@@ -1,5 +1,5 @@
 # class 1 estimations
-# comment 2
+# comment  2
 import numpy as nmp
 import matplotlib.pyplot as mtplt
 
