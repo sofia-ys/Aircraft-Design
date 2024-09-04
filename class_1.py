@@ -1,4 +1,5 @@
-# class 1 estimations
-# comment 2
-# comment 3
-# Comment 4
+# importing reference aircraft file
+import pandas as pd
+
+filePath = "referenceAircraft.xlsx"
+df = pd.read_excel(filePath)
