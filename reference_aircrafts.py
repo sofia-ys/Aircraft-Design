@@ -1,3 +1,5 @@
 import pandas as pd
 
-pd.read_excel("Reference Aircraft.xlsx")
+df = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
+
+print(df.head())
