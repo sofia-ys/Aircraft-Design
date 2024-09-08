@@ -5,24 +5,25 @@ import numpy as np
 # Company                                   0
 # Model                                     1
 # Max Payload [kg]                          2
-# MTOM [kg]	OEM [kg]                        3
-# Range [km]                                4
-# Ferry range [km]                          5
-# Take-off Dist [m]                         6
-# Landing Dist [m]                          7
-# Thrust per engine [N]                     8
-# Number fo engines                         9
-# Total Thrust [N]                          10
-# Wing Surface Area [m²]                    11
-# Aspect Ratio                              12
-# Taper ratio                               13
-# Sweep at 1/4 chord [deg]                  14
-# Vertical Tail Surface Area [m²]           15
-# Horizontal Tail Surface Area [m²]         16
-# Cruise [Mach]                             17
-# At alt. [m]                               18
-# Span[m]                                   19
+# MTOM [kg]	                                3
+# OEM [kg]                                  4
+# Range [km]                                5
+# Ferry range [km]                          6
+# Take-off Dist [m]                         7
+# Landing Dist [m]                          8
+# Thrust per engine [N]                     9
+# Number fo engines                         10
+# Total Thrust [N]                          11
+# Wing Surface Area [m²]                    12
+# Aspect Ratio                              13
+# Taper ratio                               14
+# Sweep at 1/4 chord [deg]                  15
+# Vertical Tail Surface Area [m²]           16
+# Horizontal Tail Surface Area [m²]         17
+# Cruise [Mach]                             18
+# At alt. [m]                               19
+# Span[m]                                   20
 
 df = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
 
-print(df.iloc[0:5, 1:3])
+print(df.iloc[:, [1, 12, 13]])
