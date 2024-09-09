@@ -10,6 +10,7 @@ T_sl = 288 # [K] temp at sea level isa
 P_sl = 101325 # [Pa] pressure at sea level isa
 a = -0.0065 # [K/m] temperature lapse rate with altitude
 
+MTOM = 113051 # [kg]
 payload_max = 18960 # [kg]
 M = 0.85 # cruise mach number at 31000 [ft]
 dist_take_off = 10000 # [ft]
@@ -17,7 +18,11 @@ l_fl = 1980 # [m] landing field length
 range_harmonic = 9545 # [km] at 18960 [kg]
 range_MTOW_full_fuel = 11716 # [km] at a payload of 8531 [kg]
 range_ferry = 12697 # [km]
-speed_approach = (l_fl/0.45)**0.5 # [m/s]
+speed_stall_lnading_field = (l_fl/0.45)**0.5 # [m/s]
+m_fraq_landing = 0.85
+c_l_max_landing = 2.3
+s_wing = np.mean(ra.df["Wing Surface Area [m²]"])
+speed_stall_cl_max = ((m_fraq_landing*MTOM*9.80665)/(c_l_max_landing*0.5*1.225*s_wing))**0.5
 altitude_landing = 0 # [m] landing altitude suggested in the book, maybe should be changed
 T_delta = 15 # [K] hot day conditions
 AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircrafts
@@ -32,7 +37,7 @@ cl_cruise = 1.5
 cl_landing = 2.5
 cl_take_off = 2
 
-m_fraq_landing = 0.85
+
 
 c_lfl = 0.45 # [s^2/m] landing field length coefficient suggested in adsee book p.133
 P_landing = P_sl * (1 + (a * altitude_landing) / T_sl) ** (-g / (a * R))
