@@ -23,7 +23,7 @@ import numpy as np
 # Cruise [Mach]                             18
 # At alt. [m]                               19
 # Span[m]                                   20
-
+#comment
 df = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
 
 #print(df.iloc[:, [1, 12, 13]])

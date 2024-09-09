@@ -20,8 +20,9 @@ speed_approach = ((dist_landing*0.3048)/0.45)**0.5 # [m/s]
 altitude_landing = 1600 # [m] landing altitude suggested in the book, maybe should be changed
 T_delta = 15 # [K] hot day conditions
 AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircrafts
-S_wet_to_S = 6.5  # assumed Swet/S for our aircraft and for all reference aircrafts, should be refined
+S_wet_to_S = 5.48  # assumed Swet/S for our aircraft and for all reference aircrafts, should be refined
 S_wet = S_wet_to_S * np.mean(ra.df["Wing Surface Area [m²]"]) # Wetted area of our aircraft
+MTOM = 113051 #kg
 
 cl_cruise = 1.5
 cl_landing = 2.5
