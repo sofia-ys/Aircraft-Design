@@ -34,3 +34,4 @@ l_fl = c_lfl * speed_approach ** 2 # landing field length
 P_landing = P_sl * (1 + (a * altitude_landing) / T_sl) ** (-g / (a * R))
 T_landing = T_sl + T_delta + a * altitude_landing
 rho_landing = P_landing / (R * T_landing)
+theta_t_break = 1.08
