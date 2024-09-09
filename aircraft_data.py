@@ -24,6 +24,7 @@ m_fraq_landing = 0.85
 c_l_max_landing = 2.3
 s_wing = np.mean(ra.df["Wing Surface Area [m²]"]) # [m]
 speed_stall_cl_max = ((m_fraq_landing*MTOM*9.80665)/(c_l_max_landing*0.5*1.225*s_wing))**0.5 # [m/s]
+altitude_cruise = 9448.8 # [m]
 altitude_landing = 0 # [m] landing altitude suggested in the book, maybe should be changed
 T_delta = 15 # [K] hot day conditions
 AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircrafts
@@ -41,7 +42,12 @@ cl_take_off = 2
 
 
 c_lfl = 0.45 # [s^2/m] landing field length coefficient suggested in adsee book p.133
+P_cruise = P_sl * (1 + (a * altitude_cruise) / T_sl) ** (-g / (a * R))
 P_landing = P_sl * (1 + (a * altitude_landing) / T_sl) ** (-g / (a * R))
 T_landing = T_sl + T_delta + a * altitude_landing
+T_cruise = T_sl + a * altitude_cruise
+rho_cruise = P_cruise / (R * T_cruise)
 rho_landing = P_landing / (R * T_landing)
 theta_t_break = 1.08
+
+velocity_cruise = M * (1.4 * R * T_cruise) ** 0.5
