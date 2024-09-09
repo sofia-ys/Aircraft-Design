@@ -18,13 +18,26 @@ cruise_speed = cruise_speed.cruise_thrust_to_weight(wing_loading)
 
 climb_gradient_119 = climb_gradient.calcGradient119(wing_loading)
 
+climb_gradient_121a = climb_gradient.calcGradient121a(wing_loading)
+
+climb_gradient_121b = climb_gradient.calcGradient121b(wing_loading)
+
+climb_gradient_121c = climb_gradient.calcGradient121c(wing_loading)
+
+climb_gradient_121d = climb_gradient.calcGradient121d(wing_loading)
+
+print(len(climb_gradient_121a))
 # Plot size
 plt.figure(figsize=(12, 8))
 
 plt.axvline(x = min_speed, color = 'b', label = 'Minimum speed')
 plt.axvline(x = landing_field_length, color = 'orange' , label = 'Landing field length')
 plt.plot(wing_loading, cruise_speed, color = 'purple', label = 'Cruise speed')
-plt.plot(wing_loading, climb_gradient_119)
+plt.plot(wing_loading, climb_gradient_119, color = 'red', label = 'Climb gradient 119')
+plt.plot(wing_loading, climb_gradient_121a)
+plt.plot(wing_loading, climb_gradient_121b, color = 'blue', label = 'Climb gradient 121b')
+plt.plot(wing_loading, climb_gradient_121c, color = 'green', label = 'Climb gradient 121c')
+plt.plot(wing_loading, climb_gradient_121d, color = 'red', label = 'Climb gradient 121d')
 
 plt.legend(loc = 'upper left')
 
