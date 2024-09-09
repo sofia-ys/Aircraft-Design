@@ -1,6 +1,7 @@
 import reference_aircrafts as ra
 import numpy as np
 import pandas as pd
+import math
 # Data file for aircraft parameters and constants
 
 g = 9.80665
@@ -20,9 +21,10 @@ speed_approach = (l_fl/0.45)**0.5 # [m/s]
 altitude_landing = 0 # [m] landing altitude suggested in the book, maybe should be changed
 T_delta = 15 # [K] hot day conditions
 AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircrafts
-S_wet_to_S = np.median(ra.df["Swet/S"])
+S_wet_to_S = np.mean(ra.df["Swet/S"])
 S_wet = np.median(ra.df["Swet"]) # Wetted area of our aircraft
 bypass = 11 # Bypass ratio
+oswald = 1/(0.0472*math.pi*AR)
 
 cl_cruise = 1.5
 cl_landing = 2.5
