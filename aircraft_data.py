@@ -19,6 +19,7 @@ range_harmonic = 9545 # [km] at 18960 [kg]
 range_MTOW_full_fuel = 11716 # [km] at a payload of 8531 [kg]
 range_ferry = 12697 # [km]
 speed_stall_landing_field = (l_fl/0.45)**0.5 # [m/s]
+m_fraq_cruise = 0.95
 m_fraq_landing = 0.85
 c_l_max_landing = 2.3
 s_wing = np.mean(ra.df["Wing Surface Area [m²]"]) # [m]
