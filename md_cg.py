@@ -2,7 +2,7 @@ import numpy as np
 import math as ma
 import matplotlib.pyplot as plt
 import pandas as pd
-import aircraft_data as ad
+
 
 wing_loading = np.linspace(0, 9000, num=91)
 T_W = []
