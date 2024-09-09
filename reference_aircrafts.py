@@ -23,6 +23,9 @@ import numpy as np
 # Cruise [Mach]                             18
 # At alt. [m]                               19
 # Span[m]                                   20
+# Swet/S                                    21
+# Bypass ratio                              22
+# Swet                                      23
 #comment
 df = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
 
