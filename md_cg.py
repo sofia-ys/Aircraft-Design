@@ -19,17 +19,18 @@ for i in wing_loading:
     V.append(ma.sqrt((2*i)/ (1.225 * ad.cl_landing /1.1)))
 
 for i in V:
-    M.append(i / (ma.sqrt(1.4*287*28815)))
+    M.append(i / (ma.sqrt(1.4*287*288.15)))
 
 for i in M:
     theta_t.append((ad.T_sl * (1 + 0.2 * i **2))/ad.T_sl)
 
 for i in M:
     delta_t.append(((ad.P_sl * (1 + 0.2 * i **2)) **(1.4/0.4))/ad.P_sl)
+    print(i)
 
 for i in range(91):
-    alpha_t.append(delta_t[i]*(1-(0.43+0.014*B)))
+    alpha_t.append(delta_t[i]*(1-(0.43+0.014*B)* ma.sqrt(M[i])))
 
 print(theta_t)
 print(delta_t)
-
+print(alpha_t)
