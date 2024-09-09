@@ -32,6 +32,7 @@ cl_cruise = 1.5
 cl_landing = 2.5
 cl_take_off = 2
 
+m_frac_cruisee = 0.95
 m_fraq_landing = 0.85
 
 c_lfl = 0.45 # [s^2/m] landing field length coefficient suggested in adsee book p.133
