@@ -1,31 +1,16 @@
-import numpy as np
 import math as ma
-import matplotlib.pyplot as plt
-import pandas as pd
 import aircraft_data as ad
-
-T_W = []
-V = []
-M = []
-theta_t = []
-delta_t = []
-alpha_t = []
-c_v = 0.032
-beta = 1
-B = 11
 
 
 # create a function to calculate all flight gradient requirements
 def calcClimbGradientGeneral(wing_loading, cl_req, cd_0, oswald):
-    T_W = []
     V = []
     M = []
     theta_t = []
     delta_t = []
     alpha_t = []
     c_v = 0.032
-    beta = 1
-    B = 11
+    B = ad.bypass
     climb_gradient = []
     for i in wing_loading:
         V.append(ma.sqrt((2 * i) / (1.225 * cl_req / 1.1)))
@@ -34,14 +19,11 @@ def calcClimbGradientGeneral(wing_loading, cl_req, cd_0, oswald):
         M.append(i / (
             ma.sqrt(1.4 * 287 * 288.15)))  # using sea level values, since all the flight gradient requirements use it
 
-
     for i in M:
         theta_t.append((ad.T_sl * (1 + 0.2 * i ** 2)) / ad.T_sl)
 
-
     for i in M:
         delta_t.append((ad.P_sl * pow((1 + 0.2 * pow(i, 2)), (1.4 / 0.4))) / ad.P_sl)
-
 
     for i in range(90):
         alpha_t.append(delta_t[i] * (1 - (0.43 + 0.014 * B) * ma.sqrt(M[i])))
