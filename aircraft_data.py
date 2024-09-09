@@ -24,7 +24,9 @@ AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircraft
 S_wet_to_S = np.mean(ra.df["Swet/S"])
 S_wet = np.median(ra.df["Swet"]) # Wetted area of our aircraft
 bypass = 11 # Bypass ratio
-oswald = 1/(0.0472*math.pi*AR)
+oswald = 1/(0.0472*math.pi*AR) #From fig 6.4
+c_f = 0.0029 # From fig 6.3
+c_d0 = c_f * S_wet_to_S
 
 cl_cruise = 1.5
 cl_landing = 2.5
