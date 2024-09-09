@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
-
+import matching_diagram as md
+import aircraft_data as ad
 
 mass_ratio = 0.95
 
@@ -13,12 +13,22 @@ e = 0.8
 mach = 0.85
 bypass = 11
 
-loading = np.linspace(1000, 10000)
+def cruise_thrust_to_weight(wing_loading):
+    p_t = 23800 * ((1 + 0.2 * mach ** 2) ** (1.4 / 0.4))
 
-def cruise_thrust_to_weight(wing_loading)
+    delta_t = p_t / 101325
+
+    lapse = delta_t * (1 - (0.43 + 0.014 * bypass) * np.sqrt(mach))
+
+    for i in wing_loading:
+        T_W.append(mass_ratio / lapse * ((CD0 * 0.5 * density * v_cr ** 2)/(mass_ratio * i) +
+                                  (mass_ratio * i) / (np.pi * AR * e * density * v_cr ** 2)))
+
+    return T_W
 
 #calculate the thrust lapse
-def lapse ():
+    """""""""
+#def lapse ():
     p_t = 23800 * ((1 + 0.2 * mach ** 2) ** (1.4 / 0.4))
 
     delta_t = p_t / 101325 
@@ -28,6 +38,7 @@ def lapse ():
     return lapse
 
 thrust_lapse = lapse()
+print(thrust_lapse)
 
 # The power loading function
 def cruise_thrust_weight (loading):
@@ -36,9 +47,8 @@ def cruise_thrust_weight (loading):
 
     return x
 
+"""""
 
-power_loading = cruise_thrust_weight(loading)
-
-plt.plot(loading, power_loading)
+plt.plot(loading, cruise_thrust_to_weight(loading))
 
 plt.show()
