@@ -12,7 +12,7 @@ def cruise_thrust_to_weight(wing_loading):
 
     for i in wing_loading:
         t_w.append(ad.m_fraq_cruise / lapse * ((ad.c_d0 * 0.5 * ad.rho_cruise * ad.velocity_cruise ** 2) /
-                                               (ad.m_fraq_cruise * i) +(ad.m_fraq_cruise * i) /
+                                               (ad.m_fraq_cruise * i) + (ad.m_fraq_cruise * i) /
                                                (np.pi * ad.AR * ad.oswald * ad.rho_cruise * ad.velocity_cruise ** 2)))
 
     return t_w
