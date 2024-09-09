@@ -13,7 +13,7 @@ delta_t = []
 alpha_t = []
 c_v = 0.032
 beta = 1
-B = 12
+B = 11
 
 for i in wing_loading:
     V.append(ma.sqrt((2*i)/ (1.225 * ad.cl_landing /1.1)))
@@ -28,7 +28,7 @@ for i in M:
     delta_t.append(((ad.P_sl * (1 + 0.2 * i **2)) **(1.4/0.4))/ad.P_sl)
 
 for i in range(91):
-    alpha_t.append(delta_t[i]*(1-(0.43+0.01)))
+    alpha_t.append(delta_t[i]*(1-(0.43+0.014*B)))
 
 print(theta_t)
 print(delta_t)
