@@ -32,7 +32,6 @@ m_fraq_landing = 0.85
 
 c_lfl = 0.45 # [s^2/m] landing field length coefficient suggested in adsee book p.133
 l_fl = 1980 # landing field length
-speed_approach = (l_fl / c_lfl) ** 0.5
 P_landing = P_sl * (1 + (a * altitude_landing) / T_sl) ** (-g / (a * R))
 T_landing = T_sl + T_delta + a * altitude_landing
 rho_landing = P_landing / (R * T_landing)
