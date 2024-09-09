@@ -1,5 +1,6 @@
 from math import sqrt, pow, pi
 import matplotlib.pyplot as plt
+
 w_s = [0]
 takeoff_dist = 3048
 T = 288.15
