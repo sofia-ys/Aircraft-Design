@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 mass_ratio = 0.95
 
 CD0 = 0.018
@@ -14,6 +15,7 @@ bypass = 11
 
 loading = np.linspace(1000, 10000)
 
+def cruise_thrust_to_weight(wing_loading)
 
 #calculate the thrust lapse
 def lapse ():
