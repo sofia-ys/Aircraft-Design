@@ -22,7 +22,7 @@ T_delta = 15 # [K] hot day conditions
 AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircrafts
 S_wet_to_S = 6.5  # assumed Swet/S for our aircraft and for all reference aircrafts, should be refined
 S_wet = S_wet_to_S * np.mean(ra.df["Wing Surface Area [m²]"]) # Wetted area of our aircraft
-bypass = 11 # Bypass ratio
+bypass = 12 # Bypass ratio
 
 cl_cruise = 1.5
 cl_landing = 2.5
