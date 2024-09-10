@@ -34,12 +34,11 @@ bypass = 11 # Bypass ratio
 oswald = 1/(0.0472*math.pi*AR) #From fig 6.4
 c_f = 0.0029 # From fig 6.3
 c_d0 = c_f * S_wet_to_S
+Ne = 2 # number of engines
 
 cl_cruise = 1.5
 cl_landing = 2.5
 cl_take_off = 2
-
-
 
 c_lfl = 0.45 # [s^2/m] landing field length coefficient suggested in adsee book p.133
 P_cruise = P_sl * (1 + (a * altitude_cruise) / T_sl) ** (-g / (a * R))
