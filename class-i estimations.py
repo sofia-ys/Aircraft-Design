@@ -47,3 +47,8 @@ plt.show()
 # calculate empty weight from W_TO slide 15
 
 # examples on procedure slides 45 - 54
+
+
+''' 5. create payload-range diagrams to select design mission'''
+
+# slides 55 - 64
