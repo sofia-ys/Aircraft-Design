@@ -56,3 +56,22 @@ graph(MTOM, OEM, "Maximum Take-Off Mass (MTOM) [kg]", "Operating Empty Mass (OEM
 ''' 5. create payload-range diagrams to select design mission'''
 
 # slides 55 - 64
+
+
+
+
+# Another one
+
+"""
+1. CD0
+2. e
+3. Max L/D
+4. TSFC
+5. Jet eff
+6. R lost
+7. E equivalent
+8. Fuel mass ration with 2-7 (no 6)
+9. operating empty mass stats
+10. MTOM mpl/(1-(moe/mtom)-(mf/mtom))
+11. Range eq6.3
+"""
