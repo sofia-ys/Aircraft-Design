@@ -32,19 +32,23 @@ take_off_field_length = take_off_field_length.take_off_field_length(wing_loading
 climb_rate = climb_rate.climb_rate(wing_loading)
 
 # Plot size
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(15, 11))
 
-plt.axvline(x = min_speed, color = '', label = 'Minimum speed')
-plt.axvline(x = landing_field_length, color = 'orange' , label = 'Landing field length')
+plt.title('Matching Diagram', fontsize = 20)
+plt.xlabel('W/S - [N/m2]', fontsize = 15)
+plt.ylabel('T/W - [N/N]', fontsize = 15)
+
+plt.axvline(x = min_speed, color = 'royalblue', label = 'Minimum speed')
+plt.axvline(x = landing_field_length, color = 'orangered' , label = 'Landing field length')
 plt.plot(wing_loading, cruise_speed, color = 'indigo', label = 'Cruise speed')
 plt.plot(wing_loading, climb_gradient_119, color = 'red', label = 'Climb gradient 119')
-plt.plot(wing_loading, climb_gradient_121a, color = 'magenta', label = 'Climb gradient 121a')
-plt.plot(wing_loading, climb_gradient_121b, color = 'cyan', label = 'Climb gradient 121b')
-plt.plot(wing_loading, climb_gradient_121c, color = 'green', label = 'Climb gradient 121c')
+plt.plot(wing_loading, climb_gradient_121a, color = 'deepskyblue', label = 'Climb gradient 121a')
+plt.plot(wing_loading, climb_gradient_121b, color = 'darkgoldenrod', label = 'Climb gradient 121b')
+plt.plot(wing_loading, climb_gradient_121c, color = 'forestgreen', label = 'Climb gradient 121c')
 plt.plot(wing_loading, climb_gradient_121d, color = 'brown', label = 'Climb gradient 121d')
-plt.plot(wing_loading, take_off_field_length, color = 'black' , label = 'Take off field length')
-plt.plot(wing_loading, climb_rate, color = 'pink', label = 'Climb rate')
-plt.plot(min_speed, climb_gradient_121b[int(np.floor(min_speed))], marker = 'D', color = 'red', markersize = '5', label = 'Design point')
+plt.plot(wing_loading, take_off_field_length, color = 'darkslategray' , label = 'Take off field length')
+plt.plot(wing_loading, climb_rate, color = 'deeppink', label = 'Climb rate')
+plt.plot(min_speed, climb_gradient_121b[int(np.floor(min_speed))], marker = 'D', color = 'crimson', markersize = '6', label = 'Design point')
 
 plt.xlim(0, 8000)
 plt.ylim(0, 1)
