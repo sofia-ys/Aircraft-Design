@@ -11,22 +11,25 @@ payloadMTOW = 8531 # [kg]
 payloadMin = 0 # [kg]
 
 # graph segments
-x1 = [0, rangeHarmonic]
-y1 = [payloadMax, payloadMax]
-x2 = [rangeHarmonic, rangeMTOW]
-y2 = [payloadMax, payloadMTOW]
-x3 = [rangeMTOW, rangeFerry]
-y3 = [payloadMTOW, 0]
+segments = [
+    ([0, rangeHarmonic], [payloadMax, payloadMax]),
+    ([rangeHarmonic, rangeMTOW], [payloadMax, payloadMTOW]),
+    ([rangeMTOW, rangeFerry], [payloadMTOW, 0])
+    ]
 
 # design mission selection point
 designx = rangeMTOW + (rangeHarmonic - rangeMTOW)/2
 designy = payloadMax - (payloadMax - payloadMTOW)/2
 
 # graph plotting
-plt.plot(x1, y1, color="#8ace00")
-plt.plot(x2, y2, color="#8ace00")
-plt.plot(x3, y3, color="#8ace00")
-plt.scatter(designx, designy, color="black")
-plt.xlabel("Range [km]")
-plt.ylabel("Payload weight [kg]")
-plt.show()
+def plotSegments(segments, designx, designy):
+    for x, y in segments:
+        plt.plot(x, y, color="#8ace00")
+    plt.scatter(designx, designy, color="black")
+    plt.xlabel("Range [km]")
+    plt.ylabel("Payload weight [kg]")
+    plt.show()
+
+plotSegments(segments, designx, designy)
+
+# design point, choose range and payload ?
