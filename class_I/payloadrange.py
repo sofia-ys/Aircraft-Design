@@ -31,3 +31,4 @@ def plotSegments(segments, designx, designy):
     plt.show()
 
 plotSegments(segments, designx, designy)
+print(designPoint)
