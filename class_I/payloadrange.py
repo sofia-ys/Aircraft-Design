@@ -18,12 +18,15 @@ y2 = [payloadMax, payloadMTOW]
 x3 = [rangeMTOW, rangeFerry]
 y3 = [payloadMTOW, 0]
 
+# design mission selection point
+designx = rangeMTOW + (rangeHarmonic - rangeMTOW)/2
+designy = payloadMax - (payloadMax - payloadMTOW)/2
+
 # graph plotting
-plt.plot(x1, y1, color="blue")
-plt.plot(x2, y2, color="blue")
-plt.plot(x3, y3, color="blue")
+plt.plot(x1, y1, color="#8ace00")
+plt.plot(x2, y2, color="#8ace00")
+plt.plot(x3, y3, color="#8ace00")
+plt.scatter(designx, designy, color="black")
 plt.xlabel("Range [km]")
 plt.ylabel("Payload weight [kg]")
 plt.show()
-
-# design mission selection point
