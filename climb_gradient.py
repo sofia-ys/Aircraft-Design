@@ -23,8 +23,12 @@ def calcClimbGradientGeneral(wing_loading, cl_req, cd_0, oswald, c_v, beta, thru
     for i in M:
         delta_t.append((P * pow((1 + 0.2 * pow(i, 2)), (1.4 / 0.4))) / ad.P_sl)
 
-    for i in range(90):
-        alpha_t.append(delta_t[i] * (1 - (0.43 + 0.014 * B) * ma.sqrt(M[i])))
+    for i in range(len(wing_loading)):
+        if theta_t[i] < ad.theta_t_break:
+            alpha_t.append(delta_t[i] * (1 - (0.43 + 0.014 * B) * ma.sqrt(M[i])))
+        else:
+            alpha_t.append(delta_t[i] * (1 - (0.43 + 0.014 * B) * ma.sqrt(M[i])
+                                         - (3 * (theta_t[i] - ad.theta_t_break)) / (1.5 + M[i])))
 
     for i in alpha_t:
         climb_gradient.append(thrust_fraq * (beta / i) * (c_v + 2 * ma.sqrt(
