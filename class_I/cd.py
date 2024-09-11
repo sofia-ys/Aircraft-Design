@@ -11,7 +11,7 @@ from aircraft_data import *
 c_friction = 0.0029 #From fig 6.3
 cd0 = S_wet_to_S *c_friction
 cdi = (cl_cruise**2)/(math.pi*AR*oswald)
-cd_cruise = cd0 + cdi
+cd_cruise = (4/3)*cd0
 
 l_d_max = 0.5*((math.pi*AR*oswald)/(cd0))**0.5
 l_d_cruise = cl_cruise/cl_cruise

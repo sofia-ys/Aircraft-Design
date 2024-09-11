@@ -10,7 +10,7 @@ T_sl = 288 # [K] temp at sea level isa
 P_sl = 101325 # [Pa] pressure at sea level isa
 a = -0.0065 # [K/m] temperature lapse rate with altitude
 
-MTOM = 113051 # [kg]
+MTOM = 13051 # [kg]
 payload_max = 18960 # [kg]
 M = 0.85 # cruise mach number at 31000 [ft]
 dist_take_off = 3048 # [m]
