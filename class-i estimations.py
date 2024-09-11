@@ -8,27 +8,31 @@ ra = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
 MTOM = ra.iloc[:, 3]
 OEM = ra.iloc[:, 4]
 
-plt.scatter(MTOM, OEM, color="black", label="Data points")  # scatter plot
+def graph(x, y, xlabel, ylabel):
+    plt.scatter(x, y, color="black", label="Data points")  # scatter plot
 
-# finding line of best fit
-coefficients = np.polyfit(MTOM, OEM, 1)  # fits a polynomial of first degree to the relationship between MTOM and OEM
-linearReg = np.polyval(coefficients, MTOM)  # generates a y value according to the linear reg derived for every x value MTOM
-a = coefficients[0]  # coefficients to determine the MTOM-OEM relation, SLIDE 15
-b = coefficients[1]
+    # finding line of best fit
+    coefficients = np.polyfit(x, y, 1)  # fits a polynomial of first degree to the relationship between x and y
+    linearReg = np.polyval(coefficients, x)  # generates a y value according to the linear reg derived for every x value
+    a = coefficients[0]  # coefficients to determine the y=mx+b relation, SLIDE 15
+    b = coefficients[1]
 
-# finding R**2
-res = np.sum((OEM - linearReg)**2)
-tot = np.sum((OEM - np.mean(OEM))**2)
-rSqr = 1 - (res/tot)
+    # finding R**2
+    res = np.sum((y - linearReg)**2)
+    tot = np.sum((y - np.mean(y))**2)
+    rSqr = 1 - (res/tot)
 
-plt.plot(MTOM, linearReg, color="#8ace00", label=f"Linear regression (R² = {rSqr:.2f})")  # plotting line of best fit
+    plt.plot(x, linearReg, color="#8ace00", label=f"Linear regression (R² = {rSqr:.2f})")  # plotting line of best fit
 
-plt.xlabel("Maximum Take-Off Mass (MTOM) [kg]")
-plt.ylabel("Operating Empty Mass (OEM) [kg]")
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
 
-plt.legend()
-plt.show()
+    plt.legend()
+    plt.show()
 
+    return a, b
+
+graph(MTOM, OEM, "Maximum Take-Off Mass (MTOM) [kg]", "Operating Empty Mass (OEM) [kg]")
 
 ''' 2. estimate drag polar and specific fuel consumption'''
 
