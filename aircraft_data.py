@@ -10,7 +10,7 @@ T_sl = 288 # [K] temp at sea level isa
 P_sl = 101325 # [Pa] pressure at sea level isa
 a = -0.0065 # [K/m] temperature lapse rate with altitude
 
-MTOM = 13051 # [kg]
+MTOM = 113051 # [kg]
 payload_max = 18960 # [kg]
 M = 0.85 # cruise mach number at 31000 [ft]
 dist_take_off = 3048 # [m]
@@ -56,3 +56,5 @@ theta_t_break = 1.08
 
 velocity_cruise = M * (1.4 * R * T_cruise) ** 0.5
 cl_cruise = (MTOM*m_fraq_cruise*9.80665)/(0.5*rho_cruise*s_wing*velocity_cruise**2)
+velocity_stall = (((MTOM*9.80665)/(cl_take_off*0.5*1.225*s_wing)))**0.5
+                  
