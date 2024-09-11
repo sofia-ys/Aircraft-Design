@@ -36,6 +36,7 @@ oswald = 1/(0.0472*math.pi*AR) #From fig 6.4
 c_f = 0.0029 # From fig 6.3
 c_d0 = c_f * S_wet_to_S
 Ne = 2 # number of engines
+climb_rate_requirement = 5  # [m/s]
 
 #cl_cruise = 1.5
 cl_landing = 2.5
