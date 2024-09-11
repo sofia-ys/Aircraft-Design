@@ -37,7 +37,7 @@ c_f = 0.0029 # From fig 6.3
 c_d0 = c_f * S_wet_to_S
 Ne = 2 # number of engines
 
-cl_cruise = 1.5
+#cl_cruise = 1.5
 cl_landing = 2.5
 cl_take_off = 2
 
@@ -54,3 +54,4 @@ rho_take_off = P_take_off / (R * T_take_off)
 theta_t_break = 1.08
 
 velocity_cruise = M * (1.4 * R * T_cruise) ** 0.5
+cl_cruise = (MTOM*m_fraq_cruise*9.80665)/(0.5*rho_cruise*s_wing*velocity_cruise**2)
