@@ -54,5 +54,5 @@ plt.xlim(0, 8000)
 plt.ylim(0, 1)
 
 plt.legend(loc = 'upper left')
-
+print(min_speed, climb_gradient_121b[int(np.floor(min_speed))])
 plt.show()
