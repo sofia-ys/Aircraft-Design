@@ -7,7 +7,7 @@ import take_off_field_length
 import climb_rate
 
 # W/S [N/m^2] Generating the wing loading list 100 to 9000 with increment of 100
-wing_loading = np.linspace(100, 9000, num=90)
+wing_loading = np.linspace(1, 9000, num=9000)
 
 # W/S [N/m^2] Calculating the maximum wing loading for the minimum speed requirement
 min_speed = (1 / ad.m_fraq_landing * (ad.rho_landing / 2) * (ad.speed_stall_landing_field / 1.23) ** 2 * ad.cl_landing)
@@ -34,9 +34,9 @@ climb_rate = climb_rate.climb_rate(wing_loading)
 # Plot size
 plt.figure(figsize=(12, 8))
 
-plt.axvline(x = min_speed, color = 'b', label = 'Minimum speed')
+plt.axvline(x = min_speed, color = '', label = 'Minimum speed')
 plt.axvline(x = landing_field_length, color = 'orange' , label = 'Landing field length')
-plt.plot(wing_loading, cruise_speed, color = 'purple', label = 'Cruise speed')
+plt.plot(wing_loading, cruise_speed, color = 'indigo', label = 'Cruise speed')
 plt.plot(wing_loading, climb_gradient_119, color = 'red', label = 'Climb gradient 119')
 plt.plot(wing_loading, climb_gradient_121a, color = 'magenta', label = 'Climb gradient 121a')
 plt.plot(wing_loading, climb_gradient_121b, color = 'cyan', label = 'Climb gradient 121b')
@@ -44,6 +44,7 @@ plt.plot(wing_loading, climb_gradient_121c, color = 'green', label = 'Climb grad
 plt.plot(wing_loading, climb_gradient_121d, color = 'brown', label = 'Climb gradient 121d')
 plt.plot(wing_loading, take_off_field_length, color = 'black' , label = 'Take off field length')
 plt.plot(wing_loading, climb_rate, color = 'pink', label = 'Climb rate')
+plt.plot(min_speed, climb_gradient_121b[int(np.floor(min_speed))], marker = 'D', color = 'red', markersize = '5', label = 'Design point')
 
 plt.xlim(0, 8000)
 plt.ylim(0, 1)
