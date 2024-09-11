@@ -19,6 +19,11 @@ Cl_climbrate = np.sqrt(Cd0_climbrate * np.pi * AR_climbrate * Oswald_climbrate)
 Bypass_climbrate = ad.bypass
 thetabrk_climbrate = ad.theta_t_break
 
+print((ad.T_cruise*(1+0.2*ad.M **2))/ad.T_sl)
+#def clim_rate(wing_loading):
+  #  alpha_t = ((ad.P_cruise * (1 + 0.2 * ad.M) ** (1.4/0.4)) / ad.P_sl) * (1 - )
+
+
 
 def climb_rate(wingloading_climbrate):
     velocity_climbrate = np.array(np.sqrt(wingloading_climbrate * (2/Cl_climbrate)*(1/Density_climbrate))) #Tabulate velocity
