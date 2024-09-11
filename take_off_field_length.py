@@ -36,5 +36,7 @@ def take_off_field_length(wing_loading):
     alpha_t = lapse_rate(wing_loading, cl_2, ad.T_take_off, ad.P_take_off, ad.rho_take_off)
 
     for i in range(len(wing_loading)):
-        t_w.append(1.15 * alpha_t[i] * sqrt(2 * wing_loading[i] / ad.dist_take_off / k_t / ad.rho_take_off / ad.g / pi / ad.AR / ad.oswald) + 2 * 4 * h2 / ad.dist_take_off)
+        t_w.append(1.15 * alpha_t[i] *
+                   sqrt(2 * wing_loading[i] / ad.dist_take_off / k_t / ad.rho_take_off / ad.g / pi / ad.AR / ad.oswald)
+                   + 2 * 4 * h2 / ad.dist_take_off)
     return t_w
