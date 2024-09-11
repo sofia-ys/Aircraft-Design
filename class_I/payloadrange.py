@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
 
 # values
 rangeHarmonic = 9545 # [km] at 18960 [kg]
@@ -20,6 +18,7 @@ segments = [
 # design mission selection point
 designx = rangeMTOW + (rangeHarmonic - rangeMTOW)/2
 designy = payloadMax - (payloadMax - payloadMTOW)/2
+designPoint = (designx, designy)  # mission design point: range, payload
 
 # graph plotting
 def plotSegments(segments, designx, designy):
@@ -28,8 +27,7 @@ def plotSegments(segments, designx, designy):
     plt.scatter(designx, designy, color="black")
     plt.xlabel("Range [km]")
     plt.ylabel("Payload weight [kg]")
+    plt.title("Payload-Range Diagram")
     plt.show()
 
 plotSegments(segments, designx, designy)
-
-# design point, choose range and payload ?
