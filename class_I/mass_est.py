@@ -3,10 +3,6 @@ import numpy as np
 import math
 import cd
 import payloadrange
-import cruise_speed
-import climb_gradient
-import take_off_field_length
-import climb_rate
 
 n_eng_times_n_p = 0.4275727
 # Calculate the C_D
@@ -22,4 +18,7 @@ m_ff = 1 - math.exp((-R_eq * 1000)/(n_eng_times_n_p*(43 * pow(10,6)/9.81) * cd.l
 # Calculate maximum takeoff mass
 M_mto = (1556.2 + cd.payload_max)/(1-0.4874-m_ff)
 
-print(M_mto)
+print('R_lost' + str(R_lost))
+print('R_eq (equivalent range): ' + str(R_eq))
+print('Fuel mass fraction: ' + str(m_ff))
+print('Maximum takeoff mass: ' + str(M_mto))
