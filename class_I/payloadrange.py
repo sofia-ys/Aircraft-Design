@@ -16,9 +16,9 @@ segments = [
     ]
 
 # design mission selection point
-designx = rangeMTOW + (rangeHarmonic - rangeMTOW)/2
-designy = payloadMax - (payloadMax - payloadMTOW)/2
-designPoint = (designx, designy)  # mission design point: range, payload
+designRange = rangeMTOW + (rangeHarmonic - rangeMTOW)/2
+designPayload = payloadMax - (payloadMax - payloadMTOW)/2
+designPoint = (designRange, designPayload)  # mission design point: range, payload
 
 # graph plotting
 def plotSegments(segments, designx, designy):
@@ -30,5 +30,5 @@ def plotSegments(segments, designx, designy):
     plt.title("Payload-Range Diagram")
     plt.show()
 
-plotSegments(segments, designx, designy)
+plotSegments(segments, designRange, designPayload)
 print(designPoint)
