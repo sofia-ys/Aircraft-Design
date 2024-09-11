@@ -1,7 +1,7 @@
 from math import sqrt, pow, pi
 import aircraft_data as ad
 
-takeoff_dist = ad.dist_take_off * 0.3048
+takeoff_dist = ad.dist_take_off
 T = ad.T_sl
 p = ad.P_sl
 rho = 1.225

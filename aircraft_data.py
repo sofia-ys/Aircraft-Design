@@ -44,12 +44,13 @@ cl_take_off = 2
 c_lfl = 0.45 # [s^2/m] landing field length coefficient suggested in adsee book p.133
 T_landing = T_sl + T_delta + a * altitude_landing
 T_cruise = T_sl + a * altitude_cruise
-T_take_off = T_sl + a * altitude_take_off
+T_take_off = T_sl + T_delta + a * altitude_take_off
 P_cruise = P_sl * (1 + (a * altitude_cruise) / T_sl) ** (-g / (a * R))
 P_landing = P_sl * (1 + (a * altitude_landing) / T_sl) ** (-g / (a * R))
 P_take_off = P_sl * (T_take_off/T_sl) ** (g / a / R)
 rho_cruise = P_cruise / (R * T_cruise)
 rho_landing = P_landing / (R * T_landing)
+rho_take_off = P_take_off / (R * T_take_off)
 theta_t_break = 1.08
 
 velocity_cruise = M * (1.4 * R * T_cruise) ** 0.5
