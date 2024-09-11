@@ -21,8 +21,8 @@ range_MTOW_full_fuel = 11716 # [km] at a payload of 8531 [kg]
 range_ferry = 12697 # [km]
 speed_stall_landing_field = (l_fl/0.45)**0.5 # [m/s]
 m_fraq_cruise = 0.95
-m_fraq_landing = 0.851
-c_l_max_landing = 2.3
+m_fraq_landing = 0.85
+c_l_max_landing = 2.5
 s_wing = np.mean(ra.df["Wing Surface Area [m²]"]) # [m]
 speed_stall_cl_max = ((m_fraq_landing*MTOM*9.80665)/(c_l_max_landing*0.5*1.225*s_wing))**0.5 # [m/s]
 altitude_cruise = 9448.8 # [m]
@@ -57,5 +57,4 @@ theta_t_break = 1.08
 
 velocity_cruise = M * (1.4 * R * T_cruise) ** 0.5
 cl_cruise = (MTOM*m_fraq_cruise*9.80665)/(0.5*rho_cruise*s_wing*velocity_cruise**2)
-velocity_stall = (((MTOM*9.80665)/(cl_take_off*0.5*1.225*s_wing)))**0.5
-                  
+velocity_stall = ((MTOM * 9.80665) / (cl_take_off * 0.5 * 1.225 * s_wing)) ** 0.5
