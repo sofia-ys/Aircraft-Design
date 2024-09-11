@@ -10,7 +10,7 @@ import climb_rate
 wing_loading = np.linspace(1, 9000, num=9000)
 
 # W/S [N/m^2] Calculating the maximum wing loading for the minimum speed requirement
-min_speed = (1 / ad.m_fraq_landing * (ad.rho_landing / 2) * (ad.speed_stall_landing_field / 1.23) ** 2 * ad.cl_landing)
+min_speed = (1 / ad.m_fraq_landing * (ad.rho_landing / 2) * ad.speed_stall_cl_max ** 2 * ad.cl_landing)
 
 # W/S [N/m^2] Calculating the maximum wing loading for the landing field length requirement
 landing_field_length = (1 / ad.m_fraq_landing) * (ad.l_fl / ad.c_lfl) * ((ad.rho_landing * ad.cl_landing) / 2)
