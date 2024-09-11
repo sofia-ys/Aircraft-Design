@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
 
 # values
 rangeHarmonic = 9545 # [km] at 18960 [kg]
