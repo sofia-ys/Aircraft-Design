@@ -12,6 +12,7 @@ a = -0.0065 # [K/m] temperature lapse rate with altitude
 
 MTOM = 150000 # [kg]
 payload_max = 18960 # [kg]
+payload_MTOW = 8531 # [kg]
 M = 0.85 # cruise mach number at 31000 [ft]
 dist_take_off = 3048 # [m]
 l_fl = 1981.2 # [m] landing field length
