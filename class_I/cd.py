@@ -14,3 +14,4 @@ cdi = (cl_cruise**2)/(math.pi*AR*oswald)
 cd_cruise = cd0 + cdi
 
 l_d_max = 0.5*((math.pi*AR*oswald)/(cd0))**0.5
+l_d_cruise = cl_cruise/cl_cruise
