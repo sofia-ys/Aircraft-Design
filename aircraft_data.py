@@ -12,6 +12,7 @@ a = -0.0065 # [K/m] temperature lapse rate with altitude
 
 MTOM = 113051 # [kg]
 payload_max = 18960 # [kg]
+payload_MTOW = 8531 # [kg]
 M = 0.85 # cruise mach number at 31000 [ft]
 dist_take_off = 3048 # [m]
 l_fl = 1981.2 # [m] landing field length
@@ -20,7 +21,7 @@ range_MTOW_full_fuel = 11716 # [km] at a payload of 8531 [kg]
 range_ferry = 12697 # [km]
 speed_stall_landing_field = (l_fl/0.45)**0.5 # [m/s]
 m_fraq_cruise = 0.95
-m_fraq_landing = 0.85
+m_fraq_landing = 0.851
 c_l_max_landing = 2.3
 s_wing = np.mean(ra.df["Wing Surface Area [m²]"]) # [m]
 speed_stall_cl_max = ((m_fraq_landing*MTOM*9.80665)/(c_l_max_landing*0.5*1.225*s_wing))**0.5 # [m/s]

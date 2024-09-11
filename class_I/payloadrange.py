@@ -1,23 +1,23 @@
 import matplotlib.pyplot as plt
+import sys
+import os
 
-# values
-rangeHarmonic = 9545 # [km] at 18960 [kg]
-rangeMTOW = 11716 # [km] at a payload of 8531 [kg]
-rangeFerry = 12697 # [km]
-payloadMax = 18960 # [kg]
-payloadMTOW = 8531 # [kg]
-payloadMin = 0 # [kg]
+# Add the parent directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# importing aircraft data file
+import aircraft_data as ad
 
 # graph segments
 segments = [
-    ([0, rangeHarmonic], [payloadMax, payloadMax]),
-    ([rangeHarmonic, rangeMTOW], [payloadMax, payloadMTOW]),
-    ([rangeMTOW, rangeFerry], [payloadMTOW, 0])
+    ([0, ad.range_harmonic], [ad.payload_max, ad.payload_max]),
+    ([ad.range_harmonic, ad.range_MTOW_full_fuel], [ad.payload_max, ad.payload_MTOW]),
+    ([ad.range_MTOW_full_fuel, ad.range_ferry], [ad.payload_MTOW, 0])
     ]
 
 # design mission selection point
-designRange = rangeMTOW + (rangeHarmonic - rangeMTOW)/2
-designPayload = payloadMax - (payloadMax - payloadMTOW)/2
+designRange = ad.range_MTOW_full_fuel + (ad.range_harmonic - ad.range_MTOW_full_fuel)/2
+designPayload = ad.payload_max - (ad.payload_max - ad.payload_MTOW)/2
 designPoint = (designRange, designPayload)  # mission design point: range, payload
 
 # graph plotting
