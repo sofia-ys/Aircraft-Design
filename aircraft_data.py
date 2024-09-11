@@ -56,3 +56,5 @@ theta_t_break = 1.08
 
 velocity_cruise = M * (1.4 * R * T_cruise) ** 0.5
 cl_cruise = (MTOM*m_fraq_cruise*9.80665)/(0.5*rho_cruise*s_wing*velocity_cruise**2)
+velocity_stall = (((MTOM*9.80665)/(cl_take_off*0.5*1.225*s_wing)))**0.5
+                  
