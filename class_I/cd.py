@@ -14,7 +14,7 @@ cdi = (cl_cruise**2)/(math.pi*AR*oswald)
 cd_cruise = (4/3)*cd0
 
 l_d_max = 0.5*((math.pi*AR*oswald)/(cd0))**0.5
-l_d_cruise = cl_cruise/cl_cruise
+l_d_cruise = cl_cruise/cd_cruise
 
 
 print("Cd_0",cd0, "Cd_cruise", cd_cruise)
