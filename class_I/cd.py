@@ -17,7 +17,7 @@ l_d_max = 0.5*((math.pi*AR*oswald)/(cd0))**0.5
 l_d_cruise = cl_cruise/cl_cruise
 
 
-print("Cd_0",cd0,"Cd_i", cdi, "Cd_cruise", cd_cruise)
+print("Cd_0",cd0, "Cd_cruise", cd_cruise)
 # Drag Coefficients based on ref.area
 
 #  Cd Zero-Lift              0.01277    (52.4 %)
