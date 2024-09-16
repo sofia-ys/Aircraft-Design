@@ -29,4 +29,11 @@ import numpy as np
 #comment
 df = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
 
-#print(df.iloc[:, [1, 12, 13]])
+#print(df.iloc[:, [3, 11, 12]])
+array = df.to_numpy()
+MTOM = array[:, 3]
+W = []
+for i in MTOM:
+    W.append(i * 9.80665)
+T = array[:, 11]
+S = array[:, 12]
