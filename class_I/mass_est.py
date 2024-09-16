@@ -3,10 +3,6 @@ import numpy as np
 import math
 import cd
 import payloadrange
-import cruise_speed
-import climb_gradient
-import take_off_field_length
-import climb_rate
 
 n_eng_times_n_p = 0.4275727
 # Calculate the C_D
