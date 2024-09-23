@@ -1,7 +1,7 @@
-clAlpha =  # airfoil lift
+clAlpha =  1.23 # airfoil lift
 sRef = 173.77  # m2
 b = 38  # m
-deltaA =  # max aileron deflection
+deltaA =  0.084 # max aileron deflection
 velocity = 0.85  # mach, find the m/s
-tau =  # from literature
-cd0 =  # airfoil cd0
+tau =  0.67 # from literature
+cd0 =  0.003 # airfoil cd0
