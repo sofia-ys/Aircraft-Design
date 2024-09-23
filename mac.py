@@ -42,14 +42,19 @@ graph(diagonal, "#8ace00")
 graph(halfC, "#8ace00")
 
 # finding MAC
-mHalf, cHalf = lineEq(halfC[0][0], halfC[1][0], halfC[0][1], halfC[1][1])
-mDiagonal, cDiagonal = lineEq(diagonal[0][0], diagonal[1][0], diagonal[0][1], diagonal[1][1])
-xInter = (cDiagonal - cHalf) / (mHalf - mDiagonal)
-yInter = mHalf * xInter + cHalf
+mHalf, cHalf = lineEq(halfC[0][0], halfC[1][0], halfC[0][1], halfC[1][1])  # finding the m and c values for the 1/2 chord line using the points
+mDiagonal, cDiagonal = lineEq(diagonal[0][0], diagonal[1][0], diagonal[0][1], diagonal[1][1])  # finding m and c for diagonal
+xMAC = (cDiagonal - cHalf) / (mHalf - mDiagonal)  # finding intersection x coordinate of the two lines
+yMAC = mHalf * xMAC + cHalf  # finding corresponding y coordinate of the intersection x
 
-MAC = ([xInter, xInter], [(yInter + 0.5 * cRoot), (yInter - 0.5 * cRoot)])
+# getting the chord length of the MAC
+mLE, cLE = lineEq(leadingE[0][0], leadingE[1][0], leadingE[0][1], leadingE[1][1]) 
+mTE, cTE = lineEq(trailingE[0][0], trailingE[1][0], trailingE[0][1], trailingE[1][1]) 
+yLE = mLE * xMAC + cLE  # finding the y coordinate of the MAC on the leading edge
+yTE = mTE * xMAC + cTE  # y coord of MAC on TE
 
+MAC = ([xMAC, xMAC], [(yLE), (yTE)])
 graph(MAC, "#8ace00")
 
-print(f"MAC: ({xInter:.2f}, {yInter:.2f})")
+print(f"MAC: ({xMAC:.2f}, {(yLE - 0.25*cRoot):.2f})")
 plt.show()
