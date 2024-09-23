@@ -20,15 +20,15 @@ def lineEq(x1, y1, x2, y2):
     return m, c
 
 # graph segments
-root = ([0, 0], [(0.25*cRoot), (-0.75*cRoot)])
-rootEx = ([0, 0], [(-0.75*cRoot), (-0.75*cRoot - cTip)])
-quarterC = ([0, b/2], [0, (-(b/2)*math.tan(sweep))])
-halfC = ([0, b/2], [(-0.25*cRoot), (-(b/2)*math.tan(sweep) - 0.25*cTip)])
-tip = ([b/2, b/2], [(-(b/2)*math.tan(sweep) + 0.25*cTip), (-(b/2)*math.tan(sweep) - 0.75*cTip)])
-tipEx = ([b/2, b/2], [(-(b/2)*math.tan(sweep) + 0.25*cTip), (-(b/2)*math.tan(sweep) + 0.25*cTip + cRoot)])
-leadingE = ([0, b/2], [(0.25*cRoot), (-(b/2)*math.tan(sweep) + 0.25*cTip)])
-trailingE = ([0, b/2], [(-0.75*cRoot), (-(b/2)*math.tan(sweep) - 0.75*cTip)])
-diagonal = ([0, b/2], [(-cTip - 0.75*cRoot), (-(b/2)*math.tan(sweep) + 0.25*cTip + cRoot)])
+root = ([0, 0], [(0), (-cRoot)])
+rootEx = ([0, 0], [(-cRoot), (-cRoot - cTip)])
+quarterC = ([0, b/2], [(-0.25*cRoot), (-(b/2)*math.tan(sweep) - 0.25*cRoot)])
+halfC = ([0, b/2], [(-0.5*cRoot), (-(b/2)*math.tan(sweep) - 0.25*cTip - 0.25*cRoot)])
+tip = ([b/2, b/2], [(-(b/2)*math.tan(sweep) + 0.25*cTip - 0.25*cRoot), (-(b/2)*math.tan(sweep) - 0.75*cTip - 0.25*cRoot)])
+tipEx = ([b/2, b/2], [(-(b/2)*math.tan(sweep) + 0.25*cTip - 0.25*cRoot), (-(b/2)*math.tan(sweep) + 0.25*cTip + 0.75*cRoot)])
+leadingE = ([0, b/2], [(0), (-(b/2)*math.tan(sweep) + 0.25*cTip - 0.25*cRoot)])
+trailingE = ([0, b/2], [(-cRoot), (-(b/2)*math.tan(sweep) - 0.75*cTip - 0.25*cRoot)])
+diagonal = ([0, b/2], [(-cTip -cRoot), (-(b/2)*math.tan(sweep) + 0.25*cTip + 0.75*cRoot)])
 
 # graphing wing planform
 graph(root, "black")
@@ -45,7 +45,6 @@ graph(halfC, "#8ace00")
 mHalf, cHalf = lineEq(halfC[0][0], halfC[1][0], halfC[0][1], halfC[1][1])  # finding the m and c values for the 1/2 chord line using the points
 mDiagonal, cDiagonal = lineEq(diagonal[0][0], diagonal[1][0], diagonal[0][1], diagonal[1][1])  # finding m and c for diagonal
 xMAC = (cDiagonal - cHalf) / (mHalf - mDiagonal)  # finding intersection x coordinate of the two lines
-yMAC = mHalf * xMAC + cHalf  # finding corresponding y coordinate of the intersection x
 
 # getting the chord length of the MAC
 mLE, cLE = lineEq(leadingE[0][0], leadingE[1][0], leadingE[0][1], leadingE[1][1]) 
@@ -56,5 +55,5 @@ yTE = mTE * xMAC + cTE  # y coord of MAC on TE
 MAC = ([xMAC, xMAC], [(yLE), (yTE)])
 graph(MAC, "#8ace00")
 
-print(f"MAC: ({xMAC:.2f}, {(yLE - 0.25*cRoot):.2f})")
+print(f"MAC: ({xMAC:.2f}, {(yLE):.2f})")
 plt.show()
