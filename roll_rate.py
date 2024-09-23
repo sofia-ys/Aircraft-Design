@@ -2,15 +2,15 @@ import math
 import mac as mac
 import numpy as np
 
-clAlpha =  1.23 # airfoil lift NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+clAlpha =  0.117 # airfoil lift
 sRef = 173.77  # m2
 b = 38  # m
 deltaA =  8.75 # max aileron deflection NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 velocity = 256.555  # cruise velocity in m/s
 tau =  0.67 # from literature NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-cd0 =  0.003 # airfoil cd0 NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+cd0 =  0.0064 # airfoil cd0 
 delX = 0.01 # step size for b range
-Pideal = 32.14 # roll rate, 45 deg/ 1.4 s NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Pideal = 32.14 # roll rate, 45 deg/ 1.4 s 
 lst = []
 
 # getting the chord length at a certain x position
