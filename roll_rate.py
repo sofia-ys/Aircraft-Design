@@ -5,23 +5,23 @@ import numpy as np
 clAlpha =  1.23 # airfoil lift NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 sRef = 173.77  # m2
 b = 38  # m
-deltaA =  0.084 # max aileron deflection NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+deltaA =  8.75 # max aileron deflection NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 velocity = 256.555  # cruise velocity in m/s
 tau =  0.67 # from literature NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 cd0 =  0.003 # airfoil cd0 NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 delX = 0.1 # step size for b range
 Pideal = 32.14 # roll rate, 45 deg/ 1.4 s NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+lst = []
 # getting the chord length at a certain x position
 def findCY(xPos):
-    yInter = mac.mLeading * xPos + mac.cLeading 
+    yInter = mac.mHalf * xPos + mac.cHalf 
     cy = abs(((-0.25*mac.cRoot - (b/2)*math.tan(mac.sweep) - 0.75*mac.cTip) + mac.cRoot)/(b/2) * xPos - mac.cRoot - yInter)
     return cy
 
 intClDeltTab = np.zeros((int((b/2)/delX), int((b/2)/delX)))  # making an array for this integral
 for i1idx, i1 in enumerate(np.arange(0, b/2, delX)):
     for i2idx, i2 in enumerate(np.arange(i1, b/2, delX)):
-        intClDeltTab[i1idx, i2idx] = findCY(i2) * 0.5 * (i2)**2 - findCY(i1) * 0.5 * (i1)**2                                                                                                                                                                                                                 
+        intClDeltTab[i1idx, i2idx] = findCY(i2) * 0.5 * (i2)**2 - findCY(i1) * 0.5 * (i1)**2                                                                                                                                                                                                              
 
 intClPTab = np.zeros((int((b/2)/delX), int((b/2)/delX)))  # making an array for this integral
 for j1idx, j1 in enumerate(np.arange(0, b/2, delX)):
@@ -41,6 +41,8 @@ for k in range(rP):
             P = -clDelta/clP * deltaA * (2 * velocity)/b
             Ptab[k, m] = P
 
+print(Ptab)
+
 difTab = np.zeros((int((b/2)/delX), int((b/2)/delX)))  # making an array for this integral
 rD, cD = difTab.shape
 for n in range(rD):
@@ -48,9 +50,23 @@ for n in range(rD):
         dif = Ptab[n, p] - Pideal
         difTab[n, p] = dif
 
-idx1, idx2 = np.where(difTab == np.min(difTab))
+minIndex = np.argmin(difTab)
+print(minIndex)
+print(difTab)
 
-b1 = idx1 * delX
-b2 = idx1 * delX + idx2 * delX
+# string = str(np.where(difTab == np.min(difTab)))
 
-print(b1, b2)
+# for ch in string:
+#     if ch.isnumeric():
+#         lst.append(int(ch))
+#     else:
+#         continue
+
+        
+# print(lst)
+
+
+# b1 = lst[0] * delX
+# b2 = lst[0] * delX + lst[1] * delX
+
+# print(lst)
