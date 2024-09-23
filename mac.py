@@ -55,5 +55,5 @@ yTE = mTE * xMAC + cTE  # y coord of MAC on TE
 MAC = ([xMAC, xMAC], [(yLE), (yTE)])
 graph(MAC, "#8ace00")
 
-print(f"MAC: ({xMAC:.2f}, {(yLE):.2f})")
+print(f"MAC: {yLE - yTE:.2f}, Position: ({xMAC:.2f}, {(yLE):.2f})")
 plt.show()
