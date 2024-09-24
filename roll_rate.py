@@ -1,4 +1,3 @@
-import math
 import mac as mac
 import numpy as np
 
