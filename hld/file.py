@@ -1,10 +1,11 @@
-<<<<<<< HEAD
 import math
 from matplotlib import pyplot
 import numpy as np
 
 deltaC_L = 0.52 # how much do we need to increase the C_L with HLDs
-
+root_chord = 7.08
+b = 38
+tr = 0.292
 LE_sweep = 2
 
 fowlerDeflection = math.radians(40)
@@ -26,8 +27,8 @@ delta_Clmax_fowler = 1.3 * cdash_c_fowler
 delta_Clmax_slotted = 1.3
 
 
+
 def sweep(x_c):
-     return(mt.atan( mt.tan(mt.radians(QC_sweep)) + ((2*root_chord)/b) * (1-tr) * ((1/4)-x_c) ) )
-=======
-test
->>>>>>> db7651c07f14a57bf2a2025727087ea31b418f80
+     return(math.atan( math.tan(0.537) + ((2*root_chord)/b) * (1-tr) * ((1/4)-x_c) ) )
+
+sweep_hinge_fowler = sweep(1 - cf_over_c)
