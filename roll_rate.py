@@ -4,9 +4,9 @@ import numpy as np
 clAlpha =  0.117 # airfoil lift
 sRef = 173.77  # m2
 b = 38  # m
-deltaA =  8.75 # max aileron deflection NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+deltaA =  22.5 # max aileron deflection
 velocity = 256.555  # cruise velocity in m/s
-tau =  0.67 # from literature NEED THE ACTUAL VALUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+tau =  0.42 # from literature
 cd0 =  0.0064 # airfoil cd0 
 delX = 0.01 # step size for b range
 Pideal = 32.14 # roll rate, 45 deg/ 1.4 s 
@@ -27,6 +27,7 @@ for i1idx, i1 in enumerate(np.arange(0, b/2, delX)):  # using ennumerate to assi
 # finding the clp value (constant)
 clP = (-4 * (clAlpha + cd0))/(sRef * b**2) * (findCY(b/2) * (1/3) * (b/2)**3 - findCY(0) * (0) * (0)**3) 
 
+'''FROM THE HIGH LIFT DEVICE POSITION DECIDE WHERE THE START POSITION OF THE AILERON IS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'''
 # finding all possible roll rates (P)
 Ptab = np.zeros((int((b/2)/delX), int((b/2)/delX)))  # making an array for this integral
 rP, cP = Ptab.shape  # finding the number of rows and columns in the ptab
