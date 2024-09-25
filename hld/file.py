@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import math
 from matplotlib import pyplot
 import numpy as np
@@ -24,3 +25,6 @@ cdash_c_slotted = 1 + delta_c_c_slotted
 delta_Clmax_fowler = 1.3 * cdash_c_fowler
 delta_Clmax_slotted = 1.3
 
+=======
+test
+>>>>>>> db7651c07f14a57bf2a2025727087ea31b418f80
