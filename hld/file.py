@@ -25,6 +25,9 @@ cdash_c_slotted = 1 + delta_c_c_slotted
 delta_Clmax_fowler = 1.3 * cdash_c_fowler
 delta_Clmax_slotted = 1.3
 
+
+def sweep(x_c):
+     return(mt.atan( mt.tan(mt.radians(QC_sweep)) + ((2*root_chord)/b) * (1-tr) * ((1/4)-x_c) ) )
 =======
 test
 >>>>>>> db7651c07f14a57bf2a2025727087ea31b418f80
