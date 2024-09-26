@@ -3,7 +3,7 @@ from matplotlib import pyplot
 import numpy as np
 import scipy.integrate as integrate
 
-deltaC_L = 0.52 # how much do we need to increase the C_L with HLDs
+deltaC_L = 0.57 # how much do we need to increase the C_L with HLDs
 root_chord = 7.08
 b = 38
 tr = 0.292
@@ -16,9 +16,7 @@ slottedDeflection = math.radians(40)
 deltac_cf_fowler = 0.62
 deltac_cf_slotted = 0.31
 
-cf_over_c = 0.1 #this value will be iterated - range from 0.1 to 0.4
-cf_c_step = 0.01 #iteration step
-cf_c_max = 0.5
+cf_over_c = 0.4 #this value will be iterated - range from 0.1 to 0.4
 
 #Fowler
 delta_c_c_fowler = cf_over_c * deltac_cf_fowler
@@ -47,28 +45,28 @@ b = 38   # Upper bound for integration
 
 #result, error = integrate.quad(function_to_integrate, 0, b/2, args=(LE_sweep, TE_sweep, c_r)) #to test the integration
 
-while(cf_over_c < cf_c_max):
-    #Fowler
-    S_wf_fowler = (deltaC_L * S)/(2*(0.9 * delta_Clmax_fowler * math.cos(sweep(1 - cf_over_c)) - deltaC_L * (cdash_c_fowler - 1)))
+#Fowler
+S_wf_fowler = (deltaC_L * S)/(2*(0.9 * delta_Clmax_fowler * math.cos(sweep(1 - cf_over_c)) - deltaC_L * (cdash_c_fowler - 1)))
 
-    areaHLD_fowler = 0
-    step = 0.05
-    upperBound_fowler = 0
+areaHLD_fowler = 0
+step = 0.01
+upperBound_fowler = 0
 
-    while(areaHLD_fowler < S_wf_fowler):
-        upperBound_fowler = upperBound_fowler + step
-        areaHLD_fowler = integrate.quad(function_to_integrate, 0, upperBound_fowler, args=(LE_sweep, TE_sweep, c_r))[0]
+while(areaHLD_fowler < S_wf_fowler):
+    upperBound_fowler = upperBound_fowler + step
+    areaHLD_fowler = integrate.quad(function_to_integrate, 0, upperBound_fowler, args=(LE_sweep, TE_sweep, c_r))[0]
 
-    #Slotted flap
-    S_wf_slotted = (deltaC_L * S/2)/(0.9 * delta_Clmax_slotted * math.cos(sweep(1 - cf_over_c)))
+#Slotted flap
+S_wf_slotted = (deltaC_L * S/2)/(0.9 * delta_Clmax_slotted * math.cos(sweep(1 - cf_over_c)))
 
-    areaHLD_slotted = 0
-    upperBound_slotted = 0
+areaHLD_slotted = 0
+upperBound_slotted = 0
 
-    while(areaHLD_slotted < S_wf_slotted):
-        upperBound_slotted = upperBound_slotted + step
-        areaHLD_slotted = integrate.quad(function_to_integrate, 0, upperBound_slotted, args=(LE_sweep, TE_sweep, c_r))[0]
+while(areaHLD_slotted < S_wf_slotted):
+    upperBound_slotted = upperBound_slotted + step
+    areaHLD_slotted = integrate.quad(function_to_integrate, 0, upperBound_slotted, args=(LE_sweep, TE_sweep, c_r))[0]
 
-    print(upperBound_slotted, areaHLD_slotted, cf_over_c, math.cos(sweep(1 - cf_over_c)))
-
-    cf_over_c += cf_c_step
+print('S:')
+print(upperBound_slotted, areaHLD_slotted, cf_over_c)
+print('F:')
+print(upperBound_fowler, areaHLD_fowler, cf_over_c)
