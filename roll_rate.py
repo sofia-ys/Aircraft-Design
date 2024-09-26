@@ -4,6 +4,7 @@ import numpy as np
 clAlpha =  0.117 # airfoil lift
 sRef = 173.77  # m2
 b = 38  # m
+xStart = 8  # start position of the aileron (along the wing)
 deltaA =  22.5 # max aileron deflection
 velocity = 256.555  # cruise velocity in m/s
 tau =  0.42 # from literature
@@ -20,7 +21,7 @@ def findCY(xPos):
 
 # iterating through every b1 and b2 possible for the cldelt value
 intClDeltTab = np.zeros((int((b/2)/delX), int((b/2)/delX)))  # making an array for this integral
-for i1idx, i1 in enumerate(np.arange(0, b/2, delX)):  # using ennumerate to assign an integer to every number we use to use for the indices
+for i1idx, i1 in enumerate(np.arange(xStart, b/2, delX)):  # using ennumerate to assign an integer to every number we use to use for the indices
     for i2idx, i2 in enumerate(np.arange(i1, b/2, delX)):
         intClDeltTab[i1idx, i2idx] = findCY(i2) * 0.5 * (i2)**2 - findCY(i1) * 0.5 * (i1)**2  # applying integral at point b2 - b1                                                                                                                                                                                                          
 
@@ -56,7 +57,7 @@ for i in range(rD):
                 idx1 = i
                 idx2 = j
 
-b1 = idx1 * delX  # calculating b1
-b2 = idx1 * delX + idx2 * delX  # b2
+b1 = xStart + idx1 * delX  # calculating b1
+b2 = xStart + idx1 * delX + idx2 * delX  # b2
 
 print(min, b1, b2)
