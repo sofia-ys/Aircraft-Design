@@ -11,6 +11,7 @@ tau =  0.42 # from literature
 cd0 =  0.0064 # airfoil cd0 
 delX = 0.01 # step size for b range
 Pideal = 32.14 # roll rate, 45 deg/ 1.4 s 
+cca = 0.22 # aileron chord ratio
 
 # getting the chord length at a certain x position
 def findCY(xPos):
@@ -59,5 +60,6 @@ for i in range(rD):
 
 b1 = xStart + idx1 * delX  # calculating b1
 b2 = xStart + idx1 * delX + idx2 * delX  # b2
+ca = ((findCY(b1) + findCY(b2))/2) * cca
 
-print(min, b1, b2)
+print(b1, b2, ca)
