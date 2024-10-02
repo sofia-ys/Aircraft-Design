@@ -1,6 +1,6 @@
 import math
 S = 173.77  # wing area m^2
-AR = 8.3 # aspect ratio
+AR = 8.3# aspect ratio
 b = math.sqrt(AR*S)  # wing span m
 taper = 0.292  # taper ratio
 cRoot = (2*S)/((taper+1)*b) # root chord m
@@ -12,7 +12,7 @@ v_cruise = 256.4704663921364
 B= 11
 C_T= 22*(B**-0.19)*(1*(10**-6))
 
-sweep_quarter = 2- (taper/0.2)
+sweep_quarter = (2- (taper/0.2))
 sweep_LE = (math.atan(math.tan((sweep_quarter)) + ((0.25) * (2*cRoot/b) * (1 - taper))))
 e = 4.61*((1-(0.045*(AR**0.68)))*((math.cos(sweep_LE))**0.15)) - 3.1
 L= 117604*0.9*9.80665
@@ -22,5 +22,4 @@ print(D_cruise)
 print(C_T)
 print(SAR)
 
-print(b)
-print(sweep_LE)
+print(sweep_quarter)
