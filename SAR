@@ -1,11 +1,16 @@
 import math
 S = 173.77  # wing area m^2
 AR = 8.3  # aspect ratio
+
 b = math.sqrt(AR*S)  # wing span m
-taper = 0.292  # taper ratio
+
+taper_initial = 0.292  # taper ratio
+taper = 0.292 #Change this
+sweep_quarter = (((taper/0.2) +2)*(180/math.pi))
+
 cRoot = (2*S)/((taper+1)*b) # root chord m
 cTip = taper*cRoot  # tip chord m
 sweep = 0.537  # wing sweep rad
 
-sweep_LE = math.degrees(math.atan(math.tan(math.radians(sweep_xc)) + (x/c) * (2*cRoot/b) * (1 - taper)))
+sweep_LE = math.degrees(math.atan(math.tan(math.radians(sweep_quarter)) + (0.25) * (2*cRoot/b) * (1 - taper)))
 e = 4.61(1-0.045*(AR**0.68))*(math.cos(sweep_LE))**0.15 - 3.1
