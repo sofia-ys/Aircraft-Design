@@ -14,7 +14,8 @@ C_T= 22*(B**-0.19)*(1*(10**-6))
 
 sweep_quarter = (2- (taper/0.2))
 sweep_LE = (math.atan(math.tan((sweep_quarter)) + ((0.25) * (2*cRoot/b) * (1 - taper))))
-e = 4.61*((1-(0.045*(AR**0.68)))*((math.cos(sweep_LE))**0.15)) - 3.1
+Lambda_05c = 0.48689
+e = 2 / (2 - AR + math.sqrt(4 + AR**2 * (1 + math.tan(Lambda_05c)**2)))
 L= 117604*0.9*9.80665
 D_cruise = (4 * L) / (3 * math.sqrt((math.pi * AR * e) / (3 * C_D0)))
 SAR= v_cruise/(D_cruise*C_T)
