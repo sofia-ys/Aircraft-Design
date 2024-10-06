@@ -26,3 +26,6 @@ print(SAR)
 
 print(sweep_quarter)
 print(Lambda_half)
+
+Cr = 2 * math.sqrt(AR * S) * (math.tan(sweep_LE) - math.tan(sweep_quarter)) + (S / (math.sqrt(AR * S)))
+Taper_ratio = ((2 * S) / (Cr * math.sqrt(AR * S))) - 1
