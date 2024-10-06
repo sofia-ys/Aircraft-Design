@@ -2,6 +2,9 @@ import math
 S = 173.77  # wing area m^2
 AR = 10# aspect ratio
 b = math.sqrt(AR*S)  # wing span m
+taper = 0.292  # taper ratio
+cRoot = (2*S)/((taper+1)*b) # root chord m
+cTip = taper*cRoot  # tip chord m
 sweep_quarter = 0.537  # wing sweep rad
 C_D0 = 0.01589727272
 CL= 0.454
