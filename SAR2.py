@@ -20,9 +20,13 @@ e = 2 / (2 - AR + math.sqrt(4 + AR**2 * (1 + math.tan(Lambda_half)**2)))
 L= 117604*0.9*9.80665
 D_cruise = (4 * L) / (3 * math.sqrt((math.pi * AR * e) / (3 * C_D0)))
 SAR= v_cruise/(D_cruise*C_T)
-print(D_cruise)
-print(C_T)
-print(SAR)
 
-print(sweep_quarter)
-print(Lambda_half)
+
+
+
+sweep_quarter = 0.537
+sweep_LE = 0.587
+Cr = 2 * math.sqrt(AR * S) * (math.tan(sweep_LE) - math.tan(sweep_quarter)) + (S / (math.sqrt(AR * S)))
+Taper_ratio = ((2 * S) / (Cr * math.sqrt(AR * S))) - 1
+C_tip = Cr*Taper_ratio
+print(Cr, "/n", C_tip)
