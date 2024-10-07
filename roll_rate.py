@@ -3,8 +3,8 @@ import numpy as np
 
 clAlpha =  0.117 # airfoil lift
 sRef = 173.77  # m2
-b = 38  # m
-xStart = 8  # start position of the aileron (along the wing)
+b = 41.06  # m
+xStart = 7.5  # start position of the aileron (along the wing)
 deltaA =  22.5 # max aileron deflection
 velocity = 256.555  # cruise velocity in m/s
 tau =  0.42 # from literature
