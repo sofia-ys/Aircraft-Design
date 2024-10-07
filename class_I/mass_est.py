@@ -6,6 +6,7 @@ import payloadrange
 # Combined engine efficiencies
 n_eng_times_n_p = 0.4275727
 # Calculate the R_eq
+
 R_lost = (1/0.7) * (cd.l_d_cruise) * (cd.altitude_cruise + (pow(cd.velocity_cruise, 2) / (2 * 9.81)))
 R_eq = (payloadrange.designRange + R_lost / 1000) * (1 + 0.05) + 1.2 * 250 + (30 * 60) * (cd.velocity_cruise / 1000)
 # Fuel mass fraction
