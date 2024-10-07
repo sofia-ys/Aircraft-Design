@@ -3,11 +3,11 @@ import math
 
 # wing parameters
 S = 173.77  # wing area m^2
-b = 37.98  # wing span m
-AR = 8.3  # aspect ratio
-taper = 0.292  # taper ratio
-cRoot = 7.08  # root chord m
-cTip = 2.07  # tip chord m
+b = 41.06  # wing span m
+AR = 9.7  # aspect ratio
+taper = 0.2529  # taper ratio
+cRoot = 6.756  # root chord m
+cTip = 1.709  # tip chord m
 sweep = 0.537  # wing sweep rad
 
 def graph(line, colour):
