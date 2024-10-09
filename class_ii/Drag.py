@@ -14,6 +14,10 @@ taper_ratio = 0.2453387369561506
 Chord_root = 6.797418854384913
 k_surface = (0.3*0.152 + 0.7*0.634)*10**-5
 
+upsweep_fus = 0.3 ############################################## IN RADIANS
+A_max_fus = 20    ##############################################
+A_base = 60       ##############################################
+
 
 x_c_m = 0.35
 t_c = 0.1096
@@ -27,6 +31,7 @@ d_nacc = 1 #####################################################
 
 V = 256
 M = 0.85
+M_dd = 0.89
 #ATMOSPHERE
 dynamic_visc = 3.355 * 10**-5
 rho  = 1.225 * 0.3589
@@ -44,14 +49,16 @@ S_wet_wing = 1.07*2*S_wing
 S_wet_htail = 1.05*2*S_htail
 S_wet_vtail = 1.05*2*S_vtail
 S_wet_fus = (m.pi * d_fus / 4) * ((1 / (3 * L1**2)) * ((4 * L1**2 + (d_fus**2 / 4)) ** 1.5 - (d_fus**3 / 8)) - d_fus + 4 * L2 + 2 * m.sqrt(L3**2 + (d_fus**2 / 4)))
-print(S_wet_fus)
+
 
 #CF_C
 Fus_lam_frac = 0.05
-Wing_lam_frac = 10
+Wing_lam_frac = 0.10
 Re_trans = min( (rho*V*MAC)/(kinematic_visc), (44.62*(MAC/k_surface)**1.053)*M**1.16 )
 C_f_lam = (1.382)/(m.sqrt(Re_trans))
 C_f_turb = (0.455)/((m.log10(Re_trans))**2.58*(1+0.144*M**2)*0.65)
+
+
 
 C_F_wing = Wing_lam_frac*C_f_lam + (1-Wing_lam_frac)*C_f_turb
 C_F_fus = Fus_lam_frac*C_f_lam + (1-Fus_lam_frac)*C_f_turb
@@ -66,11 +73,18 @@ FF_nacc = 1 + (0.35 / f_nacc)
 
 
 #IF_C
-IF_wing = 1
-IF_fus = 1
-IF_nacc = 1
-IF_tail = 1
+IF_wing = 1 ####################################################
+IF_fus = 1  ####################################################
+IF_nacc = 1 ####################################################
+IF_tail = 1 ####################################################
 
-C_D_misc = 0
+Wave_drag =  0.002*(1+2.5*(M_dd-M)/(0.05))**(-1)
+Fus_upsweep_drag = 3.83*upsweep_fus**2.5*A_max_fus * (0.5*rho*V**2)
+Fus_base_drag = (0.139+0.419*(M-0.161)**2)*A_base * (0.5*rho*V**2)
 
-CD_0 = (1/S_ref)*((C_F_fus * FF_fus * IF_fus * S_wet_fus) + (C_F_wing * FF_wing * IF_wing * S_wet_wing)) + C_D_misc
+Lanfing_gear_drag = 0 ########################################## SLIDE 57
+Excrescence_and_leakage_drag = 1.035
+
+D_misc = Fus_upsweep_drag + Fus_base_drag
+
+CD_0 = ((1/S_ref)*((C_F_fus * FF_fus * IF_fus * S_wet_fus) + (C_F_wing * FF_wing * IF_wing * S_wet_wing))) * Excrescence_and_leakage_drag
