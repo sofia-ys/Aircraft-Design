@@ -88,3 +88,16 @@ Excrescence_and_leakage_drag = 1.035
 D_misc = Fus_upsweep_drag + Fus_base_drag
 
 CD_0 = ((1/S_ref)*((C_F_fus * FF_fus * IF_fus * S_wet_fus) + (C_F_wing * FF_wing * IF_wing * S_wet_wing))) * Excrescence_and_leakage_drag
+
+CL=0.43
+AR = 9.7
+A = 10
+Sweep_LE = 0.5871613666551182-0.0053
+e = 4.61*(1-0.045*AR**0.68)*(m.cos(Sweep_LE)**0.15)-3.1
+twist_tip = 3 ################################
+twist_MGC = 1 ################################
+twist_drag = 0.00004*(twist_tip-twist_MGC)
+
+AR_effective = 0 #############################
+
+CD = CD_0 + (CL**2)/(m.pi*A*e) + twist_drag
