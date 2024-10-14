@@ -12,7 +12,7 @@ ZFW = 130000
 
 
 Wing_mass = (kw * (b_s ** 0.75)) * (1 + m.sqrt(b_ref / b_s) * (n_ult ** 0.55) * ((b_s / t_r) / (ZFW / S_wing)) ** 0.30) * ZFW
-print(Wing_mass)
+
 
 
 
@@ -35,9 +35,9 @@ L_a = 1  # Electrical routing distance, generators to avionics to cockpit, ft ##
 N_gen = 2  # Number of generators
 W_uav = 1800  # Uninstalled avionics weight, lb
 W_c = 3979*2.2  # Maximum cargo weight, lb  ###########################################################################
-S_f = S_wet_fus/(0.3042^2)  # Fuselage wetted area, ft^2
+S_f = S_wet_fus/(0.3042**2)  # Fuselage wetted area, ft^2
 N_p = 140  # Number of personnel onboard (crew and passengers)
-V_pr = 313.6/(0.3040^3)  # Volume of pressurized section, ft^3
+V_pr = 313.6/(0.3040**3)  # Volume of pressurized section, ft^3
 W_dg = 113000*2.2  # Design gross weight, lb
 W_i = 1  # Installed weight, lb ###########################################################################
 V_t = 56*264  # Total fuel volume, gal
@@ -68,7 +68,7 @@ W_en = 3008*2.2  # Engine weight, lb
 N_Lt = 4.1/0.3042  # Nacelle length, ft
 W_fw = 34949*2.2  # Weight of fuel in wing, lb
 K_door = 1 # Cargo door factor ###########################################################################
-K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/L)) # Wing sweep factor
+K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/((l_fus-1)/0.3042))) # Wing sweep factor
 L_D = 15.8  # Lift to drag ratio
 K_mp = 1.126  # Main landing gear positioning factor
 V_stall = 1  # Stall velocity, knots ###########################################################################
@@ -95,8 +95,8 @@ W_air_conditioning = 62.36 * N_p ** 0.25 * (V_pr / 1000) ** 0.604 * W_uav ** 0.1
 W_anti_ice = 0.002 * W_dg
 W_handling_gear = 3.0e-4 * W_dg
 W_wing = 0.0051 * (W_dg * N_z) ** 0.557 * S_w ** 0.649 * A ** 0.5 * t_c ** -0.4 * (1 + lambda_w) ** 0.1 * (m.cos(Sweep_quater)) ** -1.0 * S_csw ** 0.1
-W_horizontal_tail = 0.0379 * K_uht * (1 + F_w / B_h) ** -0.25 * W_dg ** 0.639 * N_z ** 0.10 * S_ht ** 0.75 * L_t ** -1.0 * K_y ** 0.704 * (m.cos(A_h))) ** -1.0 * A_h ** 0.166 * (1 + S_e / S_ht) ** 0.1
-W_vertical_tail = 0.0026 * (1 + H_t / H_v) ** 0.225 * W_dg ** 0.556 * N_z ** 0.536 * L_t ** -0.5 * S_vt ** 0.5 * K_z ** 0.875 * (m.cos(A_v)) * A_v ** 0.35 * (t_c)_root ** -0.5
+W_horizontal_tail = 0.0379 * K_uht * (1 + F_w / B_h) ** -0.25 * W_dg ** 0.639 * N_z ** 0.10 * S_ht ** 0.75 * L_t ** -1.0 * K_y ** 0.704 * (m.cos(A_h)) ** -1.0 * A_h ** 0.166 * (1 + S_e / S_ht) ** 0.1
+W_vertical_tail = 0.0026 * (1 + H_t / H_v) ** 0.225 * W_dg ** 0.556 * N_z ** 0.536 * L_t ** -0.5 * S_vt ** 0.5 * K_z ** 0.875 * (m.cos(A_v)) * A_v ** 0.35 * t_c ** -0.5
 W_fuselage = 0.3280 * K_door * K_y * (W_dg * N_z) ** 0.5 * L_f ** 0.25 * S_f ** 0.302 * (1 + K_ws) ** 0.04 * L_D ** 0.10
 W_main_landing_gear = 0.0106 * K_mp * W_i ** 0.888 * N_i ** 0.25 * L_m ** 0.4 * N_mw ** 0.321 * N_mss ** -0.5 * V_stall ** 0.1
 W_nose_landing_gear = 0.032 * K_np * W_i ** 0.646 * N_i ** 0.2 * L_n ** 0.5 * N_nw ** 0.45
@@ -105,5 +105,11 @@ W_engine_controls = 5.0 * N_en + 0.80 * L_ec
 W_starter_pneumatic = 49.19 * (N_en * W_en / 1000) ** 0.541
 W_fuel_system = 2.405 * V_t ** 0.606 * (1 + V_i / V_t) ** -1.0 * (1 + V_p / V_t) * N_i ** 0.5
 W_eci = 3008*2*2.2  # Weight of engine and contents, lb
+
+W_total = (
+    W_flight_controls + W_APU_installed +    W_instruments +    W_hydraulics +    W_electrical +    W_avionics +    W_furnishings +    W_air_conditioning +    W_anti_ice +    W_handling_gear +    W_wing +    W_horizontal_tail +    W_vertical_tail +    W_fuselage +    W_main_landing_gear +    W_nose_landing_gear +    W_nacelle_group +    W_engine_controls +    W_starter_pneumatic +    W_fuel_system +    W_eci
+)
+print(W_total/2.2)
+
 
 # More equations could be implemented similarly based on the available terminology and equations.
