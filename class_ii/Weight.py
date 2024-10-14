@@ -21,10 +21,10 @@ A_h = 1 # AR horizontal tail
 N_f = 5  # Number of flight control systems
 N_m = 1 # Number of mechanical functions
 N_fy = 1  # Number of hydraulic utility functions
-S_cs = 1  # Total area of control surfaces, ft^2
+S_cs = 81.4  # Total area of control surfaces, ft^2
 I_y = 1  # Yawing moment of inertia, lb-ft^2
-W_APU_uninstalled = 1  # Weight of uninstalled APU
-K_r = 1  # System reliability factor
+W_APU_uninstalled = 164  # Weight of uninstalled APU, lbs
+K_r = 1  # System reliability factor = 1
 K_tp = 1  # Mission completion factor
 N_c = 1  # Number of crew
 N_en = 1  # Number of engines
