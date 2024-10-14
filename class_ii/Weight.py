@@ -17,8 +17,9 @@ print(Wing_mass)
 
 
 # VARIABLES
-N_f = 1  # Number of flight control systems
-N_m = 1  # Number of mechanical functions
+A_h = 1 # AR horizontal tail
+N_f = 5  # Number of flight control systems
+N_m = 1 # Number of mechanical functions
 N_fy = 1  # Number of hydraulic utility functions
 S_cs = 1  # Total area of control surfaces, ft^2
 I_y = 1  # Yawing moment of inertia, lb-ft^2
@@ -56,7 +57,7 @@ A = 1  # Aspect ratio
 S_w = 1  # Trapezoidal wing area, ft^2
 (t_c)_root = 1  # Thickness to chord ratio at the root
 lambda_w = 1  # Wing taper ratio
-S_csw = 1  # Control surface area (wing-mounted), ft^2
+S_csw = 1  # surface area (wing-mounted), ft^2
 K_uht = 1  # Horizontal tail unit factor
 F_w = 1  # Fuselage width at horizontal tail intersection, ft
 B_h = 1  # Horizontal tail span, ft
@@ -90,6 +91,7 @@ N_i = 1  # Ultimate landing load factor
 N_nw = 1  # Number of nose wheels
 S_n = 1  # Nacelle wetted area, ft^2
 W_ec = 1  # Engine and contents weight per nacelle, lb
+S_cargo_floor  = 1
 
 # EQUATIONS
 W_flight_controls = 145.9 * N_f ** 0.554 * (1 + N_m / N_f) ** -1.0 * S_cs ** 0.20 * (I_y * 10 ** -6) ** 0.07
@@ -102,10 +104,10 @@ W_furnishings = 0.0577 * N_c ** 0.1 * W_c ** 0.393 * S_f ** 0.75
 W_air_conditioning = 62.36 * N_p ** 0.25 * (V_pr / 1000) ** 0.604 * W_uav ** 0.10
 W_anti_ice = 0.002 * W_dg
 W_handling_gear = 3.0e-4 * W_dg
-W_military_cargo_handling = 2.4 * (1)  # Cargo floor area assumed as 1 ft^2
-W_wing = 0.0051 * (W_dg * N_z) ** 0.557 * S_w ** 0.649 * A ** 0.5 * (t_c)_root ** -0.4 * (1 + lambda_w) ** 0.1 * (cos(A)) ** -1.0 * S_csw ** 0.1
-W_horizontal_tail = 0.0379 * K_uht * (1 + F_w / B_h) ** -0.25 * W_dg ** 0.639 * N_z ** 0.10 * S_ht ** 0.75 * L_t ** -1.0 * K_y ** 0.704 * (cos(A_h)) ** -1.0 * A_h ** 0.166 * (1 + S_e / S_ht) ** 0.1
-W_vertical_tail = 0.0026 * (1 + H_t / H_v) ** 0.225 * W_dg ** 0.556 * L_t ** 0.536 * S_vt ** 0.5 * K_z ** 0.875 * (cos(A_v)) * A_v ** 0.35 * (t_c)_root ** -0.5
+W_military_cargo_handling = 2.4 * (S_cargo_floor)  # Cargo floor area assumed as 1 ft^2
+W_wing = 0.0051 * (W_dg * N_z) ** 0.557 * S_w ** 0.649 * A ** 0.5 * (t_c)_root ** -0.4 * (1 + lambda_w) ** 0.1 * (m.cos(Sweep_quater)) ** -1.0 * S_csw ** 0.1
+W_horizontal_tail = 0.0379 * K_uht * (1 + F_w / B_h) ** -0.25 * W_dg ** 0.639 * N_z ** 0.10 * S_ht ** 0.75 * L_t ** -1.0 * K_y ** 0.704 * (m.cos(A_h))) ** -1.0 * A_h ** 0.166 * (1 + S_e / S_ht) ** 0.1
+W_vertical_tail = 0.0026 * (1 + H_t / H_v) ** 0.225 * W_dg ** 0.556 * L_t ** 0.536 * S_vt ** 0.5 * K_z ** 0.875 * (m.cos(A_v)) * A_v ** 0.35 * (t_c)_root ** -0.5
 W_fuselage = 0.3280 * K_door * K_y * (W_dg * N_z) ** 0.5 * L_f ** 0.25 * S_f ** 0.302 * (1 + K_ws) ** 0.04 * (L_D) ** 0.10
 W_main_landing_gear = 0.0106 * K_mp * W_i ** 0.888 * N_i ** 0.25 * L_m ** 0.4 * N_mw ** 0.321 * N_mss ** 0.5 * V_stall ** 0.1
 W_nose_landing_gear = 0.032 * K_np * W_i ** 0.646 * N_i ** 0.2 * L_n ** 0.5 * N_nw ** 0.45
