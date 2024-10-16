@@ -49,7 +49,7 @@ S_wet_wing = 1.07*2*S_wing
 S_wet_htail = 1.05*2*S_htail
 S_wet_vtail = 1.05*2*S_vtail
 S_wet_fus = (m.pi * d_fus / 4) * ((1 / (3 * L1**2)) * ((4 * L1**2 + (d_fus**2 / 4)) ** 1.5 - (d_fus**3 / 8)) - d_fus + 4 * L2 + 2 * m.sqrt(L3**2 + (d_fus**2 / 4)))
-print(S_wet_fus)
+
 
 #CF_C
 Fus_lam_frac = 0.05
@@ -88,7 +88,7 @@ D_misc = Fus_upsweep_drag + Fus_base_drag
 
 CD_0 = ((1/S_ref)*((C_F_fus * FF_fus * IF_fus * S_wet_fus) + (C_F_wing * FF_wing * IF_wing * S_wet_wing))) * Excrescence_and_leakage_drag
 
-print(CD_0)
+
 CL=0.43
 AR = 9.7
 A = 10
