@@ -13,7 +13,7 @@ ZFW = 90000
 
 Wing_mass = (kw * (b_s ** 0.75)) * (1 + m.sqrt(b_ref / b_s) * (n_ult ** 0.55) * ((b_s / t_r) / (ZFW / S_wing)) ** 0.30) * ZFW
 
-print(Wing_mass)
+print(Wing_mass*1)
 
 
 # VARIABLES
