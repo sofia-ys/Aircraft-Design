@@ -10,6 +10,15 @@ cRoot = 6.756  # root chord m
 cTip = 1.709  # tip chord m
 sweep = 0.537  # wing sweep rad
 
+# horizontal tail parameters
+# S = 59.18  # wing area m^2
+# AR = 4  # aspect ratio
+# b = math.sqrt(S * AR)  # wing span m
+# taper = 0.4  # taper ratio
+# cRoot = 6.7562 * S / (b * (1 + taper))  # root chord m
+# cTip = cRoot * taper  # tip chord m
+# sweep = 0.610865  # wing sweep rad
+
 def graph(line, colour):
     x, y = line
     plt.plot(x, y, color=colour)
@@ -32,13 +41,13 @@ diagonal = ([0, b/2], [(-cTip -cRoot), (-(b/2)*math.tan(sweep) + 0.25*cTip + 0.7
 
 # graphing wing planform
 graph(root, "black")
-graph(rootEx, "#8ace00")
+# graph(rootEx, "#8ace00")
 graph(quarterC, "#8ace00")
 graph(tip, "black")
-graph(tipEx, "#8ace00")
+# graph(tipEx, "#8ace00")
 graph(leadingE, "black")
 graph(trailingE, "black")
-graph(diagonal, "#8ace00")
+# graph(diagonal, "#8ace00")
 graph(halfC, "#8ace00")
 
 # finding MAC
@@ -52,8 +61,13 @@ mTE, cTE = lineEq(trailingE[0][0], trailingE[1][0], trailingE[0][1], trailingE[1
 yLE = mLE * xMAC + cLE  # finding the y coordinate of the MAC on the leading edge
 yTE = mTE * xMAC + cTE  # y coord of MAC on TE
 
+# finding AC
+mQuarter, cQuarter = lineEq(quarterC[0][0], quarterC[1][0], quarterC[0][1], quarterC[1][1])
+yAC = mQuarter * xMAC + cQuarter
+
 MAC = ([xMAC, xMAC], [(yLE), (yTE)])
 graph(MAC, "#8ace00")
 
 print(f"MAC: {yLE - yTE:.2f}, Position: ({xMAC:.2f}, {(yLE):.2f})")
+print(f"AC Position: ({xMAC:.2f}, {(yAC):.2f})")
 plt.show()
