@@ -2,7 +2,7 @@ from Drag import *
 import math as m
 
 b = 41
-b_ref = 1.905
+b_ref = 1.905   
 sweep_half = Sweep_quater
 n_ult = 1.5*2.5
 kw = 6.67e-3
@@ -17,12 +17,12 @@ print(Wing_mass, Wing_mass)
 
 
 # VARIABLES
-A_h = 1 # AR horizontal tail ###########################################################################
-N_f = 5  # Number of flight control systems ###########################################################################
-N_m = 1 # Number of mechanical functions ###########################################################################
-N_fy = 1  # Number of hydraulic utility functions ###########################################################################
-S_cs = 81.4  # Total area of control surfaces, ft^2 ###########################################################################
-I_y = 1  # Yawing moment of inertia, lb-ft^2 ###########################################################################
+A_h = 4 # AR horizontal tail 
+N_f = 7  # Number of flight control systems 
+N_m = 0 # Number of mechanical functions 
+N_fy = 15  # Number of hydraulic utility functions 
+S_cs = 84+313  # Total area of control surfaces, ft^2 
+I_y = 90000000  # Yawing moment of inertia, lb-ft^2 
 W_APU_uninstalled = 164  # Weight of uninstalled APU, lbs
 K_r = 1  #1 System reliability factor
 K_tp = 1  #1 Mission completion factor
@@ -30,12 +30,12 @@ N_c = 3  # Number of crew
 N_en = 2  # Number of engines
 L_f = 102.5  # Total fuselage length, ft
 B_w = 134.8  # Wing span, ft
-R_kva = 1  # System electrical rating, kv*A ###########################################################################
-L_a = 1  # Electrical routing distance, generators to avionics to cockpit, ft ###########################################################################
+R_kva = 180  # System electrical rating, kv*A 
+L_a = 50/0.3048  # Electrical routing distance, generators to avionics to cockpit, ft 
 N_gen = 2  # Number of generators
 W_uav = 1800  # Uninstalled avionics weight, lb
 W_c = 3979*2.2  # Maximum cargo weight, lb  ###########################################################################
-S_f = S_wet_fus/(0.3042**2)  # Fuselage wetted area, ft^2
+S_f = S_wet_fus/(0.3048**2)  # Fuselage wetted area, ft^2
 N_p = 140  # Number of personnel onboard (crew and passengers)
 V_pr = 313.6/(0.3040**3)  # Volume of pressurized section, ft^3
 W_dg = 113000*2.2  # Design gross weight, lb
@@ -44,7 +44,7 @@ V_t = 56*264  # Total fuel volume, gal
 V_i = 56*26  # Integral tanks volume, gal
 V_p = 0  # Self-sealing "protected" tanks volume, gal
 N_i = 2.5  # Ultimate landing load factor
-L_m = 1  # Length of main landing gear, in ###########################################################################
+L_m = 100  # Length of main landing gear, in ###########################################################################
 L_n = 1  # Nose gear length, in ###########################################################################
 N_mw = 1  # Number of main wheels ###########################################################################
 N_mss = 1  # Number of main gear shock struts ###########################################################################
@@ -62,13 +62,13 @@ B_h = 1  # Horizontal tail span, ft ############################################
 N_z = 1.5*2.5  # Ultimate load factor
 S_ht = 1  # Horizontal tail area, ft^2 ###########################################################################
 K_y = 1  # Vertical tail height above fuselage, ft ###########################################################################
-H_t = 1  # Horizontal tail height above fuselage, ft ###########################################################################
-H_v = 1  # Vertical tail height above fuselage, ft ###########################################################################
+H_t = 0  # Horizontal tail height above fuselage, ft 
+H_v = 1  # Vertical tail height above fuselage, ft 
 W_en = 3008*2.2  # Engine weight, lb
-N_Lt = 4.1/0.3042  # Nacelle length, ft
+N_Lt = 4.1/0.3048  # Nacelle length, ft
 W_fw = 34949*2.2  # Weight of fuel in wing, lb
 K_door = 1 # Cargo door factor ###########################################################################
-K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/((l_fus-1)/0.3042))) # Wing sweep factor
+K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/((l_fus-1)/0.3048))) # Wing sweep factor
 L_D = 15.8  # Lift to drag ratio
 K_mp = 1.126  # Main landing gear positioning factor
 V_stall = 1  # Stall velocity, knots ###########################################################################
@@ -81,7 +81,7 @@ K_z = 1  # Vertical tail height above fuselage factor ##########################
 N_nw = 1  # Number of nose wheels ###########################################################################
 S_n = 1  # Nacelle wetted area, ft^2 ###########################################################################
 N_w = 1 #Nacelle width, ft
-W_ec = 3008*2*2.2 #Nacelle width, ft 
+W_ec = 3008*2*2.2
 
 # EQUATIONS
 W_flight_controls = 145.9 * N_f ** 0.554 * (1 + N_m / N_f) ** -1.0 * S_cs ** 0.20 * (I_y * 10 ** -6) ** 0.07
@@ -107,7 +107,8 @@ W_fuel_system = 2.405 * V_t ** 0.606 * (1 + V_i / V_t) ** -1.0 * (1 + V_p / V_t)
 W_eci = 3008*2*2.2  # Weight of engine and contents, lb
 
 W_total = (
-    W_flight_controls + W_APU_installed +    W_instruments +    W_hydraulics +    W_electrical +    W_avionics +    W_furnishings +    W_air_conditioning +    W_anti_ice +    W_handling_gear +    W_wing +    W_horizontal_tail +    W_vertical_tail +    W_fuselage +    W_main_landing_gear +    W_nose_landing_gear +    W_nacelle_group +    W_engine_controls +    W_starter_pneumatic +    W_fuel_system +    W_eci
+    W_flight_controls + W_APU_installed +    W_instruments +    W_hydraulics +    W_electrical +    W_avionics +    W_furnishings +    W_air_conditioning +    W_anti_ice +    W_handling_gear +    W_wing +    W_horizontal_tail + 
+    W_vertical_tail +    W_fuselage +    W_main_landing_gear +    W_nose_landing_gear +    W_nacelle_group +    W_engine_controls +    W_starter_pneumatic +    W_fuel_system +    W_eci
 )
 print(W_total/2.2)
 
