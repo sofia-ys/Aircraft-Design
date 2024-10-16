@@ -30,7 +30,7 @@ delta_Clmax_slotted = 1.3
 
 def sweep(x_c):
     return(math.atan( math.tan(0.537) + ((2*root_chord)/b) * (1-tr) * ((1/4)-x_c) ) )
-#print(sweep(0))
+print(sweep(0))
 sweep_hinge_fowler = sweep(1 - cf_over_c)
 
 # Defining the function to integrate

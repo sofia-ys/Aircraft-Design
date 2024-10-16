@@ -29,7 +29,7 @@ import numpy as np
 #comment
 df = pd.read_excel("Reference_aircraft.xlsx", sheet_name="Sheet 1")
 
-#print(df.iloc[:, [3, 11, 12]])
+#print(df.iloc[:, [15]])
 array = df.to_numpy()
 MTOM = array[:, 3]
 W = []
