@@ -13,7 +13,7 @@ ZFW = 130000
 
 Wing_mass = (kw * (b_s ** 0.75)) * (1 + m.sqrt(b_ref / b_s) * (n_ult ** 0.55) * ((b_s / t_r) / (ZFW / S_wing)) ** 0.30) * ZFW
 
-
+print(Wing_mass, Wing_mass)
 
 
 # VARIABLES
@@ -109,5 +109,25 @@ W_total = (
 )
 print(W_total/2.2)
 
-
-# More equations could be implemented similarly based on the available terminology and equations.
+print("W_flight_controls = ", W_flight_controls)
+print("W_APU_installed = ", W_APU_installed)
+print("W_instruments = ", W_instruments)
+print("W_hydraulics = ", W_hydraulics)
+print("W_electrical = ", W_electrical)
+print("W_avionics = ", W_avionics)
+print("W_furnishings = ", W_furnishings)
+print("W_air_conditioning = ", W_air_conditioning)
+print("W_anti_ice = ", W_anti_ice)
+print("W_handling_gear = ", W_handling_gear)
+print("W_wing = ", W_wing)
+print("W_horizontal_tail = ", W_horizontal_tail)
+print("W_vertical_tail = ", W_vertical_tail)
+print("W_fuselage = ", W_fuselage)
+print("W_main_landing_gear = ", W_main_landing_gear)
+print("W_nose_landing_gear = ", W_nose_landing_gear)
+print("W_nacelle_group = ", W_nacelle_group)
+print("W_engine_controls = ", W_engine_controls)
+print("W_starter_pneumatic = ", W_starter_pneumatic)
+print("W_fuel_system = ", W_fuel_system)
+print("W_eci = ", W_eci)
+print("Total Weight (W_total) = ", W_total)
