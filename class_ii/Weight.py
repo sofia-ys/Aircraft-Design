@@ -64,7 +64,6 @@ H_t = 1  # Horizontal tail height above fuselage, ft ###########################
 H_v = 1  # Vertical tail height above fuselage, ft ###########################################################################
 W_en = 3008*2.2  # Engine weight, lb
 N_Lt = 4.1/0.3042  # Nacelle length, ft
-W_fw = 34949*2.2  # Weight of fuel in wing, lb
 K_door = 1 # Cargo door factor ###########################################################################
 K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/((l_fus-1)/0.3042))) # Wing sweep factor
 L_D = 15.8  # Lift to drag ratio
@@ -103,9 +102,10 @@ W_engine_controls = 5.0 * N_en + 0.80 * L_ec
 W_starter_pneumatic = 49.19 * (N_en * W_en / 1000) ** 0.541
 W_fuel_system = 2.405 * V_t ** 0.606 * (1 + V_i / V_t) ** -1.0 * (1 + V_p / V_t) * N_i ** 0.5
 W_eci = 3008*2*2.2  # Weight of engine and contents, lb
+W_fw = 34949*2.2  # Weight of fuel in wing, lb
 
 W_total = (
-    W_flight_controls + W_APU_installed +    W_instruments +    W_hydraulics +    W_electrical +    W_avionics +    W_furnishings +    W_air_conditioning +    W_anti_ice +    W_handling_gear +    W_wing +    W_horizontal_tail +    W_vertical_tail +    W_fuselage +    W_main_landing_gear +    W_nose_landing_gear +    W_nacelle_group +    W_engine_controls +    W_starter_pneumatic +    W_fuel_system +    W_eci
+    W_fw + W_flight_controls + W_APU_installed + W_instruments + W_hydraulics + W_electrical + W_avionics + W_furnishings + W_air_conditioning + W_anti_ice + W_handling_gear + W_wing + W_horizontal_tail + W_vertical_tail + W_fuselage + W_main_landing_gear + W_nose_landing_gear + W_nacelle_group + W_engine_controls + W_starter_pneumatic + W_fuel_system + W_eci
 )
 print(W_total/2.2)
 
