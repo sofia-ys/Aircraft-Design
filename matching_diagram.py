@@ -57,4 +57,5 @@ plt.ylim(0, 1)
 
 plt.legend(loc = 'upper left')
 print(landing_field_length, climb_gradient_121b[int(np.floor(landing_field_length))])
+print(landing_field_length)
 plt.show()

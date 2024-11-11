@@ -4,8 +4,8 @@ import math as m
 #INPUTS
 S_ref = 173.54
 S_wing = 173.5 
-S_htail = 1 ####################################################
-S_vtail = 1 ####################################################
+S_htail = 59.18
+S_vtail = 42.99
 L1 = 8.561    
 L2 = 18.787   
 L3 = 9.305   
@@ -15,7 +15,7 @@ Chord_root = 6.797418854384913
 k_surface = (0.3*0.152 + 0.7*0.634)*10**-5
 
 upsweep_fus = 0.1047197551
-A_max_fus = (3.722/2)**2*m.pi   ##############################################
+A_max_fus = (3.722/2)**2*m.pi   
 A_base = 116       
 
 
@@ -24,8 +24,8 @@ t_c = 0.1096
 Sweep_quater = 0.537
 l_fus = 36.653
 d_fus = 3.722
-l_nacc = 1 #####################################################
-d_nacc = 1 #####################################################
+l_nacc = 4.1
+d_nacc = 2.8
 
 
 
@@ -81,22 +81,24 @@ Wave_drag =  0.002*(1+2.5*(M_dd-M)/(0.05))**(-1)
 Fus_upsweep_drag = 3.83*upsweep_fus**2.5*A_max_fus * (0.5*rho*V**2)
 Fus_base_drag = (0.139+0.419*(M-0.161)**2)*A_base * (0.5*rho*V**2)
 
-Lanfing_gear_drag = 0 ########################################## SLIDE 57
+Landing_gear_drag = 0 ########################################## SLIDE 57
 Excrescence_and_leakage_drag = 1.035
 
 D_misc = Fus_upsweep_drag + Fus_base_drag
 
-CD_0 = ((1/S_ref)*((C_F_fus * FF_fus * IF_fus * S_wet_fus) + (C_F_wing * FF_wing * IF_wing * S_wet_wing))) * Excrescence_and_leakage_drag
+CD_0 = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus) + (1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)) * Excrescence_and_leakage_drag
+
 
 CL=0.43
 AR = 9.7
 A = 10
 Sweep_LE = 0.5871613666551182-0.0053
 e = 4.61*(1-0.045*AR**0.68)*(m.cos(Sweep_LE)**0.15)-3.1
-twist_tip = 3 ################################
-twist_MGC = 1 ################################
+twist_tip = 3 
+twist_MGC = 1 
 twist_drag = 0.00004*(twist_tip-twist_MGC)
 
-AR_effective = 0 #############################
+AR_effective = 0 
 
-CD = CD_0 + (CL**2)/(m.pi*A*e) + twist_drag
+CD = CD_0 + twist_drag
+print(CD)
