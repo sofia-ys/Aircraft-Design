@@ -86,7 +86,7 @@ Excrescence_and_leakage_drag = 1.035
 
 D_misc = Fus_upsweep_drag + Fus_base_drag
 
-CD_0 = ((1/S_ref)*((C_F_fus * FF_fus * IF_fus * S_wet_fus) + (C_F_wing * FF_wing * IF_wing * S_wet_wing))) * Excrescence_and_leakage_drag
+CD_0 = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus) + (1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)) * Excrescence_and_leakage_drag
 
 
 CL=0.43

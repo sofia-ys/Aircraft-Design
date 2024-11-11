@@ -66,7 +66,7 @@ H_t = 0  # Horizontal tail height above fuselage, ft
 H_v = 1  # Vertical tail height above fuselage, ft 
 W_en = 3008*2.2  # Engine weight, lb
 N_Lt = 4.1/0.3048  # Nacelle length, ft
-W_fw = 34949*2.2  # Weight of fuel in wing, lb
+W_fw = 27438*2.2  # Weight of fuel in wing, lb
 K_door = 1.12 # Cargo door factor 
 K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/((l_fus-1)/0.3048))) # Wing sweep factor
 L_D = 15.8  # Lift to drag ratio
@@ -112,7 +112,6 @@ W_engine_controls = 5.0 * N_en + 0.80 * L_ec
 W_starter_pneumatic = 49.19 * (N_en * W_en / 1000) ** 0.541
 W_fuel_system = 2.405 * V_t ** 0.606 * (1 + V_i / V_t) ** -1.0 * (1 + V_p / V_t) * N_i ** 0.5
 W_eci = 3008*2*2.2  # Weight of engine and contents, lb
-W_fw = 34949*2.2  # Weight of fuel in wing, lb
 W_seats = N_p * W_seat
 W_food = N_carts * W_cart + W_food * N_p
 
@@ -148,7 +147,7 @@ print("W_payload =", W_c)
 print("W_seats =", W_seats)
 print("W_food =", W_food)
 
-print("Total Weight (W_total) = ", W_total)
+print("Total Weight (W_total) = ", W_total/2.2, "\n\n\n")
 
 
 print("W_flight_controls = {:.2f}%".format((W_flight_controls / W_total) * 100))
