@@ -38,7 +38,7 @@ W_c = 18960*2.2  # Maximum cargo weight, lb
 S_f = 367/(0.3048**2)  # Fuselage wetted area, ft^2
 N_p = 140  # Number of personnel onboard (crew and passengers)
 V_pr = 313.6/(0.3040**3)  # Volume of pressurized section, ft^3
-W_dg = 85100*2.2  # Design gross weight, lb
+W_dg = 76504*2.2  # Design gross weight, lb
 W_i = 1400  # Installed weight, lb
 V_t = 56*264  # Total fuel volume, gal
 V_i = 56*264  # Integral tanks volume, gal
@@ -175,9 +175,4 @@ print("W_fuel = {:.2f}%".format((W_fw / W_total) * 100))
 print("W_payload = {:.2f}%".format((W_c / W_total) * 100))
 print("W_seats = {:.2f}%".format((W_seats / W_total) * 100))
 print("W_food = {:.2f}%".format((W_food / W_total) * 100))
-print("Total Weight (W_total) = {:.2f}%".format((W_total / 2.2)))  # This will always be 100%
-
-
-
-print("W_fus = ", W_fuselage/2.2)
-
+print("Total Weight (W_total) = {:.2f}".format((W_total / 2.2)))  # This will always be 100%
