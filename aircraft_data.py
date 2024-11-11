@@ -10,7 +10,7 @@ T_sl = 288 # [K] temp at sea level isa
 P_sl = 101325 # [Pa] pressure at sea level isa
 a = -0.0065 # [K/m] temperature lapse rate with altitude
 
-MTOM = 117604 # [kg]
+MTOM = 86000 # [kg]
 payload_max = 18960 # [kg]
 payload_MTOW = 8531 # [kg]
 M = 0.85 # cruise mach number at 31000 [ft]
@@ -34,16 +34,15 @@ altitude_landing = 0 # [m] landing altitude suggested in the book, maybe should 
 altitude_lfl = 0
 altitude_take_off = 0
 T_delta = 15 # [K] hot day conditions
-AR = np.mean(ra.df["Aspect Ratio"]) # Average aspect ratio of reference aircrafts
+AR = 9.7 # Average aspect ratio of reference aircrafts
 S_wet_to_S = np.mean(ra.df["Swet/S"])
 S_wet = np.median(ra.df["Swet"]) # Wetted area of our aircraft
 bypass = 11 # Bypass ratio
-oswald = 1/(0.0472*math.pi*AR) #From fig 6.4
+oswald = 1/(0.042*math.pi*AR) #From fig 6.4
 c_f = 0.0029 # From fig 6.3
 c_d0 = c_f * S_wet_to_S
 Ne = 2 # number of engines
 climb_rate_requirement = 12.75  # [m/s]
-
 T_lfl_hot = T_sl + T_delta + a * altitude_landing
 T_landing = T_sl + a * altitude_landing
 T_cruise = T_sl + a * altitude_cruise
