@@ -81,7 +81,7 @@ Wave_drag =  0.002*(1+2.5*(M_dd-M)/(0.05))**(-1)
 Fus_upsweep_drag = 3.83*upsweep_fus**2.5*A_max_fus * (0.5*rho*V**2)
 Fus_base_drag = (0.139+0.419*(M-0.161)**2)*A_base * (0.5*rho*V**2)
 
-Lanfing_gear_drag = 0 ########################################## SLIDE 57
+Landing_gear_drag = 0 ########################################## SLIDE 57
 Excrescence_and_leakage_drag = 1.035
 
 D_misc = Fus_upsweep_drag + Fus_base_drag
@@ -100,5 +100,5 @@ twist_drag = 0.00004*(twist_tip-twist_MGC)
 
 AR_effective = 0 
 
-CD = CD_0 + (CL**2)/(m.pi*A*e) + twist_drag
+CD = CD_0 + twist_drag
 print(CD)
