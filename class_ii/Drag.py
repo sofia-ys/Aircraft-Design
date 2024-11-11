@@ -26,6 +26,12 @@ l_fus = 36.653
 d_fus = 3.722
 l_nacc = 4.1
 d_nacc = 2.8
+S_fus_frontal = m.pi*(d_fus/2)**2
+C_D_c_engine = 0.006 # fro powepoint slide 46
+S_ref_engine = m.pi*(d_nacc/2)**2
+S_wet_engine = 2*S_ref_engine + m.pi*d_nacc*l_nacc
+
+
 
 
 
@@ -78,27 +84,34 @@ IF_fus = 1
 IF_nacc = 1 
 IF_tail = 1.045 
 Wave_drag =  0.002*(1+2.5*(M_dd-M)/(0.05))**(-1)
-Fus_upsweep_drag = 3.83*upsweep_fus**2.5*A_max_fus * (0.5*rho*V**2)
-Fus_base_drag = (0.139+0.419*(M-0.161)**2)*A_base * (0.5*rho*V**2)
+
+M=0.2
+Fus_upsweep_drag = 3.83*upsweep_fus**2.5*A_max_fus/S_ref
+#Fus_base_drag = (0.139+0.419*(M-0.161)**2)*A_base/S_ref
+
+twist_tip = 3 
+twist_MGC = 1 
+twist_drag = 0.00004*(twist_tip-twist_MGC)
+
+
 
 Landing_gear_drag = 0 ########################################## SLIDE 57
 Excrescence_and_leakage_drag = 1.035
 
-D_misc = Fus_upsweep_drag + Fus_base_drag
+C_D_misc = Fus_upsweep_drag + twist_drag#+ Fus_base_drag
 
-CD_0 = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus) + (1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)) * Excrescence_and_leakage_drag
 
+CD_0 = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus) + (1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)) * Excrescence_and_leakage_drag + 2*(1/S_ref)*(C_D_c_engine*S_wet_engine) + C_D_misc
 
 CL=0.43
 AR = 9.7
 A = 10
 Sweep_LE = 0.5871613666551182-0.0053
 e = 4.61*(1-0.045*AR**0.68)*(m.cos(Sweep_LE)**0.15)-3.1
-twist_tip = 3 
-twist_MGC = 1 
-twist_drag = 0.00004*(twist_tip-twist_MGC)
+
 
 AR_effective = 0 
 
-CD = CD_0 + twist_drag
+
+CD = CD_0
 print(CD)
