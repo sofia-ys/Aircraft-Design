@@ -2,21 +2,20 @@ import math as m
 
 
 #INPUTS
-S_ref = 173.54
-S_wing = 173.5 
-S_htail = 59.18
-S_vtail = 42.99
+S_ref = 129.8 #173.8
+S_wing = 129.8 #173.8
+S_htail = 47.51 #59.3
+S_vtail = 33.38 #43
 L1 = 8.561    
 L2 = 18.787   
 L3 = 9.305   
 
-taper_ratio = 0.2453387369561506
-Chord_root = 6.797418854384913
+taper_ratio = 0.246 #0.2453
+Chord_root = 5.918 #6.797
 k_surface = (0.3*0.152 + 0.7*0.634)*10**-5
 
 upsweep_fus = 0.1047197551
 A_max_fus = (3.722/2)**2*m.pi   
-A_base = 116       
 
 
 x_c_m = 0.35

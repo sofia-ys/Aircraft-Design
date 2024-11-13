@@ -2,8 +2,8 @@ import math as m
 
 
 #INPUTS
-S_ref =  132#Reference area 173.4
-S_wing = 132 
+S_ref =  173 #Reference area 173.4
+S_wing = 173 
 S_htail = 59.18
 S_vtail = 42.99
 L1 = 8.561    
