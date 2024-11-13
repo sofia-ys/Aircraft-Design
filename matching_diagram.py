@@ -59,3 +59,7 @@ plt.legend(loc = 'upper left')
 print(landing_field_length, cruise_speed_value[int(np.floor(landing_field_length))])
 print(landing_field_length)
 plt.show()
+
+MTOW = 79692.86  # kg from the first class II iteration
+print("Surface area: ", MTOW * 9.80665 / landing_field_length)
+print("Thrust: ", MTOW * 9.80665 * cruise_speed_value[int(np.floor(landing_field_length))] / 1000)
