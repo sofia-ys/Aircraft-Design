@@ -38,7 +38,7 @@ W_c = 18960*2.2  # Maximum cargo weight, lb
 S_f = 367/(0.3048**2)  # Fuselage wetted area, ft^2
 N_p = 140  # Number of personnel onboard (crew and passengers)
 V_pr = 313.6/(0.3040**3)  # Volume of pressurized section, ft^3
-W_dg = 117604*2.2  # Design gross weight, lb: previously 113000
+W_dg = 117000*2.2  # Design gross weight, lb
 W_i = 1400  # Installed weight, lb
 V_t = 56*264  # Total fuel volume, gal
 V_i = 56*264  # Integral tanks volume, gal
@@ -121,7 +121,7 @@ W_total = (
 )
 
 
-
+'''
 print("W_flight_controls = ", W_flight_controls)
 print("W_APU_installed = ", W_APU_installed)
 print("W_instruments = ", W_instruments)
@@ -176,3 +176,57 @@ print("W_payload = {:.2f}%".format((W_c / W_total) * 100))
 print("W_seats = {:.2f}%".format((W_seats / W_total) * 100))
 print("W_food = {:.2f}%".format((W_food / W_total) * 100))
 print("Total Weight (W_total) = {:.2f}".format((W_total / 2.2)))  # This will always be 100%
+
+'''
+
+import csv
+
+# Define each component's weight with human-readable names
+components = {
+    "Flight Controls": W_flight_controls,
+    "APU (Auxiliary Power Unit)": W_APU_installed,
+    "Instruments": W_instruments,
+    "Hydraulics": W_hydraulics,
+    "Electrical Systems": W_electrical,
+    "Avionics": W_avionics,
+    "Furnishings": W_furnishings,
+    "Air Conditioning": W_air_conditioning,
+    "Anti-Ice System": W_anti_ice,
+    "Handling Gear": W_handling_gear,
+    "Wing": W_wing,
+    "Horizontal Tail": W_horizontal_tail,
+    "Vertical Tail": W_vertical_tail,
+    "Fuselage": W_fuselage,
+    "Main Landing Gear": W_main_landing_gear,
+    "Nose Landing Gear": W_nose_landing_gear,
+    "Nacelle Group": W_nacelle_group,
+    "Engine Controls": W_engine_controls,
+    "Starter and Pneumatic Systems": W_starter_pneumatic,
+    "Fuel System": W_fuel_system,
+    "Engine and Controls Installation": W_eci,
+    "Fuel Weight": W_fw,
+    "Payload": W_c,
+    "Seats": W_seats,
+    "Food and Supplies": W_food
+}
+
+# Calculate total weight in kg
+W_total_kg = W_total / 2.2
+
+# Prepare data for CSV
+csv_data = [["Name", "Weight (kg)", "Percent of Total Weight (%)"]]
+for name, weight in components.items():
+    weight_kg = weight / 2.2    
+    percent = (weight / W_total) * 100
+    csv_data.append([name, round(weight_kg, 2), round(percent, 2)])
+
+# Add total weight to CSV
+csv_data.append(["Total Weight", round(W_total_kg, 2), 100.0])
+
+# Write to CSV file
+with open("component_weights.csv", mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(csv_data)
+
+print("CSV file 'component_weights.csv' has been created successfully.")
+print(W_total)

@@ -2,8 +2,8 @@ import math as m
 
 
 #INPUTS
-S_ref = 173.54
-S_wing = 173.5 
+S_ref =  132#Reference area 173.4
+S_wing = 132 
 S_htail = 59.18
 S_vtail = 42.99
 L1 = 8.561    
@@ -36,18 +36,15 @@ S_wet_engine = 2*S_ref_engine + m.pi*d_nacc*l_nacc
 
 
 V = 256
-M = 0.85
-M_dd = 0.89
+M=0.85
 #ATMOSPHERE
 dynamic_visc = 3.355 * 10**-5
 rho  = 1.225 * 0.3589
-
 kinematic_visc = dynamic_visc*rho
 
 
 
 #CALCULATIONS
-Re = 36249291
 MAC = C_MGC = (2 / 3) * Chord_root * ((1 + taper_ratio + taper_ratio**2) / (1 + taper_ratio))
 
 #S_WET
@@ -63,7 +60,6 @@ Wing_lam_frac = 0.10
 Re_trans = min( (rho*V*MAC)/(kinematic_visc), (44.62*(MAC/k_surface)**1.053)*M**1.16 )
 C_f_lam = (1.382)/(m.sqrt(Re_trans))
 C_f_turb = (0.455)/((m.log10(Re_trans))**2.58*(1+0.144*M**2)*0.65)
-
 
 
 C_F_wing = Wing_lam_frac*C_f_lam + (1-Wing_lam_frac)*C_f_turb
@@ -83,35 +79,21 @@ IF_wing = 1.2
 IF_fus = 1  
 IF_nacc = 1 
 IF_tail = 1.045 
-Wave_drag =  0.002*(1+2.5*(M_dd-M)/(0.05))**(-1)
 
-M=0.2
+
+
+
+#MISC DRAG
 Fus_upsweep_drag = 3.83*upsweep_fus**2.5*A_max_fus/S_ref
-#Fus_base_drag = (0.139+0.419*(M-0.161)**2)*A_base/S_ref
 
-twist_tip = 3 
+twist_tip = 3 #degrees
 twist_MGC = 1 
 twist_drag = 0.00004*(twist_tip-twist_MGC)
 
-
-
-Landing_gear_drag = 0 ########################################## SLIDE 57
 Excrescence_and_leakage_drag = 1.035
-
-C_D_misc = Fus_upsweep_drag + twist_drag#+ Fus_base_drag
+C_D_misc = Fus_upsweep_drag + twist_drag
 
 
 CD_0 = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus) + (1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)) * Excrescence_and_leakage_drag + 2*(1/S_ref)*(C_D_c_engine*S_wet_engine) + C_D_misc
 
-CL=0.43
-AR = 9.7
-A = 10
-Sweep_LE = 0.5871613666551182-0.0053
-e = 4.61*(1-0.045*AR**0.68)*(m.cos(Sweep_LE)**0.15)-3.1
-
-
-AR_effective = 0 
-
-
-CD = CD_0
-print(CD)
+print(CD_0)

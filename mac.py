@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import math
 
 # wing parameters
-S = 173.77  # wing area m^2
+S = 131.75 # 173.77  # wing area m^2
 b = 41.06  # wing span m
 AR = 9.7  # aspect ratio
 taper = 0.2529  # taper ratio
