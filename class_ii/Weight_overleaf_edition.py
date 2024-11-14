@@ -229,4 +229,4 @@ with open("component_weights.csv", mode="w", newline="") as file:
     writer.writerows(csv_data)
 
 print("CSV file 'component_weights.csv' has been created successfully.")
-print(W_total)
+print(W_total/2.2)
