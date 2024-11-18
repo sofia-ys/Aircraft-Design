@@ -1,7 +1,7 @@
 import numpy as np
 
 # Define the file path
-file_path = r"C:\Users\bence\TU Delft\2nd year\Project\XFLR 5\WP4\MainWing_a=0.00_v=10.00ms.txt"
+file_path = r"MainWing_a=0.00_v=10.00ms.txt"
 
 # Initialize lists to store the relevant data
 y_span = []
@@ -17,7 +17,7 @@ with open(file_path, 'r') as file:
 
     for line in file:
         # Identify the beginning of the "Main Wing" section
-        if "Main Wing" in line:
+        if "Main Wing1" in line:
             main_wing_section = True
             continue
 
