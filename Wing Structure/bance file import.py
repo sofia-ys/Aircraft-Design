@@ -1,8 +1,8 @@
 import numpy as np
 
 # Define the file path
-file_path_alpha0 = r"MainWing_a=0.00_v=10.00ms.txt"
-file_path_alpha10 = r"MainWing_a=10.00_v=10.00ms.txt"
+file_path_alpha0 = r"Wing Structure\\XFLR5_files\\MainWing_a=0.00_v=10.00ms.txt"
+file_path_alpha10 = r"Wing Structure\\XFLR5_files\\MainWing_a=10.00_v=10.00ms.txt"
 
 def xflr(file_path):
     # Initialize lists to store the relevant data
