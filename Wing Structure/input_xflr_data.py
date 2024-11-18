@@ -9,6 +9,7 @@ file_aoa10_path = 'Wing Structure/XFLR5_files/MainWing_a=10.00_v=10.00ms.txt'
 
 # Function to read data and create interpolation functions for a given file
 def load_data(file_path):
+    # Define all the lists
     y_span = []
     chord = []
     ai = []
@@ -21,8 +22,10 @@ def load_data(file_path):
     xtr_bot = []
     xcp = []
     bm = []
-    
+    # Open the file
     with open(file_path, 'r') as file:
+        # This is just to process the XFLR5 output files and save the results to the lists
+        #---------------------------------------------------------------------------------
         for line in file:
             match = re.match(
                 r'\s*(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)',
@@ -41,22 +44,24 @@ def load_data(file_path):
                 xtr_bot.append(float(match.group(10)))
                 xcp.append(float(match.group(11)))
                 bm.append(float(match.group(12)))
-
-    # Convert lists to numpy arrays
+        #---------------------------------------------------------------------------------
+    # Get a numpy array out of the span locations analyzed
     y_span = np.array(y_span)
-    return {
+    # Create parameters for the interpolation functions
+    interpolations = {
         'chord': interp1d(y_span, chord, kind='cubic'),
         'ai': interp1d(y_span, ai, kind='cubic'),
         'cl': interp1d(y_span, cl, kind='cubic'),
         'icd': interp1d(y_span, icd, kind='cubic'),
         'cm_airf': interp1d(y_span, cm_airf, kind='cubic'),
     }
+    return y_span, interpolations
 
 # Load data for AoA 0 and AoA 10
-interpolations_aoa0 = load_data(file_aoa0_path)
-interpolations_aoa10 = load_data(file_aoa10_path)
+y_span_aoa0, interpolations_aoa0 = load_data(file_aoa0_path)
+y_span_aoa10, interpolations_aoa10 = load_data(file_aoa10_path)
 
-# Define functions to access interpolated values based on AoA and y location
+# Define functions to access interpolated values based on AoA (we only have 0 and 10) and y location
 def get_value(param, y, aoa):
     if aoa == 0:
         return interpolations_aoa0[param](y)
@@ -65,7 +70,7 @@ def get_value(param, y, aoa):
     else:
         raise ValueError("Angle of attack must be 0 or 10 degrees.")
 
-# Specific functions for each parameter
+# Specific interpolated functions for each parameter, you just insert any y location and the desired angle of attack & you get the output
 def get_chord(y, aoa):
     return get_value('chord', y, aoa)
 
@@ -84,8 +89,11 @@ def get_cm_geom(y, aoa):
 def get_cm_airf(y, aoa):
     return get_value('cm_airf', y, aoa)
 
+#----------------------------------------------
+# THIS IS JUST TO DO SANITY CHECK WITH PLOTTING
+#----------------------------------------------
 # Define a range of y values for smooth plotting
-y_new = np.linspace(0, constants.b/2, 100)
+y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100) #note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function
 
 # Plot each parameter for AoA = 0 and AoA = 10
 def plot_all_parameters():
