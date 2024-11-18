@@ -1,7 +1,7 @@
 from Drag import *
 import math as m
 
-b = 41
+b = 35.48############################################################################## 41
 b_ref = 1.905   
 sweep_half = Sweep_quater
 n_ult = 1.5*2.5
@@ -17,7 +17,7 @@ print(Wing_mass)
 
 
 # VARIABLES
-A_h = 4 # AR horizontal tail 
+A_h = 4 # AR horizontal tail  ###########################################################################
 N_f = 7  # Number of flight control systems 
 N_m = 0 # Number of mechanical functions 
 N_fy = 15  # Number of hydraulic utility functions 
@@ -29,7 +29,7 @@ K_tp = 1  # Mission completion factor
 N_c = 3  # Number of crew
 N_en = 2  # Number of engines
 L_f = 120.5  # Total fuselage length, ft
-B_w = 134.8  # Wing span, ft
+B_w =  b/0.3028 # Wing span, ft 
 R_kva = 180  # System electrical rating, kv*A 
 L_a = 50/0.3048  # Electrical routing distance, generators to avionics to cockpit, ft 
 N_gen = 2  # Number of generators
@@ -38,40 +38,40 @@ W_c = 18960*2.2  # Maximum cargo weight, lb
 S_f = 367/(0.3048**2)  # Fuselage wetted area, ft^2
 N_p = 140  # Number of personnel onboard (crew and passengers)
 V_pr = 313.6/(0.3040**3)  # Volume of pressurized section, ft^3
-W_dg = 117000*2.2  # Design gross weight, lb
+W_dg = 117604*2.2  # Design gross weight, lb: previously 113000
 W_i = 1400  # Installed weight, lb
-V_t = 56*264  # Total fuel volume, gal
-V_i = 56*264  # Integral tanks volume, gal
+V_t = 41.8*264  # Total fuel volume, gal ########################################################################### 56
+V_i = 41.8*264  # Integral tanks volume, gal ########################################################################### 56
 N_i = 2.5  # Ultimate landing load factor
 L_m = 100  # Length of main landing gear, in 
-L_n = 83  # Nose gear length, in 
+L_n = 83  # Nose gear length, in  
 N_mw = 4  # Number of main wheels 
 N_mss = 2  # Number of main gear shock struts 
-L_t = 49.5  # Tail length, ft 
-S_vt = 463  # Vertical tail area, ft^2 
-A_v = 1.6  # Aspect ratio of vertical tail
+L_t = 49.5  # Tail length, ft   ###########################################################################v
+S_vt = S_vtail/(0.3048**2)  # Vertical tail area, ft^2  ########################################################################### 463
+A_v = 2.5 # Aspect ratio of vertical tail ########################################################################### 1.6
 Sweep_vt = 0.08
-A = 9.7  # Aspect ratio
+A = 9.7  # Aspect ratio ###########################################################################
 S_w = S_wing/0.3048  # Trapezoidal wing area, ft^2
-t_c = 0.104 # Thickness to chord ratio at the root
-lambda_w = 0.2453387369561506  # Wing taper ratio
+t_c = 0.104 # Thickness to chord ratio at the root 
+lambda_w =  taper_ratio # Wing taper ratio ########################################################################### 0.24533
 S_csw = 81.4+131  # Control surface area (wing-mounted), ft^2
 K_uht = 1  # Horizontal tail unit factor  
 F_w = 7  # Fuselage width at horizontal tail intersection, ft
-B_h = 49  # Horizontal tail span, ft 
+S_ht = S_htail/(0.3048**2) # Horizontal tail area, ft^2 
+B_h = (A_h*S_ht)**0.5  # Horizontal tail span, ft  ###########################################################################
 N_z = 1.5*2.5  # Ultimate load factor
-S_ht = 194  # Horizontal tail area, ft^2 
 K_y = 27     # Vaircraft pitching radius of gyration, ft ( 0.3Lt)
 H_t = 0  # Horizontal tail height above fuselage, ft 
 H_v = 1  # Vertical tail height above fuselage, ft 
 W_en = 3008*2.2  # Engine weight, lb
 N_Lt = 4.1/0.3048  # Nacelle length, ft
-W_fw = 27438*2.2  # Weight of fuel in wing, lb
+W_fw = 34298*2.2  # Weight of fuel in wing, lb ###########################################################################
 K_door = 1.12 # Cargo door factor 
 K_ws = 0.75*((1 + 2*lambda_w)/(1+lambda_w))*(b * m.tan(Sweep_quater/((l_fus-1)/0.3048))) # Wing sweep factor
-L_D = 15.8  # Lift to drag ratio
+L_D = 15.8  # Lift to drag ratio ###########################################################################
 K_mp = 1.126  # Main landing gear positioning factor
-V_stall = 132  # Stall velocity, knots 
+V_stall = 132  # Stall velocity, knots  ###########################################################################
 K_np = 1.15  # Nose landing gear positioning factor
 K_ng = 1.017  # Nacelle group factor
 L_ec = 15/0.3048  # Length from engine front to cockpit, ft
@@ -121,7 +121,7 @@ W_total = (
 )
 
 
-'''
+
 print("W_flight_controls = ", W_flight_controls)
 print("W_APU_installed = ", W_APU_installed)
 print("W_instruments = ", W_instruments)
@@ -143,6 +143,8 @@ print("W_engine_controls = ", W_engine_controls)
 print("W_starter_pneumatic = ", W_starter_pneumatic)
 print("W_fuel_system = ", W_fuel_system)
 print("W_eci = ", W_eci)
+print("W_fuel_wing = ",W_fw *0.72)
+print("W_fuel_not_wing = ",(W_fw *0.28))
 print("W_payload =", W_c)
 print("W_seats =", W_seats)
 print("W_food =", W_food)
@@ -171,62 +173,9 @@ print("W_engine_controls = {:.2f}%".format((W_engine_controls / W_total) * 100))
 print("W_starter_pneumatic = {:.2f}%".format((W_starter_pneumatic / W_total) * 100))
 print("W_fuel_system = {:.2f}%".format((W_fuel_system / W_total) * 100))
 print("W_eci = {:.2f}%".format((W_eci / W_total) * 100))
-print("W_fuel = {:.2f}%".format((W_fw / W_total) * 100))
+print("W_fuel_wing = {:.2f}%".format(((W_fw *0.72)/ W_total) * 100))
+print("W_fuel_not_wing = {:.2f}%".format(((W_fw *0.28)/ W_total) * 100))
 print("W_payload = {:.2f}%".format((W_c / W_total) * 100))
 print("W_seats = {:.2f}%".format((W_seats / W_total) * 100))
 print("W_food = {:.2f}%".format((W_food / W_total) * 100))
 print("Total Weight (W_total) = {:.2f}".format((W_total / 2.2)))  # This will always be 100%
-
-'''
-
-import csv
-
-# Define each component's weight with human-readable names
-components = {
-    "Flight Controls": W_flight_controls,
-    "APU (Auxiliary Power Unit)": W_APU_installed,
-    "Instruments": W_instruments,
-    "Hydraulics": W_hydraulics,
-    "Electrical Systems": W_electrical,
-    "Avionics": W_avionics,
-    "Furnishings": W_furnishings,
-    "Air Conditioning": W_air_conditioning,
-    "Anti-Ice System": W_anti_ice,
-    "Handling Gear": W_handling_gear,
-    "Wing": W_wing,
-    "Horizontal Tail": W_horizontal_tail,
-    "Vertical Tail": W_vertical_tail,
-    "Fuselage": W_fuselage,
-    "Main Landing Gear": W_main_landing_gear,
-    "Nose Landing Gear": W_nose_landing_gear,
-    "Nacelle Group": W_nacelle_group,
-    "Engine Controls": W_engine_controls,
-    "Starter and Pneumatic Systems": W_starter_pneumatic,
-    "Fuel System": W_fuel_system,
-    "Engine and Controls Installation": W_eci,
-    "Fuel Weight": W_fw,
-    "Payload": W_c,
-    "Seats": W_seats,
-    "Food and Supplies": W_food
-}
-
-# Calculate total weight in kg
-W_total_kg = W_total / 2.2
-
-# Prepare data for CSV
-csv_data = [["Name", "Weight (kg)", "Percent of Total Weight (%)"]]
-for name, weight in components.items():
-    weight_kg = weight / 2.2    
-    percent = (weight / W_total) * 100
-    csv_data.append([name, round(weight_kg, 2), round(percent, 2)])
-
-# Add total weight to CSV
-csv_data.append(["Total Weight", round(W_total_kg, 2), 100.0])
-
-# Write to CSV file
-with open("component_weights.csv", mode="w", newline="") as file:
-    writer = csv.writer(file)
-    writer.writerows(csv_data)
-
-print("CSV file 'component_weights.csv' has been created successfully.")
-print(W_total)

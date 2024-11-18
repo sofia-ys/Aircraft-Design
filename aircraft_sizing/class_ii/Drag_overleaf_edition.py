@@ -2,8 +2,8 @@ import math as m
 
 
 #INPUTS
-S_ref =  132#Reference area 173.4
-S_wing = 132 
+S_ref =  173 #Reference area 173.4
+S_wing = 173 
 S_htail = 59.18
 S_vtail = 42.99
 L1 = 8.561    
@@ -96,4 +96,10 @@ C_D_misc = Fus_upsweep_drag + twist_drag
 
 CD_0 = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus) + (1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)) * Excrescence_and_leakage_drag + 2*(1/S_ref)*(C_D_c_engine*S_wet_engine) + C_D_misc
 
+Fus_drag_frac = ((1/S_ref)*(C_F_fus * FF_fus * IF_fus * S_wet_fus)*Excrescence_and_leakage_drag)*100/CD_0
+wing_drag_frac = ((1/S_ref)*(C_F_wing * FF_wing * IF_wing * S_wet_wing)*Excrescence_and_leakage_drag)*100/CD_0
+engine_drag_frac = (2*(1/S_ref)*(C_D_c_engine*S_wet_engine))*100/CD_0
+C_D_misc_frag_frac = C_D_misc*100/CD_0	
 print(CD_0)
+
+print("Fuselage fraction =", Fus_drag_frac, "\nWing fraction =", wing_drag_frac, "\nEngine fraction = ", engine_drag_frac, "\nMiscelenious fraction =", C_D_misc_frag_frac)
