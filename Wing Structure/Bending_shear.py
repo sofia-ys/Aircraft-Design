@@ -1,5 +1,13 @@
-def l(x):
-    return (x^2)
+import math as m
 
-def d(x)
-    return 0.02*x
+
+def l(x):
+    return (2*x)
+
+def d(x):
+    return x
+
+def n(x,alpha):
+    return(d(x)*m.sin(alpha)+l(x)*m.cos(alpha))
+
+print(n(1,m.pi/2))
