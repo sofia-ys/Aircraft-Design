@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.interpolate import interp1d
 
-# Load the file while skipping the header and footer
+# load the file while skipping the header and footer
 filename = "MainWing_a=10.00_v=10.00ms.txt"
 data = np.genfromtxt(filename, skip_header=14, skip_footer=120, usecols=(0, 3, 4, 6))
 
