@@ -4,7 +4,8 @@ from scipy.interpolate import interp1d
 import re
 
 # Step 1: Read the file and extract values for y-span, chord, Ai, Cl, etc.
-file_path = 'Wing Structure/XFLR5_files/MainWing_a=0.00_v=10.00ms.txt'
+file_aoa0_path = 'Wing Structure/XFLR5_files/MainWing_a=0.00_v=10.00ms.txt'
+file_aoa10_path = 'Wing Structure/XFLR5_files/MainWing_a=10.00_v=10.00ms.txt'
 
 # Initialize lists for each column
 y_span = []
@@ -20,8 +21,8 @@ xtr_bot = []
 xcp = []
 bm = []
 
-with open(file_path, 'r') as file:
-    for line in file:
+with open(file_aoa0_path, 'r') as file_0:
+    for line in file_0:
         # Adjust regex pattern to capture each column
         match = re.match(
             r'\s*(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)',
@@ -69,44 +70,102 @@ xtr_bot_interp = interp1d(y_span, xtr_bot, kind='cubic')
 xcp_interp = interp1d(y_span, xcp, kind='cubic')
 bm_interp = interp1d(y_span, bm, kind='cubic')
 
-# Step 3: Define functions that take y-span and angle of attack (AoA) as inputs
-# For this example, AoA is used as a parameter; if you have specific calculations
-# based on AoA, adjust accordingly.
+# Step 3: Define a range of y values for smooth plotting
+y_new = np.linspace(min(y_span), max(y_span), 100)
 
-def get_chord(y, aoa=0):
-    return chord_interp(y)
+# Step 4: Plot each interpolated parameter
+plt.figure(figsize=(12, 18))
 
-def get_ai(y, aoa=0):
-    return ai_interp(y)  # Modify as needed if AoA-dependent
+# Plot chord
+def plotEverything():  
+    plt.subplot(6, 2, 1)
+    plt.plot(y_new, chord_interp(y_new), label='Chord')
+    plt.xlabel('Span (y)')
+    plt.ylabel('Chord')
+    plt.title('Chord Distribution along Span')
+    plt.grid(True)
 
-def get_cl(y, aoa=0):
-    return cl_interp(y)  # Modify as needed if AoA-dependent
+    # Plot ai
+    plt.subplot(6, 2, 2)
+    plt.plot(y_new, ai_interp(y_new), label='Ai')
+    plt.xlabel('Span (y)')
+    plt.ylabel('Ai')
+    plt.title('Ai Distribution along Span')
+    plt.grid(True)
 
-def get_pcd(y, aoa=0):
-    return pcd_interp(y)
+    # Plot cl
+    plt.subplot(6, 2, 3)
+    plt.plot(y_new, cl_interp(y_new), label='Cl')
+    plt.xlabel('Span (y)')
+    plt.ylabel('Cl')
+    plt.title('Cl Distribution along Span')
+    plt.grid(True)
 
-def get_icd(y, aoa=0):
-    return icd_interp(y)
+    # Plot pcd
+    plt.subplot(6, 2, 4)
+    plt.plot(y_new, pcd_interp(y_new), label='PCd')
+    plt.xlabel('Span (y)')
+    plt.ylabel('PCd')
+    plt.title('PCd Distribution along Span')
+    plt.grid(True)
 
-def get_cm_geom(y, aoa=0):
-    return cm_geom_interp(y)
+    # Plot icd
+    plt.subplot(6, 2, 5)
+    plt.plot(y_new, icd_interp(y_new), label='ICd')
+    plt.xlabel('Span (y)')
+    plt.ylabel('ICd')
+    plt.title('ICd Distribution along Span')
+    plt.grid(True)
 
-def get_cm_airf(y, aoa=0):
-    return cm_airf_interp(y)
+    # Plot cm_geom
+    plt.subplot(6, 2, 6)
+    plt.plot(y_new, cm_geom_interp(y_new), label='CmGeom')
+    plt.xlabel('Span (y)')
+    plt.ylabel('CmGeom')
+    plt.title('CmGeom Distribution along Span')
+    plt.grid(True)
 
-def get_xtr_top(y, aoa=0):
-    return xtr_top_interp(y)
+    # Plot cm_airf
+    plt.subplot(6, 2, 7)
+    plt.plot(y_new, cm_airf_interp(y_new), label='CmAirf')
+    plt.xlabel('Span (y)')
+    plt.ylabel('CmAirf')
+    plt.title('CmAirf Distribution along Span')
+    plt.grid(True)
 
-def get_xtr_bot(y, aoa=0):
-    return xtr_bot_interp(y)
+    # Plot xtr_top
+    plt.subplot(6, 2, 8)
+    plt.plot(y_new, xtr_top_interp(y_new), label='XTrTop')
+    plt.xlabel('Span (y)')
+    plt.ylabel('XTrTop')
+    plt.title('XTrTop Distribution along Span')
+    plt.grid(True)
 
-def get_xcp(y, aoa=0):
-    return xcp_interp(y)
+    # Plot xtr_bot
+    plt.subplot(6, 2, 9)
+    plt.plot(y_new, xtr_bot_interp(y_new), label='XTrBot')
+    plt.xlabel('Span (y)')
+    plt.ylabel('XTrBot')
+    plt.title('XTrBot Distribution along Span')
+    plt.grid(True)
 
-def get_bm(y, aoa=0):
-    return bm_interp(y)
+    # Plot xcp
+    plt.subplot(6, 2, 10)
+    plt.plot(y_new, xcp_interp(y_new), label='XCP')
+    plt.xlabel('Span (y)')
+    plt.ylabel('XCP')
+    plt.title('XCP Distribution along Span')
+    plt.grid(True)
 
-# Example usage
-y_example = 0.0  # Example y-span value
-print("Chord at y =", y_example, ":", get_chord(y_example))
-print("Cl at y =", y_example, ":", get_cl(y_example))
+    # Plot bm
+    plt.subplot(6, 2, 11)
+    plt.plot(y_new, bm_interp(y_new), label='BM')
+    plt.xlabel('Span (y)')
+    plt.ylabel('BM')
+    plt.title('BM Distribution along Span')
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+plotEverything()
