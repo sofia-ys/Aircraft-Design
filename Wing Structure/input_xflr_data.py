@@ -1,9 +1,10 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import re
 
 # Step 1: Read the file and extract y-span and Cl values
-file_path = 'MainWing_a=0.00_v=10.00ms.txt'
+file_path = 'Wing Structure/XFLR5_files/MainWing_a=0.00_v=10.00ms.txt'
 y_span = []
 cl_values = []
 
@@ -19,11 +20,17 @@ with open(file_path, 'r') as file:
 y_span = np.array(y_span)
 cl_values = np.array(cl_values)
 
-# Step 2: Interpolate using scipy's interp1d
+# Step 2: Create interpolation function and evaluate it
 cl_interp_function = interp1d(y_span, cl_values, kind='cubic')
-
-# Example usage of the interpolation function
-y_new = np.linspace(min(y_span), max(y_span), 100)  # New y-span points for evaluation
+y_new = np.linspace(min(y_span), max(y_span), 100)  # New y-span points for smooth curve
 cl_new = cl_interp_function(y_new)
 
-print("Interpolated Cl values:", cl_new)
+# Step 3: Plot the interpolated function
+plt.figure(figsize=(10, 6))
+plt.plot(y_new, cl_new, color='blue', label='Interpolated Cl Distribution')
+plt.xlabel('Span (y)')
+plt.ylabel('Lift Coefficient (Cl)')
+plt.title('Interpolated Cl Distribution along the Span')
+plt.legend()
+plt.grid(True)
+plt.show()
