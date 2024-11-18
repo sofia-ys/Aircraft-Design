@@ -76,6 +76,7 @@ M_cr = 0.65  # critical Mach [-]
 # mission profile parameters
 m_p = 13745.5  # payload mass [kg]
 range = 10630.5  # design range [km]
+mach_cruise = 0.85  # cruise mach number at cruise altitude [-]
 
 # under carriage parameters
 theta_scrape = 15  # scrape angle constraint [deg]
