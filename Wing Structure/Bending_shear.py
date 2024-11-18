@@ -1,5 +1,6 @@
 import math as m
-
+import scipy as sp
+from scipy import integrate
 
 def l(x):
     return (2*x)
@@ -10,4 +11,6 @@ def d(x):
 def n(x,alpha):
     return(d(x)*m.sin(alpha)+l(x)*m.cos(alpha))
 
-print(n(1,m.pi/2))
+def w(x,alpha,l):
+    return (-1*sp.integrate.quad(n(x,alpha),x,l))
+
