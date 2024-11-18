@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Define the file path
 file_path_alpha0 = r"Wing Structure\\XFLR5_files\\MainWing_a=0.00_v=10.00ms.txt"
@@ -62,6 +63,12 @@ def xflr(file_path):
 
 y_span_alpha0, chord_alpha0, ai_alpha0, cl_alpha0, icd_alpha0, cm_at_chord_4_alpha0, main_wing_data_alpha0 = xflr(file_path_alpha0)
 y_span_alpha10, chord_alpha10, ai_alpha10, cl_alpha10, icd_alpha10, cm_at_chord_4_alpha10, main_wing_data_alpha10 = xflr(file_path_alpha10)
+
+# rho = 1.225
+# velocity = 10
+# lift_alpha0 = cl_alpha0 * 0.5 * rho * 10**2 * chord_alpha0
+# plt.plot(y_span_alpha0, cl_alpha0)
+# plt.show()
 
 # Display the extracted data
 print("Cl at 0 deg angle of attack: ", cl_alpha0)
