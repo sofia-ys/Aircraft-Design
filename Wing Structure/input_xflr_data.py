@@ -3,8 +3,17 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import re
 
+file_path = ''
+
+#function to give you the sectional lift coefficient at any span location
+def getClSpan(AOA, y_dist):
+    #insert the correct angle of attack into the filename
+    file_path = 'Wing Structure/XFLR5_files/MainWing_' + str(AOA) + '_v=10.00ms.txt'
+    print(file_path)
+    #interpolate the function
+
+
 # Step 1: Read the file and extract y-span and Cl values
-file_path = 'Wing Structure/XFLR5_files/MainWing_a=0.00_v=10.00ms.txt'
 y_span = []
 cl_values = []
 
