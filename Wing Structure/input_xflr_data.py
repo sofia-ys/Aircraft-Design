@@ -63,12 +63,12 @@ y_span_aoa10, interpolations_aoa10 = load_data(file_aoa10_path)
 
 # Define functions to access interpolated values based on AoA (we only have 0 and 10) and y location
 def get_value(param, y, aoa):
-    if aoa == 0:
+    if aoa == 0 and max(y) <= max(y_span_aoa0):
         return interpolations_aoa0[param](y)
-    elif aoa == 10:
+    elif aoa == 10 and max(y) <= max(y_span_aoa0):
         return interpolations_aoa10[param](y)
     else:
-        raise ValueError("Angle of attack must be 0 or 10 degrees.")
+        raise ValueError("Angle of attack or wing span value error.")
 
 # Specific interpolated functions for each parameter, you just insert any y location and the desired angle of attack & you get the output
 def get_chord(y, aoa):
@@ -93,7 +93,7 @@ def get_cm_airf(y, aoa):
 # THIS IS JUST TO DO SANITY CHECK WITH PLOTTING
 #----------------------------------------------
 # Define a range of y values for smooth plotting
-y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100) #note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function
+y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100) # Note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function. For the interpolation, the maximum span value from the XFLR5 output is used (not the one from constants.py, since the interpolation wouldn't work then)
 
 # Plot each parameter for AoA = 0 and AoA = 10
 def plot_all_parameters():
