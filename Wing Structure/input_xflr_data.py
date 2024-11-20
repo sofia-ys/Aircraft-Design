@@ -63,9 +63,9 @@ y_span_aoa10, interpolations_aoa10 = load_data(file_aoa10_path)
 
 # Define functions to access interpolated values based on AoA (we only have 0 and 10) and y location
 def get_value(param, y, aoa):
-    if aoa == 0 and max(y) <= max(y_span_aoa0):
+    if aoa == 0:
         return interpolations_aoa0[param](y)
-    elif aoa == 10 and max(y) <= max(y_span_aoa0):
+    elif aoa == 10:
         return interpolations_aoa10[param](y)
     else:
         raise ValueError("Angle of attack or wing span value error.")
