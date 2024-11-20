@@ -20,7 +20,9 @@ def Wingbox_lengths (d1_root,d2_root, d3_root, y)
     d3 = d3_root + (d3_root*taper - d3_root)/(b/2) * y
     return d1, d2, d3
 
-alpha = math.atan((d1-d3)/d2)
+def alpha(y) (d1,d2,d3)
+    alpha = math.atan((d1-d3)/d2)
+    return alpha
 
 
 h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha))))/ ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha)))
