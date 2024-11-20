@@ -24,8 +24,20 @@ def alpha(y) (d1,d2,d3)
     alpha = math.atan((d1-d3)/d2)
     return alpha
 
+def BottomskinCentroidZcontribution(AS, s, alpha, n2):
+    CB_z = sum(AS * i * s * math.sin(alpha) for i in range(0, n2))
+    return CB_z
+def BottomskinCentroidXcontribution(AS, s, alpha, n2):
+    CB_x = sum(AS * i * s * math.cos(alpha) for i in range(0, n2))
+    return CB_x
+def TopskinCentroidXcontribution(AS, s, alpha, n1):
+    CT_x = sum(AS * i * s  for i in range(0, n1))
+    return CT_x
+
 total_area= ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha))) + (As * (n1+n2))
-h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha))))/ total_area
+h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha)))+CB_Z+d1*N1*AS)/ total_area #Z centroid positon
+x= ((d2**2)*t2/2)+d3*d2*t1+ ((d2**2)*t2/(2*math.cos(alpha))+CB_x+CT_x)
+
 
 #Calculation of Ixx
 # h is the height of the centroid from bottom left
