@@ -121,7 +121,7 @@ W_total = (
 )
 
 
-'''
+
 print("W_flight_controls = ", W_flight_controls)
 print("W_APU_installed = ", W_APU_installed)
 print("W_instruments = ", W_instruments)
@@ -177,7 +177,7 @@ print("W_seats = {:.2f}%".format((W_seats / W_total) * 100))
 print("W_food = {:.2f}%".format((W_food / W_total) * 100))
 print("Total Weight (W_total) = {:.2f}".format((W_total / 2.2)))  # This will always be 100%
 
-'''
+
 
 import csv
 
