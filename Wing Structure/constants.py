@@ -92,8 +92,10 @@ l_mw = 4.06  # distance from centre to main wheel [m]
 # wing box characteristics
 d_1 = 15 #Place Holder value Length of front spar
 d_2 = 15 #Place holder value for Distance between front and back spar
-d_3 = 10 # Place Holder value fo length of back spar
+d_3 = 10 # Place Holder value for length of back spar
+d_4 = 5 # Place Holder  value for distrance between front spar amd multibox spar
 t_1 = 0.5 # Place Holder  value for thickness of spars
 t_2 = 0.5 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
+as = 1 # Stringer area
