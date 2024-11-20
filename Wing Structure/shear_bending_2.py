@@ -28,8 +28,8 @@ def plot_lift_distribution(x_vals, lift_vals):
     plt.show()
 
 # Given parameters
-density = ct.densi  # kg/m^3 (air density at sea level)
-airspeed = 10  # m/s (airspeed)
+density = ct.density_cruise  # kg/m^3 (air density at sea level)
+airspeed = ct.V_cruise  # m/s (airspeed)
 alpha = 0  # degrees (angle of attack)
 span = 17.7  # meters (wing span)
 engine_position = 9  # meters from the center (location of the engine)
