@@ -11,6 +11,7 @@ t2 = con.t_2
 n1 = con.n_1
 n2 = con.n_2
 n3 = con.n_3
+taper = con.taper
 As = con.As
 
 def Wingbox lenghts (d1_root,d2_root, d3_root, y)
