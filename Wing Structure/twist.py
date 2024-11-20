@@ -67,8 +67,7 @@ def tors_const (d1, d2, d3, alpha, t1, t2): #J = (4A^2)/integral(ds/t)
     torsional_const = 4 * A ** 2 / (denominator)
     return torsional_const
 
-def twist(d1, d2, d3, alpha, t1, t2, G, T):
-    J = tors_const(d1, d2, d3, alpha, t1, t2)
+def twist(T, G, J):
     twist = T / (G * J)
     return twist
 
