@@ -24,8 +24,8 @@ def alpha(y) (d1,d2,d3)
     alpha = math.atan((d1-d3)/d2)
     return alpha
 
-
-h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha))))/ ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha)))
+total_area= ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha))) + (As * (n1+n2))
+h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha))))/ total_area
 
 #Calculation of Ixx
 # h is the height of the centroid from bottom left
