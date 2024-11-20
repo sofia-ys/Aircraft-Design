@@ -89,7 +89,7 @@ W_nw = 6.8  # nose wheel width [inch]
 l_wh = 14580  # distance from main to front wheel [mm]
 l_mw = 4.06  # distance from centre to main wheel [m]
 
-# wing box characteristics
+# wing box characteristics ALL VALUES FOR ROOT POSITION ONLY
 d_1 = 15 #Place Holder value Length of front spar
 d_2 = 15 #Place holder value for Distance between front and back spar
 d_3 = 10 # Place Holder value for length of back spar
