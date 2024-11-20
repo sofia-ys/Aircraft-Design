@@ -77,6 +77,8 @@ M_cr = 0.65  # critical Mach [-]
 m_p = 13745.5  # payload mass [kg]
 range = 10630.5  # design range [km]
 mach_cruise = 0.85  # cruise mach number at cruise altitude [-]
+V_cruise = 256
+density_cruise = 0.44165
 
 # under carriage parameters
 theta_scrape = 15  # scrape angle constraint [deg]
@@ -89,7 +91,7 @@ W_nw = 6.8  # nose wheel width [inch]
 l_wh = 14580  # distance from main to front wheel [mm]
 l_mw = 4.06  # distance from centre to main wheel [m]
 
-# wing box characteristics
+# wing box characteristics ALL VALUES FOR ROOT POSITION ONLY
 d_1 = 15 #Place Holder value Length of front spar
 d_2 = 15 #Place holder value for Distance between front and back spar
 d_3 = 10 # Place Holder value for length of back spar
@@ -98,4 +100,4 @@ t_1 = 0.5 # Place Holder  value for thickness of spars
 t_2 = 0.5 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
-as = 1 # Stringer area
+As = 1 # Stringer area
