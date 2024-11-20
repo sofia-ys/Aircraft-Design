@@ -44,13 +44,14 @@ def load_data(file_path):
 
     y_span = np.array(y_span)
     interpolations = {
-        'chord': interp1d(y_span, chord, kind='cubic'),
-        'ai': interp1d(y_span, ai, kind='cubic'),
-        'cl': interp1d(y_span, cl, kind='cubic'),
-        'icd': interp1d(y_span, icd, kind='cubic'),
-        'cm_airf': interp1d(y_span, cm_airf, kind='cubic'),
+        'chord': interp1d(y_span, chord, kind='cubic', fill_value="extrapolate", bounds_error=False),
+        'ai': interp1d(y_span, ai, kind='cubic', fill_value="extrapolate", bounds_error=False),
+        'cl': interp1d(y_span, cl, kind='cubic', fill_value="extrapolate", bounds_error=False),
+        'icd': interp1d(y_span, icd, kind='cubic', fill_value="extrapolate", bounds_error=False),
+        'cm_airf': interp1d(y_span, cm_airf, kind='cubic', fill_value="extrapolate", bounds_error=False),
     }
     return y_span, interpolations
+
 
 # Load data for AoA 0 and AoA 10
 y_span_aoa0, interpolations_aoa0 = load_data(file_aoa0_path)
@@ -67,7 +68,7 @@ def get_value(param, y, aoa):
 
 # Function to interpolate between AoA values
 def interpolate_aoa(param, y, aoa):
-    if aoa < 0 or aoa > 10:
+    if aoa < 0 or aoa > 15:
         raise ValueError("Angle of attack must be between 0 and 10 degrees.")
 
     # Get the values at the specified span location (y) for AoA 0 and 10
@@ -112,7 +113,7 @@ def get_icd(y, aoa):
 
 def get_cm_airf(y, aoa):
     return interpolate_aoa('cm_airf', y, aoa)
-
+'''
 #----------------------------------------------
 # THIS IS JUST TO DO SANITY CHECK WITH PLOTTING
 #----------------------------------------------
@@ -146,7 +147,7 @@ def plot_all_parameters():
     plt.subplot(3, 2, 3)
     plt.plot(y_new, get_cl(y_new, 0), label='Cl (AoA=0)')
     plt.plot(y_new, get_cl(y_new, 5), label='Cl (AoA=5)', linestyle='--')
-    plt.plot(y_new, get_cl(y_new, 10), label='Cl (AoA=10)')
+    plt.plot(y_new, get_cl(y_new, 15), label='Cl (AoA=15)')
     plt.xlabel('Span (y)')
     plt.ylabel('Cl')
     plt.title('Cl Distribution along Span')
@@ -178,3 +179,4 @@ def plot_all_parameters():
 
 # Call the function to plot all parameters
 plot_all_parameters()
+'''
