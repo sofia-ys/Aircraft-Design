@@ -21,3 +21,4 @@ def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2):
     I = I1 + I2 + I3 + I4 + I5 + I6
 
     return I
+
