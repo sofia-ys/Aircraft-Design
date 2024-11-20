@@ -13,8 +13,8 @@ n2 = con.n_2
 n3 = con.n_3
 taper = con.taper
 As = con.As
-
-def Wingbox_lengths (d1_root,d2_root, d3_root, y)
+b= con.b
+def Wingbox_lengths (d1_root,d2_root, d3_root,b, y)
     d1 = d1_root + (d1_root*taper - d1_root)/(b/2) * y
     d2 = d2_root + (d2_root*taper - d2_root)/(b/2) * y
     d3 = d3_root + (d3_root*taper - d3_root)/(b/2) * y
