@@ -14,6 +14,7 @@ n3 = con.n_3
 As = con.As
 
 def Wingbox lenghts (d1_root,d2_root, d3_root, y)
+    d1 = d1_root + (d1_root*lamda - d1_root)/(b/2) * y
     
 
 
