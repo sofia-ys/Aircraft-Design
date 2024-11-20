@@ -1,6 +1,20 @@
 import scipy
 import math
+import constants as con
 
+
+d1 = con.d_1
+d2 = con.d_2
+d3 = con.d_3
+t1 = con.t_1
+t2 = con.t_2
+n1 = con.n_1
+n2 = con.n_2
+n3 = con.n_3
+
+
+alpha = math.atan((d1-d3)/d2)
+h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha))))/ ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha)))
 
 #Calculation of Ixx
 # h is the height of the centroid from bottom left
