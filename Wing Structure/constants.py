@@ -98,4 +98,8 @@ t_1 = 0.5 # Place Holder  value for thickness of spars
 t_2 = 0.5 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
+<<<<<<< HEAD
 as = 1 # Stringer area
+=======
+As = 1 # Stringer area
+>>>>>>> f4bb2312ecdaa38c449f48f8871ff55feddd37a0

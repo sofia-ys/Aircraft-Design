@@ -11,7 +11,7 @@ t2 = con.t_2
 n1 = con.n_1
 n2 = con.n_2
 n3 = con.n_3
-
+As = con.As
 
 alpha = math.atan((d1-d3)/d2)
 h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha))))/ ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha)))
