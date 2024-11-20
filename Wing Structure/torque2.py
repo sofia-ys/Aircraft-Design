@@ -1,7 +1,7 @@
 import math as m
 import scipy as sp
 from scipy import integrate
-from extra_constants import *
+from constants import *
 from input_xflr_data import get_cm_airf, get_chord, get_cl
 from input_xflr_data import *
 
