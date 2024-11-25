@@ -117,13 +117,13 @@ def get_icd(y, aoa):
 def get_cm_airf(y, aoa):
     return interpolate_aoa('cm_airf', y, aoa)
 
-"""
+
 # ----------------------------------------------
 # THIS IS JUST TO DO SANITY CHECK WITH PLOTTING
 # ----------------------------------------------
 # Define a range of y values for smooth plotting
 y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100)
-
+"""
 
 # Note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function.
 # For the interpolation, the maximum span value from the XFLR5 output is used
