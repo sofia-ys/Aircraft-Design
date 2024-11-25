@@ -123,6 +123,8 @@ def get_cm_airf(y, aoa):
 # ----------------------------------------------
 # Define a range of y values for smooth plotting
 y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100)
+
+
 """
 
 # Note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function.
