@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import input_xflr_data as inp
 import constants as ct
 
-
 def lift_distribution(density, airspeed, alpha, span, num_points=1000):
     # Create an array of spanwise positions from root (0) to tip (span)
     x_vals = np.linspace(0, span, num_points)
@@ -19,7 +18,7 @@ def lift_distribution(density, airspeed, alpha, span, num_points=1000):
 
 def plot_lift_distribution(x_vals, lift_vals):
     plt.figure()
-    plt.plot(x_vals, lift_vals, label='Lift Distribution')
+    plt.plot(x_vals, lift_vals, label='Lift Distribution', color='g')
     plt.xlabel('Spanwise Position (m)')
     plt.ylabel('Lift per Unit Length (N/m)')
     plt.title('Lift Distribution along the Wing')
@@ -30,9 +29,9 @@ def plot_lift_distribution(x_vals, lift_vals):
 # Given parameters
 density = 0.4436  # kg/m^3 (air density at sea level)
 airspeed = 256 # m/s (airspeed)
-alpha = 10 # degrees (angle of attack)
+alpha = 2 # degrees (angle of attack)
 span = 17.7  # meters (wing span)
-engine_position = 9  # meters from the center (location of the engine)
+engine_position = 6.21  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 
 # Get lift distribution
@@ -40,7 +39,6 @@ x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span)
 
 # Plot the lift distribution
 plot_lift_distribution(x_vals, lift_vals)
-
 
 def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight):
     # Convert engine weight from kg to Newtons (multiply by gravitational acceleration)
@@ -74,3 +72,31 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
 shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight)
 # Plot the shear force distribution
 plot_shear_force_distribution(x_vals, shear_force_vals)
+
+def bending_moment_distribution(x_vals, shear_force_vals):
+    # Initialize bending moment array
+    bending_moment_vals = np.zeros(len(x_vals))
+    
+    # Integrate shear force to calculate bending moment, starting from the tip towards the root
+    total_moment = 0.0
+    for i in reversed(range(len(x_vals) - 1)):
+        dx = x_vals[i+1] - x_vals[i]
+        total_moment += shear_force_vals[i] * dx
+        bending_moment_vals[i] = total_moment
+    
+    return bending_moment_vals
+
+def plot_bending_moment_distribution(x_vals, bending_moment_vals):
+    plt.figure()
+    plt.plot(x_vals, bending_moment_vals, label='Bending Moment Distribution', color='b')
+    plt.xlabel('Spanwise Position (m)')
+    plt.ylabel('Bending Moment (Nm)')
+    plt.title('Bending Moment Distribution along the Wing')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+# Calculate bending moment distribution
+bending_moment_vals = bending_moment_distribution(x_vals, shear_force_vals)
+# Plot the bending moment distribution
+plot_bending_moment_distribution(x_vals, bending_moment_vals)
