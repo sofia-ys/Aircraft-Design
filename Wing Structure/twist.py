@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 
 def area_trap (d1, d3, d2): #area of the wingbox
+
     return (d1 + d3)/2 * d2
 
 
@@ -59,6 +60,9 @@ def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G):
 
     return (J, twist)
 
+    
+print(tors_const2(1,1,1,0.5,1,1,1,1,1))
+
 def tors_const (d1, d2, d3, alpha, t1, t2): #J = (4A^2)/integral(ds/t)
     A = area_trap(d1,d3,d2) 
     L = d2 / np.cos(alpha) #length of the diagonal
@@ -80,3 +84,4 @@ t1 = con.t_1
 t2 = con.t_2
 t3 = con.t_1
 G = con.G_alu
+
