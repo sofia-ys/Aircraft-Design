@@ -20,9 +20,7 @@ def Wingbox_lengths (d1_root,d2_root, d3_root,b, y)
     d3 = d3_root + (d3_root*taper - d3_root)/(b/2) * y
     return d1, d2, d3
 
-def alpha(y) (d1,d2,d3)
     alpha = math.atan((d1-d3)/d2)
-    return alpha
 
 def BottomskinCentroidZcontribution(AS, s, alpha, n2):
     CB_z = sum(AS * i * s * math.sin(alpha) for i in range(0, n2))
@@ -46,6 +44,7 @@ x= ((d2**2)*t2/2)+d3*d2*t1+ ((d2**2)*t2/(2*math.cos(alpha))+CB_x+CT_x) #X centro
 # n2 is the number of stringers on the bottom skin
 # spac is stringer spacing
 def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, spac):
+
     I1 = 1/12*d1**3*t1 + d1*t1*(d1/2-h)**2
     I2 = 1*12*L**3*t1 + L*t1*(d2*math.sin(alpha)+d3/2-h)**2
     I3 = (1/12*L**3*t2+t2*L*(h-L/2*math.sin(alpha))**2)(math.sin(alpha))**2
