@@ -17,15 +17,17 @@ pos = 9
 thrust = 80000 # [N]
 d_thrust = -1.1 # vertical distance of engines [m]
 d_engine = 2.6 # horizontal distance of engine relative to torsion box[m]
+weight = 78826 # [kg]
 
 
-cl=0
-cdi=0
-x_values = np.linspace(0, max(y_new), 100)
-for x in x_values:
-    cl += get_cl(x, aoa)
-    cdi = cdi + get_icd(x,aoa) + C_D_0
-print(cl/cdi)
+def total_thrust(aoa, weight):
+    cl=0
+    cd=0
+    x_values = np.linspace(0, max(y_new), 100)
+    for x in x_values:
+        cl += get_cl(x, aoa)
+        cd = cd + get_icd(x,aoa) + C_D_0
+    return ((cd/cl)*weight)
 
 
 def thrust_dsit(x,pos, d_thrust):
