@@ -14,21 +14,21 @@ q = 0.5*rho*v**2
 we = 3008*9.81 #engine weight
 
 pos = 9
-thrust = 80000
-d_thrust = -1.1
+thrust = 80000 # [N]
+d_thrust = -1.1 
 d_engine = 2.6 
 
 
 
 def thrust_dsit(x,pos, d_thrust):
     if x < pos or x < -pos:
-        return 80000*d_thrust
+        return thrust*d_thrust
     else:
         return 0 
 
 def ew_dsit(x,pos, d_engine):
     if x < pos or x < -pos:
-        return 3008*9.81*d_engine
+        return we*d_engine
     else:
         return 0 
 
