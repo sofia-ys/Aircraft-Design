@@ -35,7 +35,7 @@ engine_position = 6.21  # meters from the center (location of the engine) 35% of
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
 n = 1 # load factor
-f_fuel = 1 # fraction of max fuel (between 0-1)
+f_fuel = 0 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
 # Get lift distribution
@@ -46,7 +46,7 @@ plot_lift_distribution(x_vals, lift_vals)
 
 def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight):
     # Convert engine weight from kg to Newtons (multiply by gravitational acceleration)
-    engine_force = engine_weight * 9.81
+    engine_force = engine_weight * g * n
     
     # Initialize shear force array
     shear_force_vals = np.zeros(len(x_vals))
@@ -56,7 +56,7 @@ def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight):
     total_distributed_load = 0.0
     for i in reversed(range(len(x_vals))):
         # Calculate distributed load at current point
-        distributed_load = (-87.186 * x_vals[i] + 1546.67) *  g * n * (f_fuel + f_structure)
+        distributed_load = - (-87.186 * x_vals[i] + 1546.67) *  g * n * (f_fuel + f_structure)
         total_distributed_load += distributed_load * (x_vals[1] - x_vals[0])
         
         # Accumulate lift contributions
