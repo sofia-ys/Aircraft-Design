@@ -15,8 +15,8 @@ we = 3008*9.81 #engine weight
 
 pos = 9
 thrust = 80000 # [N]
-d_thrust = -1.1 # [m]
-d_engine = 2.6 # [m]
+d_thrust = -1.1 # vertical distance of engines [m]
+d_engine = 2.6 # horizontal distance of engine relative to torsion box[m]
 
 
 cl=0
@@ -34,7 +34,7 @@ def thrust_dsit(x,pos, d_thrust):
     else:
         return 0 
 
-def ew_dsit(x,pos, d_engine):
+def ew_dsit(x,pos, d_engine):  # engine weight distance
     if x < pos or x < -pos:
         return we*d_engine
     else:
