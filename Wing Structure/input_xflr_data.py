@@ -91,12 +91,12 @@ def get_all_values(y, aoa):
 # Example usage
 y_example = 5.0  # Example span location
 aoa_example = 5.0  # Example AoA between 0 and 10 degrees
-results = get_all_values(y_example, aoa_example)
+#results = get_all_values(y_example, aoa_example)
 
 # Print results
-print(f"Interpolated values at y = {y_example}, AoA = {aoa_example}:")
-for param, value in results.items():
-    print(f"{param}: {value}")
+#print(f"Interpolated values at y = {y_example}, AoA = {aoa_example}:")
+#for param, value in #results.items():
+#    print(f"{param}: {value}")
 
 # Specific interpolated functions for each parameter, supporting AoA interpolation
 def get_chord(y, aoa):
@@ -113,6 +113,9 @@ def get_icd(y, aoa):
 
 def get_cm_airf(y, aoa):
     return interpolate_aoa('cm_airf', y, aoa)
+
+
+y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100)
 '''
 #----------------------------------------------
 # THIS IS JUST TO DO SANITY CHECK WITH PLOTTING

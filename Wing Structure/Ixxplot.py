@@ -1,6 +1,7 @@
 import math
 import scipy as sp
 from scipy import interpolate
+import matplotlib as plt
 import Ixx
 
 
@@ -23,3 +24,9 @@ An = [18,21,25,30,36,44,51,59,68]
 def
 f = sp.interpolate.interp1d(span_n1,n1,kind="previous",fill_value="extrapolate")
 g = sp.interpolate.interp1d(span_n2,n2,kind="previous",fill_value="extrapolate")
+b = 40 #wingspan
+Ixx_tab=[]
+y_tab = []
+step = 0.01
+for i in range (0,b / (step*2)):
+    Ixx_tab.append(Ixx)
