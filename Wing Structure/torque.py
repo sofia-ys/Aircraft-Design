@@ -27,12 +27,12 @@ def total_thrust(aoa, weight):
     for x in x_values:
         cl += get_cl(x, aoa)
         cd = cd + get_icd(x,aoa) + C_D_0
-    return ((cd/cl)*weight)
+    return ((cd/cl)*weight*9.80665) 
 
 
-def thrust_dsit(x,pos, d_thrust):
+def thrust_dsit(x,pos, d_thrust, t_thrust):
     if x < pos or x < -pos:
-        return thrust*d_thrust
+        return t_thrust*d_thrust
     else:
         return 0 
 
@@ -54,17 +54,18 @@ def cm_dist(x,aoa):
     return get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
 
 def torque_dist(x, aoa, pos, d_thrust, d_engine):
-    return integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust) + ew_dsit(x,pos, d_engine)
+    return integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust, t_thrust) + ew_dsit(x,pos, d_engine)
 
 
 x_values = np.linspace(0, max(y_new), 100)
 aoa_range = np.linspace(0, 10, 5)  # AoA values in degrees (0°, 2.5°, 5°, 7.5°, 10°)
-torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
 
-# Plotting the torque distribution
+
+# Plotting the torque distraibution
 plt.figure()
 # Loop over each AoA and calculate torque values
 for aoa in aoa_range:
+    t_thrust = total_thrust(aoa, weight)
     torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
     plt.plot(x_values, torque_values, label=f'AoA = {aoa}°')
 
