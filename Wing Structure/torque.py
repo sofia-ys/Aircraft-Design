@@ -27,6 +27,7 @@ for x in x_values:
     cdi = cdi + get_icd(x,aoa) + C_D_0
 print(cl/cdi)
 
+
 def thrust_dsit(x,pos, d_thrust):
     if x < pos or x < -pos:
         return thrust*d_thrust
@@ -58,15 +59,20 @@ def torque_dist(x, aoa, pos, d_thrust, d_engine):
 
 
 x_values = np.linspace(0, max(y_new), 100)
-
+aoa_range = np.linspace(0, 10, 5)  # AoA values in degrees (0°, 2.5°, 5°, 7.5°, 10°)
 torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
 
 # Plotting the torque distribution
 plt.figure()
-plt.plot(x_values, torque_values, label='Torque Distribution', color='b')
+# Loop over each AoA and calculate torque values
+for aoa in aoa_range:
+    torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
+    plt.plot(x_values, torque_values, label=f'AoA = {aoa}°')
+
+# Plot customization
 plt.xlabel('Spanwise Position (m)')
 plt.ylabel('Torque (Nm)')
-plt.title('Torque Distribution along the Wing Span')
+plt.title('Torque Distribution along the Wing Span for Different AoA')
 plt.legend()
 plt.grid(True)
 plt.show()
