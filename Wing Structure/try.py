@@ -31,27 +31,27 @@ if(design_choice==1):
 elif(design_choice==2):
     #Design 2
     span_n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-    n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
+    n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68] # n1 is the number of stringers on the top skin
     span_n2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-    n2 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
+    n2 = [27, 33, 38, 45, 55, 65, 80, 100, 120] # n2 is the number of stringers on the bottom skin
     span_t1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
     t1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
     span_t2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
     t2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
     span_As = [18, 21, 25]
-    As = [1, 1, 1]  # cross sectional area of a stringer
+    As = [1, 1, 1] # cross sectional area of a stringer
 else:
     #Design 3
     span_n1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
+    n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68] # n1 is the number of stringers on the top skin
     span_n2 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    n2 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
+    n2 = [27, 33, 38, 45, 55, 65, 80, 100, 120] # n2 is the number of stringers on the bottom skin
     span_t1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
     t1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
     span_t2 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
     t2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
     span_As = [0, 21, 25]
-    As = [1, 1, 1]  # cross sectional area of a stringer
+As = [1, 1, 1] # cross sectional area of a stringer
 n1_inter = sp.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
 n2_inter = sp.interpolate.interp1d(span_n2, n2, kind="previous", fill_value="extrapolate")
 t1_inter = sp.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="extrapolate")
@@ -73,43 +73,43 @@ def CentroidZcontribution(AS, sb, st, alpha, n2, n1, d1, d2, d3, d4):
 
     CB_x = sum(AS * i * sb * math.cos(alpha) for i in range(0, int(n2))) #top
 
-    CT_x = sum(AS * i * st  for i in range(0, int(n1))) #top
+    CT_x = sum(AS * i * st for i in range(0, int(n1))) #top
     u=d4*math.tan(alpha)
     if d4 > 0:
         total_area= ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha))) + (As * (n1+n2))
-        h= ((d1*d2*t2) + (t1*(d1*2)/2) + (t1*d3*d1) - ((d32)*t1/2) + ((d2*2)*t2*math.tan(alpha)/(2*math.cos(alpha)))+CB_z+d1*n1*AS)/ total_area #Z centroid positon single box
-        x= ((d2*2)*t2/2)+d3*d2*t1+ ((d2*2)*t2/(2*math.cos(alpha))+CB_x+CT_x) #X centroid position single box
+        h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha)))+CB_z+d1*n1*AS)/ total_area #Z centroid positon single box
+        x= ((d2**2)*t2/2)+d3*d2*t1+ ((d2**2)*t2/(2*math.cos(alpha))+CB_x+CT_x) #X centroid position single box
     else:
         total_area= ((t1*d1+d2*t2+t1*d3)+(d2*t2/math.cos(alpha))) + (As * (n1+n2))+ (t1*(d1-u))
-        h= ((d1*d2*t2) + (t1*(d1*2)/2) + (t1*d3*d1) - ((d32)*t1/2) + ((d22)*t2*math.tan(alpha)/(2*math.cos(alpha)))+CB_z+d1*n1*AS+(u+((d1-u)/2)(t1*(d1-u))))/ total_area #Z centroid positon multi box
-        x= ((d2*2)*t2/2)+d3*d2*t1+ ((d22)*t2/(2*math.cos(alpha))+CB_x+CT_x)+((t1(d1-u))*d4) #X centroid positon multi box
+        h= ((d1*d2*t2) + (t1*(d1**2)/2) + (t1*d3*d1) - ((d3**2)*t1/2) + ((d2**2)*t2*math.tan(alpha)/(2*math.cos(alpha)))+CB_z+d1*n1*AS+(u+((d1-u)/2)*(t1*(d1-u))))/ total_area #Z centroid positon multi box
+        x= ((d2**2)*t2/2)+d3*d2*t1+ ((d2**2)*t2/(2*math.cos(alpha))+CB_x+CT_x)+((t1*(d1-u))*d4) #X centroid positon multi box
     return h, x
 
 def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
-    I1 = 1/12*d1*3*t1 + d1*t1(d1/2-h)**2
-    I2 = 1*12*L*3*t1 + L*t1(d2*math.sin(alpha)+d3/2-h)**2
-    I3 = (1/12 * L * 3 * t2 + t2 * L * (h - L / 2 * math.sin(alpha)) * 2) * (math.sin(alpha)) ** 2
+    I1 = 1/12*d1**3*t1 + d1*t1*(d1/2-h)**2
+    I2 = 1*12*L**3*t1 + L*t1*(d2*math.sin(alpha)+d3/2-h)**2
+    I3 = (1/12 * L ** 3 * t2 + t2 * L * (h - L / 2 * math.sin(alpha)) ** 2) * (math.sin(alpha)) ** 2
     I4 = t2*d2*(d1-h)**2
     I5 = As*n1*(d1-h)**2
     I6 = 0
 
     for i in range(0,int(n2)):
-        Ii = As*(h-i*math.sin(alpha)sb)*2
+        Ii = As*(h-i*math.sin(alpha)*sb)**2
         I6 += Ii
     I = I1 + I2 + I3 + I4 + I5 + I6
 
     return I
 def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
     u = d4 * math.tan(alpha)
-    I1 = 1/12*d1*3*t1 + d1*t1(d1/2-h)**2
-    I2 = 1*12*L*3*t1 + L*t1(d2*math.sin(alpha)+d3/2-h)**2
-    I3 = (1/12 * L * 3 * t2 + t2 * L * (h - L / 2 * math.sin(alpha)) * 2) * (math.sin(alpha)) ** 2
+    I1 = 1/12*d1**3*t1 + d1*t1*(d1/2-h)**2
+    I2 = 1*12*L**3*t1 + L*t1*(d2*math.sin(alpha)+d3/2-h)**2
+    I3 = (1/12 * L ** 3 * t2 + t2 * L * (h - L / 2 * math.sin(alpha)) ** 2) * (math.sin(alpha)) ** 2
     I4 = t2*d2*(d1-h)**2
     I5 = As*n1*(d1-h)**2
     I6 = 0
-    I7 = 1 / 12 * (d1 - u) * 3 * t1 + t1 * (d1 - u) * (d1 / 2 - h + u / 2) * 2
+    I7 = 1 / 12 * (d1 - u) ** 3 * t1 + t1 * (d1 - u) * (d1 / 2 - h + u / 2) ** 2
     for i in range(0,int(n2)):
-        Ii = As*(h-i*math.sin(alpha)sb)*2
+        Ii = As*(h-i*math.sin(alpha)*sb)**2
         I6 += Ii
     I = I1 + I2 + I3 + I4 + I5 + I6 + I7
 
@@ -132,9 +132,9 @@ for y in y_tab:
     else:
         Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
 
-    #Calculation of Ixx
-    # h is the height of the centroid from bottom left
-    # alpha is in radians
-    # n1 is the number of stringers on the top skin
-    # n2 is the number of stringers on the bottom skin
-    # spac is stringer spacin
+#Calculation of Ixx
+# h is the height of the centroid from bottom left
+# alpha is in radians
+# n1 is the number of stringers on the top skin
+# n2 is the number of stringers on the bottom skin
+# spac is stringer spacing
