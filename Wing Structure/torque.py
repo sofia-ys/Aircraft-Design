@@ -56,18 +56,17 @@ def cm_dist(x,aoa):
 def torque_dist(x, aoa, pos, d_thrust, d_engine):
     return integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust) + ew_dsit(x,pos, d_engine)
 
-aoa_range = np.linspace(0, 10, 5)  # AoA values in degrees (0°, 2.5°, 5°, 7.5°, 10°)
+
 x_values = np.linspace(0, max(y_new), 100)
 
-# Loop over each AoA and calculate torque values
-for aoa in aoa_range:
-    torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
-    plt.plot(x_values, torque_values, label=f'AoA = {aoa}°')
+torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
 
-# Plot customization
+# Plotting the torque distribution
+plt.figure()
+plt.plot(x_values, torque_values, label='Torque Distribution', color='b')
 plt.xlabel('Spanwise Position (m)')
 plt.ylabel('Torque (Nm)')
-plt.title('Torque Distribution along the Wing Span for Different AoA')
+plt.title('Torque Distribution along the Wing Span')
 plt.legend()
 plt.grid(True)
 plt.show()
