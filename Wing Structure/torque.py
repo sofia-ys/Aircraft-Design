@@ -77,3 +77,95 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import integrate
+from input_xflr_data import get_cm_airf, get_chord, get_cl, get_icd
+from constants import density_cruise, V_cruise, C_D_0
+
+# Constants
+rho = density_cruise
+v = V_cruise
+q = 0.5 * rho * v ** 2
+we = 3008 * 9.81  # Engine weight [N]
+
+# Parameters
+pos = 9  # Position of engines from centerline [m]
+thrust = 80000  # Thrust [N]
+d_thrust = -1.1  # Vertical distance of engines [m]
+d_engine = 2.6  # Horizontal distance of engine relative to torsion box [m]
+weight = 78826  # Aircraft weight [kg]
+
+# Spanwise positions (y_new represents half-span)
+wing_half_span = 18  # Assuming half-span of 18 meters (full span of 36 meters)
+y_new = np.linspace(0, wing_half_span, 100)
+
+# Spanwise positions (assuming y_new is available and represents half-span)
+x_values = y_new  # Use y_new as the x positions along the wing span
+
+
+# Define functions for distributions
+def lift_dist(x, aoa):
+    cl = get_cl(x, aoa)
+    chord = get_chord(x, aoa)
+    return cl * q * chord
+
+
+def d(x):  # Distance from quarter chord to centroid of wing box
+    return 0.2 * get_chord(x, 0)  # Assuming chord distribution doesn't change significantly with AoA
+
+
+def cm_dist(x, aoa):
+    cm = get_cm_airf(x, aoa)
+    chord = get_chord(x, aoa)
+    return cm * q * chord ** 2
+
+
+def thrust_dist(x, pos, d_thrust):
+    if abs(x) <= pos:
+        return thrust * d_thrust
+    return 0
+
+
+def ew_dist(x, pos, d_engine):
+    if abs(x) <= pos:
+        return we * d_engine
+    return 0
+
+
+# Calculate torque distribution using quad integration
+def torque_dist(x, aoa, pos, d_thrust, d_engine):
+    # Lift contribution integrated from current position x to the tip (wing_half_span)
+    lift_contribution, _ = integrate.quad(lambda xi: lift_dist(xi, aoa) * d(xi), x, wing_half_span)
+
+    # Aerodynamic moment contribution from current position x to the tip
+    cm_contribution, _ = integrate.quad(lambda xi: cm_dist(xi, aoa), x, wing_half_span)
+
+    # Thrust and engine weight contributions (point loads)
+    thrust_contribution = thrust_dist(x, pos, d_thrust) if x <= pos else 0
+    engine_weight_contribution = ew_dist(x, pos, d_engine) if x <= pos else 0
+
+    # Total torque at position x
+    return lift_contribution + cm_contribution + thrust_contribution + engine_weight_contribution
+
+
+# Plotting the torque distribution
+plt.figure()
+aoa_range = np.linspace(0, 10, 5)  # AoA values in degrees (0°, 2.5°, 5°, 7.5°, 10°)
+
+for aoa in aoa_range:
+    # Calculate torque values along the span using quad integration
+    torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
+
+    # Plot torque distribution
+    plt.plot(x_values, torque_values, label=f'AoA = {aoa}°')
+
+# Plot customization
+plt.xlabel('Spanwise Position (m)')
+plt.ylabel('Torque (Nm)')
+plt.title('Torque Distribution along the Wing Span for Different AoA')
+plt.legend()
+plt.grid(True)
+plt.show()
+'''
