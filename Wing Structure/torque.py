@@ -4,16 +4,17 @@ from scipy import integrate
 from input_xflr_data import get_cm_airf, get_chord, get_cl
 from input_xflr_data import *
 import numpy as np
+from constants import *
 
 #CM 1/4 vs CM 1/2
 aoa = 0
-rho = 0.4
-v = 100 
+rho = density_cruise
+v = V_cruise
 q = 0.5*rho*v**2
 we = 3008*9.81 #engine weight
 
 pos = 9
-thrust  = 80000
+thrust = 80000
 d_thrust = -1.1
 d_engine = 2.6 
 
