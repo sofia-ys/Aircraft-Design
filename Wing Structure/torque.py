@@ -9,15 +9,22 @@ from constants import *
 #CM 1/4 vs CM 1/2
 aoa = 0
 rho = density_cruise
-v = V_cruise
+v = V_cruise 
 q = 0.5*rho*v**2
 we = 3008*9.81 #engine weight
 
 pos = 9
 thrust = 80000 # [N]
-d_thrust = -1.1 
-d_engine = 2.6 
+d_thrust = -1.1 # [m]
+d_engine = 2.6 # [m]
 
+
+cl=0
+cdi=0
+x_values = np.linspace(0, max(y_new), 100)
+for x in x_values:
+    cl += get_cl(x, aoa)
+    cd = get_icd(x,aoa)
 
 
 def thrust_dsit(x,pos, d_thrust):
