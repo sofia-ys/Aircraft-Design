@@ -1,7 +1,8 @@
 #This file calculates the torsional constant of a single-cell wingbox
 import numpy as np
-
 import constants as con
+import torque
+import matplotlib.pyplot as plt
 
 
 def area_trap (d1, d3, d2): #area of the wingbox
@@ -66,7 +67,7 @@ def tors_const (d1, d2, d3, alpha, t1, t2): #J = (4A^2)/integral(ds/t)
     torsional_const = 4 * A ** 2 / (denominator)
     return torsional_const
 
-def twist(T, G, J):
+def theta_prime(T, G, J):
     twist = T / (G * J)
     return twist
 
@@ -79,7 +80,3 @@ t1 = con.t_1
 t2 = con.t_2
 t3 = con.t_1
 G = con.G_alu
-
-J = tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G)
-
-print(J)
