@@ -1,5 +1,5 @@
-    ''' all values taken from WP3 final aircraft parameters'''
-import math
+''' all values taken from WP3 final aircraft parameters'''
+
 # fuselage parameters
 L_fus = 36.65  # fuselage length [m]
 d_f_outer = 3.722  # outer diameter [m]
@@ -101,4 +101,3 @@ t_2 = 0.5 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
 As = 1 # Stringer area
-alpha = math.atan((d_1-d_3)/d_2) #This is the angle at the bottom of the wingbox ( when you have an actual value change it from 30)
