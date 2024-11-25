@@ -53,6 +53,7 @@ else:
 # n2 is the number of stringers on the bottom skin
 # spac is stringer spacing
 def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, spac):
+    if
     I1 = 1/12*d1**3*t1 + d1*t1*(d1/2-h)**2
     I2 = 1*12*L**3*t1 + L*t1*(d2*math.sin(alpha)+d3/2-h)**2
     I3 = (1/12*L**3*t2+t2*L*(h-L/2*math.sin(alpha))**2)(math.sin(alpha))**2
