@@ -7,7 +7,7 @@ import numpy as np
 from constants import *
 
 #CM 1/4 vs CM 1/2
-aoa = 0
+aoa = 10
 rho = density_cruise
 v = V_cruise 
 q = 0.5*rho*v**2
@@ -24,8 +24,8 @@ cdi=0
 x_values = np.linspace(0, max(y_new), 100)
 for x in x_values:
     cl += get_cl(x, aoa)
-    cd = get_icd(x,aoa)
-
+    cdi = cdi + get_icd(x,aoa) + C_D_0
+print(cl/cdi)
 
 def thrust_dsit(x,pos, d_thrust):
     if x < pos or x < -pos:
