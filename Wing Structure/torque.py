@@ -45,7 +45,7 @@ def ew_dsit(x,pos, d_engine):  # engine weight distance
 def lift_dist(x, aoa):
     return get_cl(x, aoa) * q * get_chord(x, aoa)
 
-def d(x, aoa):
+def d(x, aoa):    #distance from quarter cord to centroid of wing box
     return 0.25 * get_chord(x, aoa)
 
 def h(x, aoa):
