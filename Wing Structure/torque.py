@@ -50,9 +50,6 @@ def lift_dist(x, aoa):
 def d(x, aoa):    #distance from quarter cord to centroid of wing box
     return 0.25 * get_chord(x, aoa)
 
-def h(x, aoa):
-    return lift_dist(x,aoa) * d(x,aoa)
-
 def cm_dist(x,aoa):
     return get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
 
