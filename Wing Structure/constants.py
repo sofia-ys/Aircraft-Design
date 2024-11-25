@@ -101,3 +101,6 @@ t_2 = 0.5 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
 As = 1 # Stringer area
+
+# Material properties 
+G_alu = 26e9
