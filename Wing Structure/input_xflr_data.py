@@ -1,11 +1,16 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import re
 
+# Get the current directory of the script
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
 # Paths to files for different angles of attack
-file_aoa0_path = 'Wing Structure/XFLR5_files/MainWing_a=0.00_v=10.00ms.txt'
-file_aoa10_path = 'Wing Structure/XFLR5_files/MainWing_a=10.00_v=10.00ms.txt'
+file_aoa0_path = os.path.join(current_directory, 'XFLR5_files', 'MainWing_a=0.00_v=10.00ms.txt')
+file_aoa10_path = os.path.join(current_directory, 'XFLR5_files', 'MainWing_a=10.00_v=10.00ms.txt')
+
 
 # Function to read data and create interpolation functions for a given file
 def load_data(file_path):
@@ -21,7 +26,7 @@ def load_data(file_path):
     xtr_bot = []
     xcp = []
     bm = []
-    
+
     with open(file_path, 'r') as file:
         for line in file:
             match = re.match(
@@ -57,6 +62,7 @@ def load_data(file_path):
 y_span_aoa0, interpolations_aoa0 = load_data(file_aoa0_path)
 y_span_aoa10, interpolations_aoa10 = load_data(file_aoa10_path)
 
+
 # Function to get interpolated value at specific y location and AoA
 def get_value(param, y, aoa):
     if aoa == 0:
@@ -65,6 +71,7 @@ def get_value(param, y, aoa):
         return interpolations_aoa10[param](y)
     else:
         raise ValueError("Angle of attack or wing span value error.")
+
 
 # Function to interpolate between AoA values
 def interpolate_aoa(param, y, aoa):
@@ -78,6 +85,7 @@ def interpolate_aoa(param, y, aoa):
     # Perform linear interpolation between AoA 0 and 10
     return value_aoa0 + (value_aoa10 - value_aoa0) * (aoa / 10.0)
 
+
 # Wrapper function to get all interpolated parameters
 def get_all_values(y, aoa):
     return {
@@ -88,41 +96,42 @@ def get_all_values(y, aoa):
         'cm_airf': interpolate_aoa('cm_airf', y, aoa),
     }
 
-# Example usage
-y_example = 5.0  # Example span location
-aoa_example = 5.0  # Example AoA between 0 and 10 degrees
-results = get_all_values(y_example, aoa_example)
-
-# Print results
-print(f"Interpolated values at y = {y_example}, AoA = {aoa_example}:")
-for param, value in results.items():
-    print(f"{param}: {value}")
 
 # Specific interpolated functions for each parameter, supporting AoA interpolation
 def get_chord(y, aoa):
     return interpolate_aoa('chord', y, aoa)
 
+
 def get_ai(y, aoa):
     return interpolate_aoa('ai', y, aoa)
+
 
 def get_cl(y, aoa):
     return interpolate_aoa('cl', y, aoa)
 
+
 def get_icd(y, aoa):
     return interpolate_aoa('icd', y, aoa)
 
+
 def get_cm_airf(y, aoa):
     return interpolate_aoa('cm_airf', y, aoa)
-'''
-#----------------------------------------------
+
+
+# ----------------------------------------------
 # THIS IS JUST TO DO SANITY CHECK WITH PLOTTING
-#----------------------------------------------
+# ----------------------------------------------
 # Define a range of y values for smooth plotting
-y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100) # Note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function. For the interpolation, the maximum span value from the XFLR5 output is used (not the one from constants.py, since the interpolation wouldn't work then)
+y_new = np.linspace(min(y_span_aoa0), max(y_span_aoa0), 100)
+
+
+# Note that y_span_aoa0 or y_span_aoa10 are same, I just needed to get the y_span out of the load function.
+# For the interpolation, the maximum span value from the XFLR5 output is used
+
 # Plot each parameter for AoA = 0 and AoA = 10
 def plot_all_parameters():
     plt.figure(figsize=(12, 18))
-    
+
     # Plot chord
     plt.subplot(3, 2, 1)
     plt.plot(y_new, get_chord(y_new, 0), label='Chord (AoA=0)')
@@ -173,10 +182,10 @@ def plot_all_parameters():
     plt.title('CmAirf Distribution along Span')
     plt.legend()
     plt.grid(True)
-    
+
     plt.tight_layout()
     plt.show()
 
+
 # Call the function to plot all parameters
 plot_all_parameters()
-'''
