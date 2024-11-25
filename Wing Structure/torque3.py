@@ -5,16 +5,36 @@ from input_xflr_data import get_cm_airf, get_chord, get_cl
 from input_xflr_data import *
 import numpy as np
 
-
+#CM 1/4 vs CM 1/2
 aoa = 0
 rho = 0.4
 v = 100 
 q = 0.5*rho*v**2
+we = 3008*9.81 #engine weight
+
+pos = 9
+thrust  = 80000
+d_thrust = -1.1
+d_engine = 2.6 
+
+
+
+def thrust_dsit(x,pos, d_thrust):
+    if x < pos or x < -pos:
+        return 80000*d_thrust
+    else:
+        return 0 
+
+def ew_dsit(x,pos, d_engine):
+    if x < pos or x < -pos:
+        return 3008*9.81*d_engine
+    else:
+        return 0 
 
 
 
 def lift_dist(x, aoa):
-    return 0.5 * get_cl(x, aoa) * q * get_chord(x, aoa)
+    return get_cl(x, aoa) * q * get_chord(x, aoa)
 
 def d(x, aoa):
     return 0.25 * get_chord(x, aoa)
@@ -22,13 +42,16 @@ def d(x, aoa):
 def h(x, aoa):
     return lift_dist(x,aoa) * d(x,aoa)
 
-def torque_dist(x, aoa):
-    return integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa), min(y_new), x)[0]
+def cm_dist(x,aoa):
+    return get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
+
+def torque_dist(x, aoa, pos, d_thrust, d_engine):
+    return integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust) + ew_dsit(x,pos, d_engine)
 
 
-x_values = np.linspace(min(y_new), 0, 100)
+x_values = np.linspace(0, max(y_new), 100)
 
-torque_values = [torque_dist(x, aoa) for x in x_values]
+torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
 
 # Plotting the torque distribution
 plt.figure()
