@@ -2,7 +2,7 @@ import math
 import scipy as sp
 from scipy import interpolate
 import matplotlib as plt
-import Ixx
+import draft
 
 
 #Design 1
