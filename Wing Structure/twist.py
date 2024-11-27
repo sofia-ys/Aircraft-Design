@@ -1,4 +1,4 @@
-#This file calculates the torsional constant of a single-cell wingbox
+#This file calculates the twist
 import numpy as np
 import constants as con
 import torque
@@ -19,7 +19,7 @@ def area_trap (d1, d3, d2): #area of the wingbox
 
     return (d1 + d3)/2 * d2
 
-def tors_const (d1, d2, d3, alpha, t1, t2): #J = (4A^2)/integral(ds/t)
+def tors_const (d1, d2, d3, alpha, t1, t2): #Single-cell torsional constant calculation: J = (4A^2)/integral(ds/t) 
     A = area_trap(d1,d3,d2) 
     L = d2 / np.cos(alpha) #length of the diagonal
     denominator = d1 / t1 + d3 / t1 + d2 / t2 + L / t2 #integral of ds/t
@@ -27,7 +27,7 @@ def tors_const (d1, d2, d3, alpha, t1, t2): #J = (4A^2)/integral(ds/t)
     torsional_const = 4 * A ** 2 / (denominator)
     return torsional_const
 
-def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G):
+def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional constant calculation
     #Set unit torsion
     T = 1
 
@@ -83,7 +83,8 @@ print(J)
 torques = sp.interpolate.interp1d(torque.x_values, torque.torque_values, kind="previous",fill_value="extrapolate")
 
 def dtheta (y):
-    return torques(y) / (J * G)
+    x = torques(y) * 1000 / (J * G)
+    return x
 
 twist_distribution = np.array([0])
 error = 0
@@ -95,4 +96,8 @@ for i in range(len(torque.x_values) - 1):
 twist_distribution = twist_distribution * 180 / np.pi
 
 plt.plot(torque.x_values ,twist_distribution)
+plt.xlabel('Spanwise Position [m]')
+plt.ylabel('Twist [deg]')
+plt.title('Twist Distribution along the Wing Span')
+plt.grid(True)
 plt.show()
