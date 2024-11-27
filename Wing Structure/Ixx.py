@@ -1,7 +1,7 @@
 import scipy as sp
 import math
 import constants as con
-
+import matplotlib.pyplot as plt
 d1_root = con.d_1
 d2_root = con.d_2
 d3_root = con.d_3
@@ -125,7 +125,7 @@ def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
 
     return I
 
-
+Ixx_tab = []
 for y in y_tab:
     n1 = n1_inter(y)
     n2 = n2_inter(y)
@@ -140,5 +140,13 @@ for y in y_tab:
     h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4)
     if y <= q:
         Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+        Ixx_tab.append(Ixx)
     else:
         Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+        Ixx_tab.append(Ixx)
+plt.plot(y_tab, Ixx_tab)
+plt.xlabel('Position along half-span')
+plt.ylabel('Ixx')
+plt.title('Moment of inertia at each position along the half-span ')
+plt.show()
+
