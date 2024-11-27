@@ -19,16 +19,16 @@ design_choice = 1
 q = con.q
 if design_choice == 1:
     #Design 1
-    span_n1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
-    span_n2 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    n2 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
-    span_t1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    t1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-    span_t2 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    t2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-    span_As = [0, 21, 25]
-    As = [1, 1, 1]  #cross sectional area of a stringer
+    span_n1 = con.span_n1_1
+    n1 = con.n1_1  # n1 is the number of stringers on the top skin
+    span_n2 = con.span_n2_1
+    n2 = con.n2_1  # n2 is the number of stringers on the bottom skin
+    span_t1 = con.span_t1_1
+    t1 = con.t1_1
+    span_t2 = con.span_t2_1
+    t2 = con.t2_1
+    span_As = con.span_As_1
+    As = con.As_1  #cross sectional area of a stringer
 elif design_choice == 2:
     #Design 2
     span_n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
