@@ -35,8 +35,8 @@ span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
-n = 1 # load factor
-f_fuel = 0 # fraction of max fuel (between 0-1)
+n = -1 # load factor
+f_fuel = 0.8 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
 # Get lift distribution
@@ -113,3 +113,9 @@ def plot_bending_moment_distribution(x_vals, bending_moment_vals):
 bending_moment_vals = bending_moment_distribution(x_vals, shear_force_vals)
 # Plot the bending moment distribution
 plot_bending_moment_distribution(x_vals, bending_moment_vals)
+
+# Calculate total lift by integrating the lift distribution
+total_lift = np.trapz(lift_vals, x_vals)
+
+# Print the total lift
+print(f"Total Lift: {total_lift:.2f} N")
