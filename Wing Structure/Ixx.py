@@ -70,7 +70,7 @@ def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4):
     I = I1 + I2 + I3 + I4 + I5 + I6 + I7
 
     return I
-Ixx_tab=[]
+
 def Ixxfinal(design_choice, y):
     d1_root = con.d_1
     d2_root = con.d_2
@@ -138,10 +138,12 @@ def Ixxfinal(design_choice, y):
 
 
 y_tab = []
+Ixx_tab=[]
 i = 0
 step = 0.05
 count = 0
 b = con.b
+
 while i <= b / 2:
     i = i + step
     y_tab.append(i)
