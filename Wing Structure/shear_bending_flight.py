@@ -35,7 +35,7 @@ span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
-n = 2.5 # load factor
+n = -1 # load factor
 f_fuel = 0.8 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
@@ -79,8 +79,8 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
     plt.title('Shear Force Distribution along the Wing')
     plt.legend()
     plt.grid(which='major', linestyle='-', linewidth=0.7)
-    plt.xticks(np.arange(0, 18.5, 0.5))  # Denser x-axis ticks
-    plt.yticks(np.arange(0, round(max(shear_force_vals) + max(shear_force_vals)/20,-4), round(max(shear_force_vals)/10,-4)))  # Denser y-axis ticks
+    plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
+    plt.yticks(np.arange(0, round(max(shear_force_vals) + max(shear_force_vals)/10,-4), round(max(shear_force_vals)/10,-4)))  # Denser y-axis ticks
     plt.show()
 
 # Calculate shear force distribution
@@ -109,8 +109,8 @@ def plot_bending_moment_distribution(x_vals, bending_moment_vals):
     plt.title('Bending Moment Distribution along the Wing')
     plt.legend()
     plt.grid(which='major', linestyle='-', linewidth=0.7)
-    plt.xticks(np.arange(0, 18.5, 0.5))  # Denser x-axis ticks
-    plt.yticks(np.arange(0, max(bending_moment_vals) + max(bending_moment_vals)/20, round(max(bending_moment_vals)/10,-5)))  # Denser y-axis ticks
+    plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
+    plt.yticks(np.arange(0, round(max(bending_moment_vals) + max(bending_moment_vals)/10,-5), round(max(bending_moment_vals)/10,-5)))  # Denser y-axis ticks
     plt.show()
 
 # Calculate bending moment distribution
