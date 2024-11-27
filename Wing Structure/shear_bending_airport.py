@@ -65,7 +65,7 @@ def plot_bending_moment_distribution(x_vals, bending_moment_vals):
 
 # Given parameters
 span = 17.7  # meters (wing span)
-engine_position = 9  # meters from the center (location of the engine)
+engine_position = 6.2  # meters from the center (location of the engine)
 engine_weight = 3008  # kg (weight of the engine)
 landing_gear_position = 4.07  # meters from the center
 landing_gear_force = 358139  # Newtons
