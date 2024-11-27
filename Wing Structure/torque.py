@@ -27,7 +27,7 @@ def total_thrust(aoa, weight):
     for x in x_values:
         cl += get_cl(x, aoa)
         cd = cd + get_icd(x,aoa) + C_D_0
-    return ((cd/cl)*weight*9.80665) 
+    return (0.5*(cd/cl)*weight*9.80665) 
 
 
 def thrust_dsit(x,pos, d_thrust, t_thrust):
@@ -71,7 +71,7 @@ for aoa in aoa_range:
 
 # Plot customization
 plt.xlabel('Spanwise Position (m)')
-plt.ylabel('Torque (Nm)')
+plt.ylabel('Torque (Nm) around 0.5c, lift 0.25c')
 plt.title('Torque Distribution along the Wing Span for Different AoA')
 plt.legend()
 plt.grid(True)
