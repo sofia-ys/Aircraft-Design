@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import constants as cst
 
 # Distributed load function
 def distributed_load(x):
@@ -68,7 +69,7 @@ span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine)
 engine_weight = 3008  # kg (weight of the engine)
 landing_gear_position = 4.07  # meters from the center
-landing_gear_force = 358139  # Newtons
+landing_gear_force = cst.MTOM * 9.81 / 2  # Newtons
 
 # Create an array of spanwise positions from root (0) to tip (span)
 x_vals = np.linspace(0, span, 1000)
