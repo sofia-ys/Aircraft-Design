@@ -1,5 +1,8 @@
 import scipy as sp
 import math
+
+from matplotlib import pyplot as plt
+
 import constants as con
 
 d1_root = con.d_1
@@ -13,19 +16,19 @@ i = 0
 step = 0.05
 count = 0
 design_choice = 1
-q = 20  #value along the span at which 3rd spar stops being there
+q = con.q
 if design_choice == 1:
     #Design 1
-    span_n1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
-    span_n2 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    n2 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
-    span_t1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    t1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-    span_t2 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-    t2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-    span_As = [0, 21, 25]
-    As = [1, 1, 1]  #cross sectional area of a stringer
+    span_n1 = con.span_n1_1
+    n1 = con.n1_1  # n1 is the number of stringers on the top skin
+    span_n2 = con.span_n2_1
+    n2 = con.n2_1  # n2 is the number of stringers on the bottom skin
+    span_t1 = con.span_t1_1
+    t1 = con.t1_1
+    span_t2 = con.span_t2_1
+    t2 = con.t2_1
+    span_As = con.span_As_1
+    As = con.As_1  #cross sectional area of a stringer
 elif design_choice == 2:
     #Design 2
     span_n1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
@@ -124,21 +127,38 @@ def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
     I = I1 + I2 + I3 + I4 + I5 + I6 + I7
 
     return I
+Ixx_tab=[]
+def Ixx(design_choice, y, ):
 
-def Ixx():
-for y in y_tab:
-    n1 = n1_inter(y)
-    n2 = n2_inter(y)
-    t1 = t1_inter(y)
-    t2 = t2_inter(y)
-    As = As_inter(y)
-    d1, d2, d3, d4, = Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y)
-    alpha = math.atan((d1 - d3) / d2)
-    L = (d1 - d3) / math.cos(alpha)
-    sb = L / (n2 - 1)
-    st = d2 / (n1 - 1)
-    h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4)
-    if y <= q:
-        Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
-    else:
-        Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+
+
+
+    #for y in y_tab:
+        n1 = n1_inter(y)
+        n2 = n2_inter(y)
+        t1 = t1_inter(y)
+        t2 = t2_inter(y)
+        As = As_inter(y)
+        d1, d2, d3, d4, = Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y)
+        alpha = math.atan((d1 - d3) / d2)
+        L = (d1 - d3) / math.cos(alpha)
+        sb = L / (n2 - 1)
+        st = d2 / (n1 - 1)
+        h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4)
+        if y <= q:
+            Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+            Ixx_tab.append(Ixx)
+        else:
+            Ixx = Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+            Ixx_tab.append(Ixx)
+
+ for y in y_tab:
+     Ixx = Ixx(1,y,)
+     Ixx_tab.append(Ixx)
+
+
+        plt.plot(y_tab, Ixx_tab)
+        plt.xlabel('Position along half-span')
+        plt.ylabel('Ixx')
+        plt.title('Moment of inertia at each position along the half-span ')
+        plt.show()
