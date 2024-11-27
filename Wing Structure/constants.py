@@ -130,13 +130,13 @@ span_As_2 = [18, 21, 25]
 As_2 = [1, 1, 1]  #cross sectional area of a stringer
 
 #Design 3
-span_n1_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-n1_3 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
-span_n2_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-n2_3 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
-span_t1_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-t1_3 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-span_t2_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
-t2_3 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
-span_As_3 = [0, 21, 25]
+span_n1_3 = [0, 2, 4, 6, 7]
+n1_3 = [2, 2, 4, 4, 4]  # n1 is the number of stringers on the top skin
+span_n2_3 = [0, 2, 4, 5]
+n2_3 = [27, 33, 38, 45]  # n2 is the number of stringers on the bottom skin
+span_t1_3 = [0, 2, 4]
+t1_3 = [18, 21, 25]
+span_t2_3 = [0, 2, 4]
+t2_3 = [18, 21, 25]
+span_As_3 = [0, 2, 4]
 As_3 = [1, 1, 1]  #cross sectional area of a stringer
