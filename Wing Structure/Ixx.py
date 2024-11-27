@@ -81,15 +81,15 @@ def CentroidZcontribution(AS, sb, st, alpha, n2, n1, d1, d2, d3, d4):
         h = ((d1 * d2 * t2) + (t1 * (d1 ** 2) / 2) + (t1 * d3 * d1) - ((d3 ** 2) * t1 / 2) + (
                     (d2 ** 2) * t2 * math.tan(alpha) / (
                         2 * math.cos(alpha))) + CB_z + d1 * n1 * AS) / total_area  #Z centroid positon single box
-        x = ((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + (
-                    (d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x)  #X centroid position single box
+        x = (((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + (
+                    (d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x))/total_area  #X centroid position single box
     else:
         total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2)) + (t1 * (d1 - u))
         h = ((d1 * d2 * t2) + (t1 * (d1 ** 2) / 2) + (t1 * d3 * d1) - ((d3 ** 2) * t1 / 2) + (
                     (d2 ** 2) * t2 * math.tan(alpha) / (2 * math.cos(alpha))) + CB_z + d1 * n1 * AS + (
                          u + ((d1 - u) / 2) * (t1 * (d1 - u)))) / total_area  #Z centroid positon multi box
-        x = ((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + ((d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x) + (
-                    (t1 * (d1 - u)) * d4)  #X centroid positon multi box
+        x = (((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + ((d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x) + (
+                    (t1 * (d1 - u)) * d4))/total_area  #X centroid positon multi box
     return h, x
 
 
@@ -125,7 +125,7 @@ def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
 
     return I
 
-
+def Ixx():
 for y in y_tab:
     n1 = n1_inter(y)
     n2 = n2_inter(y)
