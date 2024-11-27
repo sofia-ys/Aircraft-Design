@@ -13,7 +13,7 @@ v = V_cruise
 q = 0.5*rho*v**2
 we = 3008*9.81 #engine weight
 
-pos = 9
+pos = 6.2
 thrust = 80000 # [N]
 d_thrust = -1.1 # vertical distance of engines [m]
 d_engine = 2.6 # horizontal distance of engine relative to torsion box[m]

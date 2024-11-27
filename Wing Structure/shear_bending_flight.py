@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import input_xflr_data as inp
 import constants as ct
 
-def lift_distribution(density, airspeed, alpha, span, num_points=1000):
+def lift_distribution(density, airspeed, alpha, span, M, num_points=1000):
     # Create an array of spanwise positions from root (0) to tip (span)
     x_vals = np.linspace(0, span, num_points)
     lift_vals = np.zeros(num_points)
@@ -11,7 +11,7 @@ def lift_distribution(density, airspeed, alpha, span, num_points=1000):
     # Calculate the lift per unit length at each spanwise point
     for i, x in enumerate(x_vals):
         c = inp.get_chord(x,alpha)  # Local chord length
-        cl_local = inp.get_cl(x,alpha)  # Local coefficient of lift
+        cl_local = inp.get_cl(x,alpha)/((1-M**2)**(0.5))  # Local coefficient of lift
         lift_vals[i] = 0.5 * density * airspeed**2 * c * cl_local
 
     return x_vals, lift_vals
@@ -29,9 +29,10 @@ def plot_lift_distribution(x_vals, lift_vals):
 # Given parameters
 density = 0.4436  # kg/m^3 (air density at sea level)
 airspeed = 256 # m/s (airspeed)
+M = 0.85
 alpha = 2 # degrees (angle of attack)
 span = 17.7  # meters (wing span)
-engine_position = 6.21  # meters from the center (location of the engine) 35% of b/2
+engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
 n = 1 # load factor
@@ -39,7 +40,7 @@ f_fuel = 0 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
 # Get lift distribution
-x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span)
+x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M)
 
 # Plot the lift distribution
 plot_lift_distribution(x_vals, lift_vals)

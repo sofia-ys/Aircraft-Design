@@ -96,40 +96,8 @@ d_1 = 15 #Place Holder value Length of front spar
 d_2 = 15 #Place holder value for Distance between front and back spar
 d_3 = 10 # Place Holder value for length of back spar
 d_4 = 5 # Place Holder  value for distrance between front spar amd multibox spar
-spac = 0.1 # Stringer spacing
-
-#Design 1
-d1_span_n1 = [18,21,25,30,36,44,51,59,68]
-d1_n1 = [18,21,25,30,36,44,51,59,68] # n1 is the number of stringers on the top skin
-d1_span_n2 = [18,21,25,30,36,44,51,59,68]
-d1_n2 = [27,33,38,45,55,65,80,100,120] # n2 is the number of stringers on the bottom skin
-d1_span_t1 = [18,21,25,30,36,44,51,59,68]
-d1_t1 = [18,21,25,30,36,44,51,59,68]
-d1_span_t2 = [18,21,25,30,36,44,51,59,68]
-d1_t2 = [18,21,25,30,36,44,51,59,68]
-d1_span_An = [18,21,25]
-d1_An = [1,1,1] # cross sectional area of a stringer
-
-#Design 2
-d2_span_n1 = [18,21,25,30,36,44,51,59,68]
-d2_n1 = [18,21,25,30,36,44,51,59,68] # n1 is the number of stringers on the top skin
-d2_span_n2 = [18,21,25,30,36,44,51,59,68]
-d2_n2 = [27,33,38,45,55,65,80,100,120] # n2 is the number of stringers on the bottom skin
-d2_span_t1 = [18,21,25,30,36,44,51,59,68]
-d2_t1 = [18,21,25,30,36,44,51,59,68]
-d2_span_t2 = [18,21,25,30,36,44,51,59,68]
-d2_t2 = [18,21,25,30,36,44,51,59,68]
-d2_span_An = [18,21,25]
-d2_An = [1,1,1] # cross sectional area of a stringer
-
-#Design 3
-d3_span_n1 = [18,21,25,30,36,44,51,59,68]
-d3_n1 = [18,21,25,30,36,44,51,59,68] # n1 is the number of stringers on the top skin
-d3_span_n2 = [18,21,25,30,36,44,51,59,68]
-d3_n2 = [27,33,38,45,55,65,80,100,120] # n2 is the number of stringers on the bottom skin
-d3_span_t1 = [18,21,25,30,36,44,51,59,68]
-d3_t1 = [18,21,25,30,36,44,51,59,68]
-d3_span_t2 = [18,21,25,30,36,44,51,59,68]
-d3_t2 = [18,21,25,30,36,44,51,59,68]
-d3_span_An = [18,21,25]
-d3_An = [1,1,1] # cross sectional area of a stringer
+t_1 = 0.005 # Place Holder  value for thickness of spars
+t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
+n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
+n_2 = 5 # n1 is the number of stringers on the bottom skin
+As = 1 # Stringer area
