@@ -130,7 +130,7 @@ for y in y_tab:
     if (y <= q):
         Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
     else:
-        Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+        Ixx = Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
 
     #Calculation of Ixx
     # h is the height of the centroid from bottom left
