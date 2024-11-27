@@ -78,7 +78,9 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
     plt.ylabel('Shear Force (N)')
     plt.title('Shear Force Distribution along the Wing')
     plt.legend()
-    plt.grid(True)
+    plt.grid(which='major', linestyle='-', linewidth=0.7)
+    plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
+    plt.yticks(np.arange(0, round(max(shear_force_vals) + max(shear_force_vals)/10,-4), round(max(shear_force_vals)/10,-4)))  # Denser y-axis ticks
     plt.show()
 
 # Calculate shear force distribution
@@ -106,7 +108,9 @@ def plot_bending_moment_distribution(x_vals, bending_moment_vals):
     plt.ylabel('Bending Moment (Nm)')
     plt.title('Bending Moment Distribution along the Wing')
     plt.legend()
-    plt.grid(True)
+    plt.grid(which='major', linestyle='-', linewidth=0.7)
+    plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
+    plt.yticks(np.arange(0, round(max(bending_moment_vals) + max(bending_moment_vals)/10,-5), round(max(bending_moment_vals)/10,-5)))  # Denser y-axis ticks
     plt.show()
 
 # Calculate bending moment distribution
