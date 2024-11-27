@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import input_xflr_data as inp
 import constants as ct
+from scipy.interpolate import interp1d
 
 def lift_distribution(density, airspeed, alpha, span, M, num_points=1000):
     # Create an array of spanwise positions from root (0) to tip (span)
@@ -35,7 +36,7 @@ span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
-n = -1 # load factor
+n = 2.5 # load factor
 f_fuel = 0.8 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
@@ -45,9 +46,9 @@ x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M)
 # Plot the lift distribution
 plot_lift_distribution(x_vals, lift_vals)
 
-def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight):
+def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor):
     # Convert engine weight from kg to Newtons (multiply by gravitational acceleration)
-    engine_force = engine_weight * g * n
+    engine_force = engine_weight * g * load_factor
     
     # Initialize shear force array
     shear_force_vals = np.zeros(len(x_vals))
@@ -57,7 +58,7 @@ def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight):
     total_distributed_load = 0.0
     for i in reversed(range(len(x_vals))):
         # Calculate distributed load at current point
-        distributed_load = - (-87.186 * x_vals[i] + 1546.67) *  g * n * (f_fuel + f_structure)
+        distributed_load = - (-87.186 * x_vals[i] + 1546.67) *  g * load_factor * (f_fuel + f_structure)
         total_distributed_load += distributed_load * (x_vals[1] - x_vals[0])
         
         # Accumulate lift contributions
@@ -68,7 +69,6 @@ def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight):
             shear_force_vals[i] = total_lift + total_distributed_load - engine_force
         else:
             shear_force_vals[i] = total_lift + total_distributed_load
-    
     return shear_force_vals
 
 def plot_shear_force_distribution(x_vals, shear_force_vals):
@@ -84,7 +84,7 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
     plt.show()
 
 # Calculate shear force distribution
-shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight)
+shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, n)
 # Plot the shear force distribution
 plot_shear_force_distribution(x_vals, shear_force_vals)
 
@@ -100,6 +100,14 @@ def bending_moment_distribution(x_vals, shear_force_vals):
         bending_moment_vals[i] = total_moment
     
     return bending_moment_vals
+
+# get the critical bending moment in flight
+def getBendingMomentFlight(y, load_factor):
+    s_f_values = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor)
+    b_m_values = bending_moment_distribution(x_vals, s_f_values)
+
+    moment_function = interp1d(x_vals, b_m_values, kind='linear', fill_value="extrapolate")
+    return moment_function(y)
 
 def plot_bending_moment_distribution(x_vals, bending_moment_vals):
     plt.figure()

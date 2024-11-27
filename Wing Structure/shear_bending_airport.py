@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import constants as cst
+from scipy.interpolate import interp1d
 
 # Distributed load function
 def distributed_load(x):
@@ -93,3 +94,10 @@ plot_shear_force_distribution(x_vals, shear_force_vals)
 
 # Plot the bending moment distribution
 plot_bending_moment_distribution(x_vals, bending_moment_vals)
+
+def getBendingMomentGround(y):
+    s_f_values = shear_force_distribution(x_vals, load_vals, engine_position, engine_weight)
+    b_m_values = bending_moment_distribution(x_vals, s_f_values)
+
+    moment_function = interp1d(x_vals, b_m_values, kind='linear', fill_value="extrapolate")
+    return moment_function(y)
