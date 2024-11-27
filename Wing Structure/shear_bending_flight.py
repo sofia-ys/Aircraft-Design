@@ -35,7 +35,7 @@ span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
-n = 2.5 # load factor
+n = -1 # load factor
 f_fuel = 0.8 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
