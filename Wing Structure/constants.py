@@ -93,9 +93,9 @@ l_wh = 14580  # distance from main to front wheel [mm]
 l_mw = 4.06  # distance from centre to main wheel [m]
 
 # wing box characteristics ALL VALUES FOR ROOT POSITION ONLY
-d_1 = 15 #Place Holder value Length of front spar
-d_2 = 15 #Place holder value for Distance between front and back spar
-d_3 = 10 # Place Holder value for length of back spar
+d_1 = 0.65 #Place Holder value Length of front spar
+d_2 = 5 #Place holder value for Distance between front and back spar
+d_3 = 0.3 # Place Holder value for length of back spar
 d_4 = 5 # Place Holder  value for distrance between front spar amd multibox spar
 t_1 = 0.005 # Place Holder  value for thickness of spars
 t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
