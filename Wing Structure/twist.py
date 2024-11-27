@@ -83,7 +83,8 @@ print(J)
 torques = sp.interpolate.interp1d(torque.x_values, torque.torque_values, kind="previous",fill_value="extrapolate")
 
 def dtheta (y):
-    return torques(y) / (J * G)
+    x = torques(y) * 1000 / (J * G)
+    return x
 
 twist_distribution = np.array([0])
 error = 0
