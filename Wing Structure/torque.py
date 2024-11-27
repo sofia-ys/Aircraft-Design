@@ -18,7 +18,7 @@ thrust = 80000 # [N]
 d_thrust = -1.1 # vertical distance of engines [m]
 d_engine = 2.6 # horizontal distance of engine relative to torsion box[m]
 weight = 78826 # [kg]
-
+torques = []
 
 def total_thrust(aoa, weight):
     cl=0
@@ -67,6 +67,7 @@ plt.figure()
 for aoa in aoa_range:
     t_thrust = total_thrust(aoa, weight)
     torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
+    torques.append(torque_values)
     plt.plot(x_values, torque_values, label=f'AoA = {aoa}°')
 
 # Plot customization

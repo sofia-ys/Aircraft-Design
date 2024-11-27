@@ -5,15 +5,18 @@ import torque
 import matplotlib.pyplot as plt
 import scipy as sp
 
-d1 = con.d_1
-d2 = con.d_2
-d3 = con.d_3
-d4 = con.d_4
+d1 = np.array([0.65,0.6,0.55,0.45,0.4,0.35,0.3,0.2,0.15,0.1])
+d2 = d1 / 0.65 * con.d_2 
+d3 = d1 / 0.65 * con.d_3
+d4 = d1 / 0.65 * con.d_4
 alpha = np.arctan((d3-d1) / d2)
 t1 = con.t_1
 t2 = con.t_2
 t3 = con.t_1
 G = 25e9
+x = [0,2,4,6,8,10,12,14,16,18]
+
+
 
 def area_trap (d1, d3, d2): #area of the wingbox
 
@@ -77,27 +80,29 @@ def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional con
 
     return J
 
-J = tors_const(d1,d2,d3,alpha,t1,t2)
-print(J)
+J = sp.interpolate.interp1d(x, tors_const(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
 
-torques = sp.interpolate.interp1d(torque.x_values, torque.torque_values, kind="previous",fill_value="extrapolate")
+for aoa in range(len(torque.aoa_range)):
+    torques = sp.interpolate.interp1d(torque.x_values, torque.torques[aoa], kind="previous",fill_value="extrapolate")
 
-def dtheta (y):
-    x = torques(y) * 1000 / (J * G)
-    return x
+    def dtheta (y):
+        x = torques(y) * 1000 / (J(y) * G)
+        return x
 
-twist_distribution = np.array([0])
-error = 0
+    twist_distribution = np.array([0])
+    error = 0
 
-for i in range(len(torque.x_values) - 1):
-    integrated_part, e = sp.integrate.quad(dtheta, torque.x_values[i], torque.x_values[i+1])
-    twist_distribution = np.append(twist_distribution, [integrated_part + twist_distribution[-1]])
+    for i in range(len(torque.x_values) - 1):
+        integrated_part, e = sp.integrate.quad(dtheta, torque.x_values[i], torque.x_values[i+1])
+        twist_distribution = np.append(twist_distribution, [integrated_part + twist_distribution[-1]])
 
-twist_distribution = twist_distribution * 180 / np.pi
+    twist_distribution = twist_distribution * 180 / np.pi
 
-plt.plot(torque.x_values ,twist_distribution)
+    plt.plot(torque.x_values ,twist_distribution, label=f'AoA = {torque.aoa_range[aoa]}°')
+
 plt.xlabel('Spanwise Position [m]')
 plt.ylabel('Twist [deg]')
-plt.title('Twist Distribution along the Wing Span')
+plt.title('Twist Distribution along the Wing Span for different Angles of Attack')
+plt.legend()
 plt.grid(True)
 plt.show()
