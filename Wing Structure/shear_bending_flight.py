@@ -101,7 +101,7 @@ def bending_moment_distribution(x_vals, shear_force_vals):
     
     return bending_moment_vals
 
-# get the critical bending moment in flight
+# A function to get the bending moment in flight at any span location and any loading factor
 def getBendingMomentFlight(y, load_factor):
     s_f_values = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor)
     b_m_values = bending_moment_distribution(x_vals, s_f_values)

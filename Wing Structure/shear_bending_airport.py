@@ -95,6 +95,7 @@ plot_shear_force_distribution(x_vals, shear_force_vals)
 # Plot the bending moment distribution
 plot_bending_moment_distribution(x_vals, bending_moment_vals)
 
+# A function to give you the ground bending moment at any span location
 def getBendingMomentGround(y):
     s_f_values = shear_force_distribution(x_vals, load_vals, engine_position, engine_weight)
     b_m_values = bending_moment_distribution(x_vals, s_f_values)
