@@ -102,3 +102,41 @@ t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
 As = 1 # Stringer area
+q = 20  #value along the span at which 3rd spar stops being there
+
+
+#Design 1
+span_n1_1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+n1_1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
+span_n2_1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+n2_1 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
+span_t1_1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+t1_1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+span_t2_1 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+t2_1 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+span_As_1 = [0, 21, 25]
+As_1 = [1, 1, 1]  # cross sectional area of a stringer
+
+#Design 2
+span_n1_2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+n1_2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
+span_n2_2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+n2_2 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
+span_t1_2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+t1_2= [18, 21, 25, 30, 36, 44, 51, 59, 68]
+span_t2_2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+t2_2 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+span_As_2 = [18, 21, 25]
+As_2 = [1, 1, 1]  #cross sectional area of a stringer
+
+#Design 3
+span_n1_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+n1_3 = [18, 21, 25, 30, 36, 44, 51, 59, 68]  # n1 is the number of stringers on the top skin
+span_n2_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+n2_3 = [27, 33, 38, 45, 55, 65, 80, 100, 120]  # n2 is the number of stringers on the bottom skin
+span_t1_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+t1_3 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+span_t2_3 = [0, 21, 25, 30, 36, 44, 51, 59, 68]
+t2_3 = [18, 21, 25, 30, 36, 44, 51, 59, 68]
+span_As_3 = [0, 21, 25]
+As_3 = [1, 1, 1]  #cross sectional area of a stringer
