@@ -1,4 +1,4 @@
-from Ixx import
+from Ixx import Ixxfinal
 import scipy as sp
 import matplotlib.pyplot as plt
 import constants as con
@@ -9,7 +9,7 @@ def bending_moment(y):
     return 123
 #import moment of inertia function
 def Ixx(y):
-    return 123
+    return Ixxfinal(1,y)
 def second_derivative_deflection(y):
     return -1 * bending_moment(y) / (E * Ixx(y))
 def first_derivative_deflection(y):
