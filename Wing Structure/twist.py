@@ -5,6 +5,7 @@ import torque
 import matplotlib.pyplot as plt
 import scipy as sp
 
+#temporary wingbox design with scaled wingbox along wingspan
 d1 = np.array([0.65,0.6,0.55,0.45,0.4,0.35,0.3,0.2,0.15,0.1])
 d2 = d1 / 0.65 * con.d_2 
 d3 = d1 / 0.65 * con.d_3
@@ -15,8 +16,6 @@ t2 = con.t_2
 t3 = con.t_1
 G = 25e9
 x = [0,2,4,6,8,10,12,14,16,18]
-
-
 
 def area_trap (d1, d3, d2): #area of the wingbox
 
@@ -80,14 +79,16 @@ def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional con
 
     return J
 
+def dtheta (y):
+        x = torques(y) * 1000 / (J(y) * G)
+        return x
+
 J = sp.interpolate.interp1d(x, tors_const(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
+
+plt.plot()
 
 for aoa in range(len(torque.aoa_range)):
     torques = sp.interpolate.interp1d(torque.x_values, torque.torques[aoa], kind="previous",fill_value="extrapolate")
-
-    def dtheta (y):
-        x = torques(y) * 1000 / (J(y) * G)
-        return x
 
     twist_distribution = np.array([0])
     error = 0
