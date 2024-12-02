@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import input_xflr_data as inp
 import constants as ct
 from scipy.interpolate import interp1d
+from scipy.optimize import fsolve
 
 def lift_distribution(density, airspeed, alpha, span, M, num_points=1000):
     # Create an array of spanwise positions from root (0) to tip (span)
@@ -28,7 +29,7 @@ def plot_lift_distribution(x_vals, lift_vals):
     plt.show()
 
 # Given parameters
-density = 0.4436  # kg/m^3 (air density at sea level)
+density = 0.4416  # kg/m^3 (air density at sea level)
 airspeed = 256 # m/s (airspeed)
 M = 0.85
 alpha = 2 # degrees (angle of attack)
@@ -44,7 +45,7 @@ f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M)
 
 # Plot the lift distribution
-plot_lift_distribution(x_vals, lift_vals)
+#plot_lift_distribution(x_vals, lift_vals)
 
 def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor):
     # Convert engine weight from kg to Newtons (multiply by gravitational acceleration)
@@ -86,7 +87,7 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
 # Calculate shear force distribution
 shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, n)
 # Plot the shear force distribution
-plot_shear_force_distribution(x_vals, shear_force_vals)
+#plot_shear_force_distribution(x_vals, shear_force_vals)
 
 def bending_moment_distribution(x_vals, shear_force_vals):
     # Initialize bending moment array
@@ -130,4 +131,39 @@ plot_bending_moment_distribution(x_vals, bending_moment_vals)
 total_lift = np.trapz(lift_vals, x_vals)
 
 # Print the total lift
-print(f"Total Lift: {total_lift:.2f} N")
+#print(f"Total Lift: {total_lift:.2f} N")
+
+
+# Function to calculate the difference between calculated and target lift
+def lift_error(alpha, density, airspeed, span, M, target_lift, num_points=1000):
+    # Get lift distribution
+    x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M, num_points)
+
+    # Calculate total lift by integrating the lift distribution
+    total_lift = np.trapz(lift_vals, x_vals)
+
+    # Calculate the difference between target lift and calculated lift
+    return total_lift - target_lift
+
+# Function to find angle of attack for a given target lift
+def find_angle_of_attack(density, airspeed, target_lift, span, M, alpha_guess=2):
+    # Use fsolve to find the alpha that gives the target lift
+    alpha_solution = fsolve(
+        lift_error, alpha_guess, args=(density, airspeed, span, M, target_lift)
+    )
+    return alpha_solution[0]
+
+# Example usage
+if __name__ == "__main__":
+    # Given parameters
+    density = 0.4416  # kg/m^3 (air density)
+    airspeed = 256  # m/s (airspeed)
+    span = 17.7  # meters (wing span)
+    M = 0.85  # Mach number
+    target_lift = 848260.89 # Desired total lift in Newtons (modify as needed)
+
+    # Find the angle of attack for the given target lift
+    alpha = find_angle_of_attack(density, airspeed, target_lift, span, M)
+
+    # Print the result
+    print(f"Required angle of attack: {alpha:.2f} degrees")
