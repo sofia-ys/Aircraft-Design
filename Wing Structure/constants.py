@@ -94,32 +94,32 @@ l_mw = 4.06  # distance from centre to main wheel [m]
 
 # wing box characteristics ALL VALUES FOR ROOT POSITION ONLY
 d_1 = 0.65 #Place Holder value Length of front spar
-d_2 = 5 #Place holder value for Distance between front and back spar
+d_2 = 3.5 #Place holder value for Distance between front and back spar
 d_3 = 0.3 # Place Holder value for length of back spar
-d_4 = 5 # Place Holder  value for distrance between front spar amd multibox spar
+d_4 = 1.2 # Place Holder  value for distrance between front spar amd multibox spar
 t_1 = 0.005 # Place Holder  value for thickness of spars
 t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
 n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
 n_2 = 5 # n1 is the number of stringers on the bottom skin
-As = 1 # Stringer area
-q = 10  #value along the span at which 3rd spar stops being there
+As = 0.0001 # Stringer area
+q = 5  #value along the span at which 3rd spar stops being there
 
 
 #Design 1
 span_n1_1 = [0, 3.5, 7, 10.5, 15.5]
-n1_1 = [7, 6, 6, 5, 5]  # n1 is the number of stringers on the top skin
+n1_1 = [6, 5, 5, 4, 4]  # n1 is the number of stringers on the top skin
 span_n2_1 = [0, 3.5, 7, 10.5, 15.5]
-n2_1 = [8, 7, 7, 6, 6]  # n2 is the number of stringers on the bottom skin
+n2_1 = [7, 6, 6, 5, 5]  # n2 is the number of stringers on the bottom skin
 span_t1_1 = [0, 3.5, 7, 10.5, 15.5]
-t1_1 = [0.005, 0.005, 0.005, 0.005, 0.005]
+t1_1 = [0.004, 0.003, 0.003, 0.002, 0.002]
 span_t2_1 = [0, 3.5, 7, 10.5, 15.5]
-t2_1 = [0.005, 0.005, 0.005, 0.005, 0.005]
+t2_1 = [0.004, 0.003, 0.003, 0.002, 0.002]
 span_As_1 = [0, 7.5, 15.5]
-As_1 = [0.00015, 0.00015, 0.00015]  # cross sectional area of a stringer
+As_1 = [0.0001, 0.0001, 0.0001]  # cross sectional area of a stringer
 
 #Design 2
-span_n1_2 = [0, 21, 25, 30, 36]
-n1_2 = [18, 21, 25, 30, 36]  # n1 is the number of stringers on the top skin
+span_n1_2 = [0, 7, 25, 30, 36]
+n1_2 = [18, 6, 25, 30, 36]  # n1 is the number of stringers on the top skin
 span_n2_2 = [0, 21, 25, 30, 36]
 n2_2 = [27, 33, 38, 45, 55]  # n2 is the number of stringers on the bottom skin
 span_t1_2 = [0, 21, 25, 30, 36]
