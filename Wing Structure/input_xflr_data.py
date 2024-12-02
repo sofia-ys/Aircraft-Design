@@ -75,8 +75,8 @@ def get_value(param, y, aoa):
 
 # Function to interpolate between AoA values
 def interpolate_aoa(param, y, aoa):
-    if aoa < 0 or aoa > 15:
-        raise ValueError("Angle of attack must be between 0 and 10 degrees.")
+    #if aoa < 0 or aoa > 15:
+        #raise ValueError("Angle of attack must be between 0 and 10 degrees.")
 
     # Get the values at the specified span location (y) for AoA 0 and 10
     value_aoa0 = get_value(param, y, 0)

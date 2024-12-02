@@ -43,14 +43,17 @@ f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
 # Get lift distribution
 x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M)
-
 # Plot the lift distribution
 #plot_lift_distribution(x_vals, lift_vals)
 
-def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor):
+def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor, no_fuel_contribution = 0):
     # Convert engine weight from kg to Newtons (multiply by gravitational acceleration)
     engine_force = engine_weight * g * load_factor
     
+    fuel_frac = f_fuel
+    if(no_fuel_contribution > 1e-3): #for avoiding memory bugs with pure 0 or 1
+        fuel_frac = 0
+        print('no fuel:')
     # Initialize shear force array
     shear_force_vals = np.zeros(len(x_vals))
     
@@ -59,7 +62,7 @@ def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, 
     total_distributed_load = 0.0
     for i in reversed(range(len(x_vals))):
         # Calculate distributed load at current point
-        distributed_load = - (-87.186 * x_vals[i] + 1546.67) *  g * load_factor * (f_fuel + f_structure)
+        distributed_load = - (-87.186 * x_vals[i] + 1546.67) *  g * load_factor * (fuel_frac + f_structure)
         total_distributed_load += distributed_load * (x_vals[1] - x_vals[0])
         
         # Accumulate lift contributions
@@ -99,7 +102,6 @@ def bending_moment_distribution(x_vals, shear_force_vals):
         dx = x_vals[i+1] - x_vals[i]
         total_moment += shear_force_vals[i] * dx
         bending_moment_vals[i] = total_moment
-    
     return bending_moment_vals
 
 # A function to get the bending moment in flight at any span location and any loading factor
@@ -133,7 +135,6 @@ total_lift = np.trapz(lift_vals, x_vals)
 # Print the total lift
 #print(f"Total Lift: {total_lift:.2f} N")
 
-
 # Function to calculate the difference between calculated and target lift
 def lift_error(alpha, density, airspeed, span, M, target_lift, num_points=1000):
     # Get lift distribution
@@ -160,7 +161,7 @@ if __name__ == "__main__":
     airspeed = 256  # m/s (airspeed)
     span = 17.7  # meters (wing span)
     M = 0.85  # Mach number
-    target_lift = 848260.89 # Desired total lift in Newtons (modify as needed)
+    target_lift = 848260.89 # Desired total lift in Newtons (modify as needed)S
 
     # Find the angle of attack for the given target lift
     alpha = find_angle_of_attack(density, airspeed, target_lift, span, M)
