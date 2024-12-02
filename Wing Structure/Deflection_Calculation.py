@@ -15,10 +15,10 @@ def Ixx(y):
 def second_derivative_deflection(y):
     return -1 * bending_moment(y) / (E * Ixx(y))
 def first_derivative_deflection(y):
-    slope,error = sp.integrate.quad(second_derivative_deflection,0,y)
+    slope, error = sp.integrate.quad(second_derivative_deflection,0,y)
     return slope
 def deflection(y):
-    defl,error = sp.integrate.quad(first_derivative_deflection,0,y)
+    defl, error = sp.integrate.quad(first_derivative_deflection,0,y)
     return defl
 y_tab = []
 step = 0.1
@@ -26,13 +26,16 @@ y = 0
 step_number = 0
 deflection_tab = []
 slope_tab = []
-while y <= b / 2 :
+while y <= b / 2:
     y_tab.append(y)
     y = y + step
     step_number = step_number + 1
 for el in y_tab:
     slope_tab.append(first_derivative_deflection(el))
     deflection_tab.append(deflection(el))
+
+
+
 plt.plot(y_tab, slope_tab, label='Slope')
 plt.xlabel('Position along half-span')
 plt.ylabel('Slope at each point along half-span')
