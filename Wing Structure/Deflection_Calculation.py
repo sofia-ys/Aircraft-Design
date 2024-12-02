@@ -11,7 +11,7 @@ def bending_moment(y):
     return getBendingMomentFlight(y, -1)
 #import moment of inertia function
 def Ixx(y):
-    return Ixxfinal(1,y)
+    return Ixxfinal(2,y)
 def second_derivative_deflection(y):
     return -1 * bending_moment(y) / (E * Ixx(y))
 def first_derivative_deflection(y):
@@ -21,7 +21,7 @@ def deflection(y):
     defl,error2 = sp.integrate.quad(first_derivative_deflection,0,y)
     return defl
 y_tab = []
-step = 0.5
+step = 10
 y = 0
 step_number = 0
 deflection_tab = []

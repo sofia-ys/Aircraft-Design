@@ -6,7 +6,7 @@ from shear_bending_flight import getBendingMomentFlight
 import constants as con
 
 # Constants
-E = 70 * 10**9  # Young's modulus for the material (Pa)
+E = 72.4 * 10**9  # Young's modulus for the material (Pa)
 b = con.b       # Wing span from constants
 
 # Predefine functions for bending moment and moment of inertia
