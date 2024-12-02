@@ -150,7 +150,7 @@ while i <= b / 2:
     count = count + 1
 
 for y in y_tab:
-     Ixx = Ixxfinal(3, y)
+     Ixx = Ixxfinal(1, y)
      Ixx_tab.append(Ixx)
 
 plt.plot(y_tab, Ixx_tab)
