@@ -85,7 +85,6 @@ def dtheta (y):
 
 J = sp.interpolate.interp1d(x, tors_const(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
 
-plt.plot()
 
 for aoa in range(len(torque.aoa_range)):
     torques = sp.interpolate.interp1d(torque.x_values, torque.torques[aoa], kind="previous",fill_value="extrapolate")
