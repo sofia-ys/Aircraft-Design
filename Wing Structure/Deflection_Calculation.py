@@ -4,7 +4,7 @@ import scipy as sp
 import matplotlib.pyplot as plt
 import constants as con
 
-E = 70 * 10^9 # change it when you choose material
+E = 70 * 10**9 # change it when you choose material
 b = con.b
 #import Moment function
 def bending_moment(y):
@@ -21,7 +21,7 @@ def deflection(y):
     defl,error = sp.integrate.quad(first_derivative_deflection,0,y)
     return defl
 y_tab = []
-step = 0.05
+step = 0.1
 y = 0
 step_number = 0
 deflection_tab = []
