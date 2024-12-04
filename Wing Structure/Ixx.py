@@ -77,7 +77,6 @@ def Ixxfinal(design_choice, y):
     d3_root = con.d_3
     d4_root = con.d_4
     b = con.b
-    q = con.q
     if design_choice == 1:
         span_n1 = con.span_n1_1
         n1 = con.n1_1  # n1 is the number of stringers on the top skin
@@ -89,6 +88,7 @@ def Ixxfinal(design_choice, y):
         t2 = con.t2_1
         span_As = con.span_As_1
         As = con.As_1  # cross sectional area of a stringer
+        q = con.q1
     elif design_choice == 2:
         span_n1 = con.span_n1_2
         n1 = con.n1_2  # n1 is the number of stringers on the top skin
@@ -100,6 +100,7 @@ def Ixxfinal(design_choice, y):
         t2 = con.t2_2
         span_As = con.span_As_2
         As = con.As_1  # cross sectional area of a stringer
+        q = con.q2
     else:
         span_n1 = con.span_n1_3
         n1 = con.n1_3  # n1 is the number of stringers on the top skin
@@ -111,6 +112,7 @@ def Ixxfinal(design_choice, y):
         t2 = con.t2_3
         span_As = con.span_As_3
         As = con.As_3  # cross sectional area of a stringer
+        q = con.q3
     n1_inter = sp.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
     n2_inter = sp.interpolate.interp1d(span_n2, n2, kind="previous", fill_value="extrapolate")
     t1_inter = sp.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="extrapolate")
