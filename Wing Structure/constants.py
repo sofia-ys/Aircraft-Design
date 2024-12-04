@@ -93,15 +93,12 @@ l_wh = 14580  # distance from main to front wheel [mm]
 l_mw = 4.06  # distance from centre to main wheel [m]
 
 # wing box characteristics ALL VALUES FOR ROOT POSITION ONLY
-d_1 = 0.65 #Place Holder value Length of front spar
-d_2 = 3.5 #Place holder value for Distance between front and back spar
-d_3 = 0.3 # Place Holder value for length of back spar
+d_1 = 0.609118 #Place Holder value Length of front spar
+d_2 = 2.582268 #Place holder value for Distance between front and back spar
+d_3 = 0.487393 # Place Holder value for length of back spar
 d_4 = 1.2 # Place Holder  value for distrance between front spar amd multibox spar
 t_1 = 0.005 # Place Holder  value for thickness of spars
 t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
-n_1 = 5 #  Place Holdern1 is the number of stringers on the top skin
-n_2 = 5 # n1 is the number of stringers on the bottom skin
-As = 0.0001 # Stringer area
 
 
 #Design 1
@@ -110,9 +107,9 @@ n1_1 = [6, 5, 5, 4, 4]  # n1 is the number of stringers on the top skin
 span_n2_1 = [0, 3.5, 7, 10.5, 15.5]
 n2_1 = [7, 6, 6, 5, 5]  # n2 is the number of stringers on the bottom skin
 span_t1_1 = [0, 3.5, 7, 10.5, 15.5]
-t1_1 = [0.004, 0.003, 0.003, 0.002, 0.002]
+t1_1 = [0.005, 0.005, 0.005, 0.005, 0.005]
 span_t2_1 = [0, 3.5, 7, 10.5, 15.5]
-t2_1 = [0.004, 0.003, 0.003, 0.002, 0.002]
+t2_1 = [0.005, 0.005, 0.005, 0.005, 0.005]
 span_As_1 = [0, 7.5, 15.5]
 As_1 = [0.0001, 0.0001, 0.0001]  # cross sectional area of a stringer
 q1 = 5 #value along the span at which 3rd spar stops being there

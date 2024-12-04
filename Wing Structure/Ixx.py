@@ -14,25 +14,24 @@ def Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y):
     return d1_a, d2_a, d3_a, d4_a
 
 
-def CentroidZcontribution(AS, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2):
-    As = con.As
-    CB_z = sum(AS * i * sb * math.sin(alpha) for i in range(0, int(n2)))  #for bottom
+def CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2):
+    CB_z = sum(As * i * sb * math.sin(alpha) for i in range(0, int(n2)))  #for bottom
 
-    CB_x = sum(AS * i * sb * math.cos(alpha) for i in range(0, int(n2)))  #top
+    CB_x = sum(As * i * sb * math.cos(alpha) for i in range(0, int(n2)))  #top
 
-    CT_x = sum(AS * i * st for i in range(0, int(n1)))  #top
+    CT_x = sum(As * i * st for i in range(0, int(n1)))  #top
     u = d4 * math.tan(alpha)
     if d4 > 0:
         total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2))
         h = ((d1 * d2 * t2) + (t1 * (d1 ** 2) / 2) + (t1 * d3 * d1) - ((d3 ** 2) * t1 / 2) + (
                     (d2 ** 2) * t2 * math.tan(alpha) / (
-                        2 * math.cos(alpha))) + CB_z + d1 * n1 * AS) / total_area  #Z centroid positon single box
+                        2 * math.cos(alpha))) + CB_z + d1 * n1 * As) / total_area  #Z centroid positon single box
         x = (((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + (
                     (d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x))/total_area  #X centroid position single box
     else:
         total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2)) + (t1 * (d1 - u))
         h = ((d1 * d2 * t2) + (t1 * (d1 ** 2) / 2) + (t1 * d3 * d1) - ((d3 ** 2) * t1 / 2) + (
-                    (d2 ** 2) * t2 * math.tan(alpha) / (2 * math.cos(alpha))) + CB_z + d1 * n1 * AS + (
+                    (d2 ** 2) * t2 * math.tan(alpha) / (2 * math.cos(alpha))) + CB_z + d1 * n1 * As + (
                          u + ((d1 - u) / 2) * (t1 * (d1 - u)))) / total_area  #Z centroid positon multi box
         x = (((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + ((d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x) + (
                     (t1 * (d1 - u)) * d4))/total_area  #X centroid positon multi box
