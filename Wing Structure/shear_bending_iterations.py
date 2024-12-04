@@ -146,3 +146,17 @@ for i in range(len(case_airspeeds)):
     print(f"  Max Bending Moment: {max_bending:.2f} Nm")
     print(f"  Min Bending Moment: {min_bending:.2f} Nm")
     print()
+
+total_max_shear = max(max_shear_forces)
+total_min_shear = min(min_shear_forces)
+total_max_bm = max(max_bending_moments)
+total_min_bm = min(min_bending_moments)
+
+i = max_shear_forces.index(total_max_shear)
+print(f"Maximum total shear: {total_max_shear}, Index: {i}")
+i = min_shear_forces.index(total_min_shear)
+print(f"Minimum total shear: {total_min_shear}, Index: {i}")
+i = max_bending_moments.index(total_max_bm)
+print(f"Maximum bending moment: {total_max_bm}, Index: {i}")
+i = min_bending_moments.index(total_min_bm)
+print(f"Minimum bending moment: {total_min_bm}, Index: {i}")
