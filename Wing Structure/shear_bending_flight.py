@@ -29,15 +29,15 @@ def plot_lift_distribution(x_vals, lift_vals):
     plt.show()
 
 # Given parameters
-density = 0.4416  # kg/m^3 (air density at sea level)
-airspeed = 256 # m/s (airspeed)
-M = 0.85
-alpha = 2 # degrees (angle of attack)
+density = 1.225  # kg/m^3 (air density at sea level)
+airspeed = 257 # m/s (airspeed)
+M = 0.76
+alpha = -1.2 # degrees (angle of attack)
 span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
-n = -1 # load factor
+n = 2.5 # load factor
 f_fuel = 0.8 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
