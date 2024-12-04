@@ -37,7 +37,7 @@ span = 17.7  # meters (wing span)
 engine_position = 6.2  # meters from the center (location of the engine) 35% of b/2
 engine_weight = 3008  # kg (weight of the engine)
 g = 9.81 # m/s^2 gravitational acceleration
-n = 2.5 # load factor
+n = -1 # load factor
 f_fuel = 0.8 # fraction of max fuel (between 0-1)
 f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 
@@ -65,8 +65,8 @@ def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, 
         distributed_load = - (-87.186 * x_vals[i] + 1546.67) *  g * load_factor * (fuel_frac + f_structure)
         total_distributed_load += distributed_load * (x_vals[1] - x_vals[0])
         
-        # Accumulate lift contributions
-        total_lift += lift_vals[i] * (x_vals[1] - x_vals[0])
+        # Accumulate lift contributions, account for the load factor!
+        total_lift += lift_vals[i] * (x_vals[1] - x_vals[0]) * load_factor
         
         # Calculate shear force including engine force and distributed load
         if x_vals[i] <= engine_position:
@@ -75,7 +75,7 @@ def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, 
             shear_force_vals[i] = total_lift + total_distributed_load
     return shear_force_vals
 
-def plot_shear_force_distribution(x_vals, shear_force_vals):
+def plot_shear_force_distribution(x_vals, shear_force_vals, load_factor = 1):
     plt.figure()
     plt.plot(x_vals, shear_force_vals, label='Shear Force Distribution', color='r')
     plt.xlabel('Spanwise Position (m)')
@@ -84,13 +84,16 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
     plt.legend()
     plt.grid(which='major', linestyle='-', linewidth=0.7)
     plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
-    plt.yticks(np.arange(0, round(max(shear_force_vals) + max(shear_force_vals)/10,-4), round(max(shear_force_vals)/10,-4)))  # Denser y-axis ticks
+    if(load_factor < 0):
+        plt.yticks(np.arange(round(min(shear_force_vals),-5), round(max(shear_force_vals) + max(shear_force_vals)/10,-4), -round(min(shear_force_vals)/10,-4)))  # Denser y-axis ticks
+    else:
+        plt.yticks(np.arange(0, round(max(shear_force_vals) + max(shear_force_vals)/10,-4), round(max(shear_force_vals)/10,-4)))  # Denser y-axis ticks
     plt.show()
 
 # Calculate shear force distribution
 shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, n)
 # Plot the shear force distribution
-#plot_shear_force_distribution(x_vals, shear_force_vals)
+plot_shear_force_distribution(x_vals, shear_force_vals, n)
 
 def bending_moment_distribution(x_vals, shear_force_vals):
     # Initialize bending moment array
@@ -112,28 +115,31 @@ def getBendingMomentFlight(y, load_factor):
     moment_function = interp1d(x_vals, b_m_values, kind='linear', fill_value="extrapolate")
     return moment_function(y)
 
-def plot_bending_moment_distribution(x_vals, bending_moment_vals):
+def plot_bending_moment_distribution(x_vals, bending_moment_vals, load_factor = 1):
     plt.figure()
     plt.plot(x_vals, bending_moment_vals, label='Bending Moment Distribution', color='b')
     plt.xlabel('Spanwise Position (m)')
     plt.ylabel('Bending Moment (Nm)')
-    plt.title('Bending Moment Distribution along the Wing')
+    plt.title('Bending Moment Distribution along the Wing at n = ' + str(load_factor))
     plt.legend()
     plt.grid(which='major', linestyle='-', linewidth=0.7)
     plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
-    plt.yticks(np.arange(0, round(max(bending_moment_vals) + max(bending_moment_vals)/10,-5), round(max(bending_moment_vals)/10,-5)))  # Denser y-axis ticks
+    if(load_factor < 0):
+        plt.yticks(np.arange(round(min(bending_moment_vals),-5), round(max(bending_moment_vals) + max(bending_moment_vals)/10,-5), -round(min(bending_moment_vals)/10,-5)))  # Denser y-axis ticks
+    else:
+        plt.yticks(np.arange(0, round(max(bending_moment_vals) + max(bending_moment_vals)/10,-5), round(max(bending_moment_vals)/10,-5)))  # Denser y-axis ticks
     plt.show()
 
 # Calculate bending moment distribution
 bending_moment_vals = bending_moment_distribution(x_vals, shear_force_vals)
 # Plot the bending moment distribution
-plot_bending_moment_distribution(x_vals, bending_moment_vals)
+plot_bending_moment_distribution(x_vals, bending_moment_vals, n)
 
 # Calculate total lift by integrating the lift distribution
 total_lift = np.trapz(lift_vals, x_vals)
 
 # Print the total lift
-#print(f"Total Lift: {total_lift:.2f} N")
+print(f"Total Lift: {total_lift:.2f} N")
 
 # Function to calculate the difference between calculated and target lift
 def lift_error(alpha, density, airspeed, span, M, target_lift, num_points=1000):

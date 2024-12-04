@@ -117,7 +117,7 @@ for i in range(len(case_airspeeds)):
     # Calculate the lift distribution
     x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M)
     
-    # Calculate the shear force distribution
+    # Calculate the shear force distribution, if the weight is lower than 80 000 kg, there is always a no-fuel condition
     if(case_weights[i] < 80000):
         shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor, 1)
     else:
