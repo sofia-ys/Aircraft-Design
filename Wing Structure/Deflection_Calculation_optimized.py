@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import cumtrapz
+from scipy.integrate import cumulative_trapezoid
 from Ixx import Ixxfinal
 from shear_bending_flight import getBendingMomentFlight
 import constants as con
@@ -27,8 +27,8 @@ def calculate_deflection_and_slope(y_vals, step):
     second_deriv = second_derivative_deflection(y_vals)
 
     # Use cumulative trapezoidal integration for the first and second integrals
-    slope = cumtrapz(second_deriv, y_vals, initial=0)
-    deflection = cumtrapz(slope, y_vals, initial=0)
+    slope = cumulative_trapezoid(second_deriv, y_vals, initial=0)
+    deflection = cumulative_trapezoid(slope, y_vals, initial=0)
     return slope, deflection
 
 # Main script
