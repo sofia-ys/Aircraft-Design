@@ -73,8 +73,12 @@ for aoa in aoa_range:
 # Plot customization
 plt.xlabel('Spanwise Position (m)')
 plt.ylabel('Torque (kNm) around 0.5c, lift 0.25c')
+plt.xlim(-0.5, 20)
+plt.ylim(-250, 700)
 plt.title('Torque Distribution along the Wing Span for Different AoA')
 plt.legend()
+plt.xticks(np.arange(0, 18.5, 2.5))
+plt.yticks(np.arange(-200, 750, 100))
 plt.grid(True)
 plt.show()
 
