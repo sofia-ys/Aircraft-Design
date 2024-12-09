@@ -113,4 +113,4 @@ AR_effective = 0
 
 
 CD = CD_0
-print(2*(1/S_ref)*(C_D_c_engine*S_wet_engine))
+print(CD)
