@@ -27,7 +27,7 @@ def total_thrust(aoa, weight):
     for x in x_values:
         cl += get_cl(x, aoa)
         cd = cd + get_icd(x,aoa) + C_D_0
-    return 0#(0.5*(cd/cl)*weight*9.80665) 
+    return (0.5*(cd/cl)*weight*9.80665) 
 
 
 def thrust_dsit(x,pos, d_thrust, t_thrust):
@@ -38,23 +38,23 @@ def thrust_dsit(x,pos, d_thrust, t_thrust):
 
 def ew_dsit(x,pos, d_engine,aoa):  # engine weight distance
     if x < pos or x < -pos:
-        return 0#we*d_engine*m.cos(aoa / 57.3)
+        return we*d_engine*m.cos(aoa / 57.3)
     else:
         return 0 
 
 
 
 def lift_dist(x, aoa):
-    return 0#get_cl(x, aoa) * q * get_chord(x, aoa) * m.cos(aoa / 57.3)
+    return get_cl(x, aoa) * q * get_chord(x, aoa) * m.cos(aoa / 57.3)
 
 def drag_dist(x, aoa):
-    return (0.004472775981382077) * q * (1.1) *100
+    return (0.004472775981382077) * q * (1.1)
 
 def d(x, aoa):    #distance from quarter cord to centroid of wing box
     return 0.25 * get_chord(x, aoa)
 
 def cm_dist(x,aoa):
-    return 0#get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
+    return get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
 
 def torque_dist(x, aoa, pos, d_thrust, d_engine):
     return (integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + drag_dist(x, aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust, t_thrust) + ew_dsit(x,pos, d_engine,aoa))/1000
