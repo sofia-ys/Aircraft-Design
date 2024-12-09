@@ -48,7 +48,7 @@ def lift_dist(x, aoa):
     return get_cl(x, aoa) * q * get_chord(x, aoa) * m.cos(aoa / 57.3)
 
 def drag_dist(x, aoa):
-    return (0.004472775981382077) * q * (1.1)
+    return (0.00447 + get_icd(x,aoa)) * q * get_chord(x,aoa)* m.sin(aoa / 57.3)
 
 def d(x, aoa):    #distance from quarter cord to centroid of wing box
     return 0.25 * get_chord(x, aoa)
