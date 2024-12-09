@@ -101,6 +101,16 @@ def dtheta (y):
 
 #J = sp.interpolate.interp1d(x, tors_const2(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
 
+x_values = np.linspace(0,17.74,0.5)
+torsional_stiffness = J(x_values)
+plt.plot(x_values, torsional_stiffness)
+
+plt.xlabel('Spanwise Position [m]')
+plt.ylabel('Torsional Stiffness [deg]')
+plt.title('Torsional Stiffness along the Wing Span')
+plt.grid(True)
+plt.show()
+
 for aoa in range(len(torque.aoa_range)):
     torques = sp.interpolate.interp1d(torque.x_values, torque.torques[aoa], kind="previous",fill_value="extrapolate")
 
@@ -114,6 +124,9 @@ for aoa in range(len(torque.aoa_range)):
     twist_distribution = twist_distribution * 180 / np.pi
 
     plt.plot(torque.x_values ,twist_distribution, label=f'AoA = {torque.aoa_range[aoa]}°')
+
+
+
 
 
 plt.xlabel('Spanwise Position [m]')
