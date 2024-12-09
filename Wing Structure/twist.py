@@ -4,18 +4,25 @@ import constants as con
 import torque
 import matplotlib.pyplot as plt
 import scipy as sp
+from Ixx import Wingbox_lengths as lengths
+
+def Wing_design (y):
+    return lengths(con.d_1, con.d_2, con.d_3, con.d_4, con.b, y)
 
 #temporary wingbox design with scaled wingbox along wingspan
-d1 = np.array([0.65,0.6,0.55,0.45,0.4,0.35,0.3,0.2,0.15,0.1])
-d2 = d1 / 0.65 * con.d_2 
-d3 = d1 / 0.65 * con.d_3
-d4 = d1 / 0.65 * con.d_4
-alpha = np.arctan((d3-d1) / d2)
-t1 = con.t_1
-t2 = con.t_2
-t3 = con.t_1
+# d1 = np.array([0.65,0.6,0.55,0.45,0.4,0.35,0.3,0.2,0.15,0.1])
+# d2 = d1 / 0.65 * con.d_2 
+# d3 = d1 / 0.65 * con.d_3
+# d4 = d1 / 0.65 * con.d_4
+#alpha = np.arctan((d3-d1) / d2)
+# t1 = con.t_1
+# t2 = con.t_2
+# t3 = con.t_1
 G = 25e9
-x = [0,2,4,6,8,10,12,14,16,18]
+# x = [0,2,4,6,8,10,12,14,16,18]
+
+t_1 = sp.interpolate.interp1d(con.span_t1_1, con.t1_1, kind="previous",fill_value="extrapolate")
+t_2 = sp.interpolate.interp1d(con.span_t2_1, con.t2_1, kind="previous",fill_value="extrapolate")
 
 def area_trap (d1, d3, d2): #area of the wingbox
 
@@ -29,15 +36,20 @@ def tors_const (d1, d2, d3, alpha, t1, t2): #Single-cell torsional constant calc
     torsional_const = 4 * A ** 2 / (denominator)
     return torsional_const
 
-def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional constant calculation
+def tors_const2(y): #multi-cell torsional constant calculation
     #Set unit torsion
     T = 1
-
+    
+    d1, d2, d3, d4 = Wing_design(y)
+    t1 = t_1(y)
+    t2 = t_2(y)
+   
+    alpha = np.arctan((d3-d1) / d2)
     #Set lengths of stringers 1-3 going from front to back and top to bottom
     vert1 = d1
     vert2 = vert1 - np.sin(alpha) * d4
     vert3 = d3
-
+    
     hoz1 = d2
     diag = d2 / np.cos(alpha)
     
@@ -47,13 +59,13 @@ def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional con
     
     #find matrix rows of unkowns q1, q2, and twist: [q1, q2, twist]
     lin1 = [
-            1/(2*A1) * 1/G * (vert1/t1 + hoz1/t2 * d4/d3 + diag/t2 * d4/d3),
-            -1* vert2/(2*A1*G * t3),
+            1/(2*A1) * 1 * (vert1/t1 + hoz1/t2 * d4/d2 + diag/t2 * d4/d2),
+            -1* vert2/(2*A1 * t1),
             -1 
         ]
     lin2 = [
-            -1 * vert2 / (2 * A2 * G * t3), 
-            1 / (2 * A1) * 1/G * (vert3/t1 + hoz1 / t2 * (1 - d4/d3) + diag/t2 * (1 - d4/d3)), 
+            -1 * vert2 / (2 * A2 * t1), 
+            1 / (2 * A2) * (vert3/t1 + hoz1 / t2 * (1 - d4/d2) + diag/t2 * (1 - d4/d2)), 
             -1
         ]
     lin3 = [
@@ -61,10 +73,10 @@ def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional con
             2 * A2, 
             0
         ]
-    
+    print(d4/d3)
     #right side of the matrix to be solve
     righthandside = [0, 0, 1]
-
+    
     #set up matrix to be solved
     matrix = np.array([lin1, 
                        lin2, 
@@ -72,19 +84,22 @@ def tors_const2(d1, d2, d3, d4, alpha, t1, t2, t3, G): #multi-cell torsional con
 
     #solve for q1, q2, and the twist
     solution = np.linalg.solve(matrix, righthandside)
+    print(lin1)
+    print(solution)
     twist = solution[2]
-
     #find the torsional constant (J) from the previously found twist ({dtheta/dy} = T/{GJ})
-    J = twist * G
+    J = twist * 1
 
     return J
 
+J = tors_const2
+print(J(0))
+print(tors_const)
 def dtheta (y):
         x = torques(y) * 1000 / (J(y) * G)
         return x
 
-J = sp.interpolate.interp1d(x, tors_const(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
-
+#J = sp.interpolate.interp1d(x, tors_const2(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
 
 for aoa in range(len(torque.aoa_range)):
     torques = sp.interpolate.interp1d(torque.x_values, torque.torques[aoa], kind="previous",fill_value="extrapolate")

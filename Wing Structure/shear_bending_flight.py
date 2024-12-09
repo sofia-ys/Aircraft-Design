@@ -44,7 +44,7 @@ f_structure = 0.165 # (weight of structure)/(weight of max loaded fuel)
 # Get lift distribution
 x_vals, lift_vals = lift_distribution(density, airspeed, alpha, span, M)
 # Plot the lift distribution
-#plot_lift_distribution(x_vals, lift_vals)
+plot_lift_distribution(x_vals, lift_vals)
 
 def shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, load_factor, no_fuel_contribution = 0):
     # Convert engine weight from kg to Newtons (multiply by gravitational acceleration)

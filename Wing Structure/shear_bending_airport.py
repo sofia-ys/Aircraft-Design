@@ -54,6 +54,7 @@ def plot_shear_force_distribution(x_vals, shear_force_vals):
     plt.grid(which='major', linestyle='-', linewidth=0.7)
     plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
     plt.yticks(np.arange(round(min(shear_force_vals) + min(shear_force_vals)/20,-4), round(max(shear_force_vals) + max(shear_force_vals)/20,-4), round(max(shear_force_vals)/5,-4)))  # Denser y-axis ticks
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(-1, 1))
     plt.show()
 
 # Plotting bending moment distribution
@@ -68,6 +69,7 @@ def plot_bending_moment_distribution(x_vals, bending_moment_vals):
     plt.grid(which='major', linestyle='-', linewidth=0.7)
     plt.xticks(np.arange(0, 18.5, 1))  # Denser x-axis ticks
     plt.yticks(np.arange(round(min(bending_moment_vals) + min(bending_moment_vals)/20,-4), round(max(bending_moment_vals) + max(bending_moment_vals)/20,-4), round(max(bending_moment_vals)/5,-4)))  # Denser y-axis ticks
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(-1, 1))
     plt.show()
 
 # Given parameters
