@@ -14,25 +14,24 @@ def Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y):
     return d1_a, d2_a, d3_a, d4_a
 
 
-def CentroidZcontribution(AS, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2):
-    As = con.As
-    CB_z = sum(AS * i * sb * math.sin(alpha) for i in range(0, int(n2)))  #for bottom
+def CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2):
+    CB_z = sum(As * i * sb * math.sin(alpha) for i in range(0, int(n2)))  #for bottom
 
-    CB_x = sum(AS * i * sb * math.cos(alpha) for i in range(0, int(n2)))  #top
+    CB_x = sum(As * i * sb * math.cos(alpha) for i in range(0, int(n2)))  #top
 
-    CT_x = sum(AS * i * st for i in range(0, int(n1)))  #top
+    CT_x = sum(As * i * st for i in range(0, int(n1)))  #top
     u = d4 * math.tan(alpha)
     if d4 > 0:
         total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2))
         h = ((d1 * d2 * t2) + (t1 * (d1 ** 2) / 2) + (t1 * d3 * d1) - ((d3 ** 2) * t1 / 2) + (
                     (d2 ** 2) * t2 * math.tan(alpha) / (
-                        2 * math.cos(alpha))) + CB_z + d1 * n1 * AS) / total_area  #Z centroid positon single box
+                        2 * math.cos(alpha))) + CB_z + d1 * n1 * As) / total_area  #Z centroid positon single box
         x = (((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + (
                     (d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x))/total_area  #X centroid position single box
     else:
         total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2)) + (t1 * (d1 - u))
         h = ((d1 * d2 * t2) + (t1 * (d1 ** 2) / 2) + (t1 * d3 * d1) - ((d3 ** 2) * t1 / 2) + (
-                    (d2 ** 2) * t2 * math.tan(alpha) / (2 * math.cos(alpha))) + CB_z + d1 * n1 * AS + (
+                    (d2 ** 2) * t2 * math.tan(alpha) / (2 * math.cos(alpha))) + CB_z + d1 * n1 * As + (
                          u + ((d1 - u) / 2) * (t1 * (d1 - u)))) / total_area  #Z centroid positon multi box
         x = (((d2 ** 2) * t2 / 2) + d3 * d2 * t1 + ((d2 ** 2) * t2 / (2 * math.cos(alpha)) + CB_x + CT_x) + (
                     (t1 * (d1 - u)) * d4))/total_area  #X centroid positon multi box
@@ -41,8 +40,8 @@ def CentroidZcontribution(AS, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2):
 
 def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
     I1 = 1 / 12 * d1 ** 3 * t1 + d1 * t1 * (d1 / 2 - h) ** 2
-    I2 = 1 * 12 * L ** 3 * t1 + L * t1 * (d2 * math.sin(alpha) + d3 / 2 - h) ** 2
-    I3 = (1 / 12 * L ** 3 * t2 + t2 * L * (h - L / 2 * math.sin(alpha)) ** 2) * (math.sin(alpha)) ** 2
+    I2 = 1 / 12 * L ** 3 * t1 + L * t1 * (d2 * math.sin(alpha) + d3 / 2 - h) ** 2
+    I3 = (1 / 12 * L ** 3 * t2 * (math.sin(alpha)) ** 2)+L*t2*(h-d1/2*math.sin(alpha))**2
     I4 = t2 * d2 * (d1 - h) ** 2
     I5 = As * n1 * (d1 - h) ** 2
     I6 = 0
@@ -58,8 +57,8 @@ def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
 def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4):
     u = d4 * math.tan(alpha)
     I1 = 1 / 12 * d1 ** 3 * t1 + d1 * t1 * (d1 / 2 - h) ** 2
-    I2 = 1 * 12 * L ** 3 * t1 + L * t1 * (d2 * math.sin(alpha) + d3 / 2 - h) ** 2
-    I3 = (1 / 12 * L ** 3 * t2 + t2 * L * (h - L / 2 * math.sin(alpha)) ** 2) * (math.sin(alpha)) ** 2
+    I2 = 1 / 12 * L ** 3 * t1 + L * t1 * (d2 * math.sin(alpha) + d3 / 2 - h) ** 2
+    I3 = (1 / 12 * L ** 3 * t2 * (math.sin(alpha)) ** 2)+L*t2*(h-d1/2*math.sin(alpha))**2
     I4 = t2 * d2 * (d1 - h) ** 2
     I5 = As * n1 * (d1 - h) ** 2
     I6 = 0
@@ -77,7 +76,6 @@ def Ixxfinal(design_choice, y):
     d3_root = con.d_3
     d4_root = con.d_4
     b = con.b
-    q = con.q
     if design_choice == 1:
         span_n1 = con.span_n1_1
         n1 = con.n1_1  # n1 is the number of stringers on the top skin
@@ -89,6 +87,7 @@ def Ixxfinal(design_choice, y):
         t2 = con.t2_1
         span_As = con.span_As_1
         As = con.As_1  # cross sectional area of a stringer
+        q = con.q1
     elif design_choice == 2:
         span_n1 = con.span_n1_2
         n1 = con.n1_2  # n1 is the number of stringers on the top skin
@@ -100,6 +99,7 @@ def Ixxfinal(design_choice, y):
         t2 = con.t2_2
         span_As = con.span_As_2
         As = con.As_1  # cross sectional area of a stringer
+        q = con.q2
     else:
         span_n1 = con.span_n1_3
         n1 = con.n1_3  # n1 is the number of stringers on the top skin
@@ -111,6 +111,7 @@ def Ixxfinal(design_choice, y):
         t2 = con.t2_3
         span_As = con.span_As_3
         As = con.As_3  # cross sectional area of a stringer
+        q = con.q3
     n1_inter = sp.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
     n2_inter = sp.interpolate.interp1d(span_n2, n2, kind="previous", fill_value="extrapolate")
     t1_inter = sp.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="extrapolate")

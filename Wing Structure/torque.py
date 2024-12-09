@@ -27,7 +27,7 @@ def total_thrust(aoa, weight):
     for x in x_values:
         cl += get_cl(x, aoa)
         cd = cd + get_icd(x,aoa) + C_D_0
-    return (0.5*(cd/cl)*weight*9.80665) 
+    return 0#(0.5*(cd/cl)*weight*9.80665) 
 
 
 def thrust_dsit(x,pos, d_thrust, t_thrust):
@@ -36,25 +36,28 @@ def thrust_dsit(x,pos, d_thrust, t_thrust):
     else:
         return 0 
 
-def ew_dsit(x,pos, d_engine):  # engine weight distance
+def ew_dsit(x,pos, d_engine,aoa):  # engine weight distance
     if x < pos or x < -pos:
-        return we*d_engine
+        return 0#we*d_engine*m.cos(aoa / 57.3)
     else:
         return 0 
 
 
 
 def lift_dist(x, aoa):
-    return get_cl(x, aoa) * q * get_chord(x, aoa)
+    return 0#get_cl(x, aoa) * q * get_chord(x, aoa) * m.cos(aoa / 57.3)
+
+def drag_dist(x, aoa):
+    return (0.004472775981382077) * q * (1.1) *100
 
 def d(x, aoa):    #distance from quarter cord to centroid of wing box
     return 0.25 * get_chord(x, aoa)
 
 def cm_dist(x,aoa):
-    return get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
+    return 0#get_cm_airf(x,aoa) * q * get_chord(x,aoa)**2
 
 def torque_dist(x, aoa, pos, d_thrust, d_engine):
-    return (integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust, t_thrust) + ew_dsit(x,pos, d_engine))/1000
+    return (integrate.quad(lambda x: lift_dist(x,aoa) * d(x,aoa) + drag_dist(x, aoa) * d(x,aoa) + cm_dist(x,aoa), x, max(y_new))[0] +  thrust_dsit(x, pos, d_thrust, t_thrust) + ew_dsit(x,pos, d_engine,aoa))/1000
 
 
 x_values = np.linspace(0, max(y_new), 100)
@@ -63,7 +66,7 @@ aoa_range = np.linspace(0, 10, 5)  # AoA values in degrees (0°, 2.5°, 5°, 7.5
 
 # Plotting the torque distraibution
 plt.figure()
-# Loop over each AoA and calculate torque values
+# Loop over each AoA and calculat e torque values
 for aoa in aoa_range:
     t_thrust = total_thrust(aoa, weight)
     torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
@@ -73,8 +76,12 @@ for aoa in aoa_range:
 # Plot customization
 plt.xlabel('Spanwise Position (m)')
 plt.ylabel('Torque (kNm) around 0.5c, lift 0.25c')
+plt.xlim(-0.5, 20)
+plt.ylim(-250, 700)
 plt.title('Torque Distribution along the Wing Span for Different AoA')
 plt.legend()
+plt.xticks(np.arange(0, 18.5, 2.5))
+plt.yticks(np.arange(-500, 1000, 50))
 plt.grid(True)
 plt.show()
 
