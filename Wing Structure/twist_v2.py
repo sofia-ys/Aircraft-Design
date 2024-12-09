@@ -1,7 +1,6 @@
 #This file calculates the twist
 import numpy as np
 import constants as con
-import torque
 import matplotlib.pyplot as plt
 import scipy as sp
 from Ixx import Wingbox_lengths as lengths
@@ -61,7 +60,7 @@ def tors_const2(y): #multi-cell torsional constant calculation
     righthand_side = np.array([0, 0, 1])
 
     solution = np.linalg.solve(matrix, righthand_side)
-    J = solution[2] / G
+    J = 1 / (solution[2] * G)
     return J
 
-print(tors_const2(0))
+print(tors_const2(5))

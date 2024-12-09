@@ -28,7 +28,13 @@ def area_trap (d1, d3, d2): #area of the wingbox
 
     return (d1 + d3)/2 * d2
 
-def tors_const (d1, d2, d3, alpha, t1, t2): #Single-cell torsional constant calculation: J = (4A^2)/integral(ds/t) 
+def tors_const (y): #Single-cell torsional constant calculation: J = (4A^2)/integral(ds/t) 
+
+    d1, d2, d3, d4 = Wing_design(y)
+    alpha = np.arctan((d3-d1)/d2)
+    t1 = t_1(y)
+    t2 = t_2(y)
+
     A = area_trap(d1,d3,d2) 
     L = d2 / np.cos(alpha) #length of the diagonal
     denominator = d1 / t1 + d3 / t1 + d2 / t2 + L / t2 #integral of ds/t
@@ -57,44 +63,38 @@ def tors_const2(y): #multi-cell torsional constant calculation
     A1 = area_trap(vert1, vert2, d4 )
     A2 = area_trap(vert2, vert3, (d2 - d4))
     
-    #find matrix rows of unkowns q1, q2, and twist: [q1, q2, twist]
+    #q1 q2 dtheta/dy
     lin1 = [
-            1/(2*A1) * 1 * (vert1/t1 + hoz1/t2 * d4/d2 + diag/t2 * d4/d2),
-            -1* vert2/(2*A1 * t1),
-            -1 
-        ]
+        1 / (2* A1) * (vert2 / (G * t2) + d4/(G * t2) + d1/(t1 * G) + (diag * d2/d4)/(G* t2)),
+        -1 / (2*A1) * (vert2/ (G* t2)),
+        -1
+    ]
     lin2 = [
-            -1 * vert2 / (2 * A2 * t1), 
-            1 / (2 * A2) * (vert3/t1 + hoz1 / t2 * (1 - d4/d2) + diag/t2 * (1 - d4/d2)), 
-            -1
-        ]
+        -1 / (2*A2) * (vert2 / (G* t2)),
+        1 / (2* A2) * ((d2-d4)/(G* t2) + d3/(G* t1) + diag * (1-d2/d4)/(G* t2) + vert2/(G*t2)),
+        -1
+    ]
     lin3 = [
-            2 * A1, 
-            2 * A2, 
-            0
-        ]
-    print(d4/d3)
-    #right side of the matrix to be solve
-    righthandside = [0, 0, 1]
-    
-    #set up matrix to be solved
-    matrix = np.array([lin1, 
-                       lin2, 
-                       lin3])
+        2*A1,
+        2*A2,
+        0
+    ]
 
-    #solve for q1, q2, and the twist
-    solution = np.linalg.solve(matrix, righthandside)
-    print(lin1)
-    print(solution)
-    twist = solution[2]
-    #find the torsional constant (J) from the previously found twist ({dtheta/dy} = T/{GJ})
-    J = twist * 1
+    matrix = np.array([lin1, lin2, lin3])
+    righthand_side = np.array([0, 0, 1])
+
+    solution = np.linalg.solve(matrix, righthand_side)
+    J = -1 / (solution[2] * G)
+    return J
+
+def J(y):
+    if y <= con.q1:
+         J = tors_const2(y)
+    else:
+         J = tors_const(y)
 
     return J
 
-J = tors_const2
-print(J(0))
-print(tors_const)
 def dtheta (y):
         x = torques(y) * 1000 / (J(y) * G)
         return x
@@ -114,6 +114,7 @@ for aoa in range(len(torque.aoa_range)):
     twist_distribution = twist_distribution * 180 / np.pi
 
     plt.plot(torque.x_values ,twist_distribution, label=f'AoA = {torque.aoa_range[aoa]}°')
+
 
 plt.xlabel('Spanwise Position [m]')
 plt.ylabel('Twist [deg]')
