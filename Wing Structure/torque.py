@@ -12,9 +12,9 @@ rho = density_cruise
 v = V_cruise 
 q = 0.5*rho*v**2
 we = 3008*9.81 #engine weight
-
+Zero_thrust = False
 pos = 6.2
-thrust = 80000 # [N]
+thrust = -4200 # [N]
 d_thrust = -1.1 # vertical distance of engines [m]
 d_engine = 2.6 # horizontal distance of engine relative to torsion box[m]
 weight = 78826 # [kg]
@@ -48,7 +48,7 @@ def lift_dist(x, aoa):
     return get_cl(x, aoa) * q * get_chord(x, aoa) * m.cos(aoa / 57.3)
 
 def drag_dist(x, aoa):
-    return (0.00447 + get_icd(x,aoa)) * q * get_chord(x,aoa)* m.sin(aoa / 57.3)
+    return (0.02798 + get_icd(x,aoa)) * q * get_chord(x,aoa)* m.sin(aoa / 57.3)
 
 def d(x, aoa):    #distance from quarter cord to centroid of wing box
     return 0.25 * get_chord(x, aoa)
@@ -68,7 +68,11 @@ aoa_range = np.linspace(0, 10, 5)  # AoA values in degrees (0°, 2.5°, 5°, 7.5
 plt.figure()
 # Loop over each AoA and calculat e torque values
 for aoa in aoa_range:
-    t_thrust = total_thrust(aoa, weight)
+    if Zero_thrust == True:
+        t_thrust = -4200
+    else:
+        t_thrust = total_thrust(aoa, weight)
+
     torque_values = [torque_dist(x, aoa, pos, d_thrust, d_engine) for x in x_values]
     torques.append(torque_values)
     plt.plot(x_values, torque_values, label=f'AoA = {aoa}°')
