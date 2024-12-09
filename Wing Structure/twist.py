@@ -101,12 +101,14 @@ def dtheta (y):
 
 #J = sp.interpolate.interp1d(x, tors_const2(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
 
-x_values = np.linspace(0,17.74,0.5)
-torsional_stiffness = J(x_values)
+x_values = np.linspace(0,17.74,10000)
+torsional_stiffness = []
+for i in x_values:
+    torsional_stiffness.append(J(i))
 plt.plot(x_values, torsional_stiffness)
 
 plt.xlabel('Spanwise Position [m]')
-plt.ylabel('Torsional Stiffness [deg]')
+plt.ylabel('Torsional Stiffness')
 plt.title('Torsional Stiffness along the Wing Span')
 plt.grid(True)
 plt.show()
