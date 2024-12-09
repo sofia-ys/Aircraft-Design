@@ -1,4 +1,4 @@
-#This file calculates the twist
+#This file calculates the twist of the wing
 import numpy as np
 import constants as con
 import torque
@@ -9,17 +9,7 @@ from Ixx import Wingbox_lengths as lengths
 def Wing_design (y):
     return lengths(con.d_1, con.d_2, con.d_3, con.d_4, con.b, y)
 
-#temporary wingbox design with scaled wingbox along wingspan
-# d1 = np.array([0.65,0.6,0.55,0.45,0.4,0.35,0.3,0.2,0.15,0.1])
-# d2 = d1 / 0.65 * con.d_2 
-# d3 = d1 / 0.65 * con.d_3
-# d4 = d1 / 0.65 * con.d_4
-#alpha = np.arctan((d3-d1) / d2)
-# t1 = con.t_1
-# t2 = con.t_2
-# t3 = con.t_1
 G = 25e9
-# x = [0,2,4,6,8,10,12,14,16,18]
 
 t_1 = sp.interpolate.interp1d(con.span_t1_1, con.t1_1, kind="previous",fill_value="extrapolate")
 t_2 = sp.interpolate.interp1d(con.span_t2_1, con.t2_1, kind="previous",fill_value="extrapolate")
@@ -63,7 +53,7 @@ def tors_const2(y): #multi-cell torsional constant calculation
     A1 = area_trap(vert1, vert2, d4 )
     A2 = area_trap(vert2, vert3, (d2 - d4))
     
-    #q1 q2 dtheta/dy
+    #Set up linear equations with order being c_1*q1 + c_2*q2 - dtheta/dy = K
     lin1 = [
         1 / (2* A1) * (vert2 / (G * t2) + d4/(G * t2) + d1/(t1 * G) + (diag * d2/d4)/(G* t2)),
         -1 / (2*A1) * (vert2/ (G* t2)),
@@ -80,14 +70,17 @@ def tors_const2(y): #multi-cell torsional constant calculation
         0
     ]
 
+    #Set up matrix
     matrix = np.array([lin1, lin2, lin3])
     righthand_side = np.array([0, 0, 1])
 
+    #Solve matrix
     solution = np.linalg.solve(matrix, righthand_side)
-    J = -1 / (solution[2] * G)
+    J = -1 / (solution[2] * G) #Calculate the torsional constant using found value for dtheta/dy
     return J
 
-def J(y):
+
+def J(y): #Function that switches between multi-cell and single-cell wingbox
     if y <= con.q1:
          J = tors_const2(y)
     else:
@@ -95,12 +88,12 @@ def J(y):
 
     return J
 
+#Calculate the twist distrbutions
 def dtheta (y):
         x = torques(y) * 1000 / (J(y) * G)
         return x
 
-#J = sp.interpolate.interp1d(x, tors_const2(d1,d2,d3,alpha,t1,t2), kind="previous",fill_value="extrapolate") 
-
+#Find the torsional stiffness at points along the span and plot them
 x_values = np.linspace(0,17.74,10000)
 torsional_stiffness = []
 for i in x_values:
@@ -113,12 +106,15 @@ plt.title('Torsional Stiffness along the Wing Span')
 plt.grid(True)
 plt.show()
 
+
+#get aoa and calculate the twist per aoa situation
 for aoa in range(len(torque.aoa_range)):
     torques = sp.interpolate.interp1d(torque.x_values, torque.torques[aoa], kind="previous",fill_value="extrapolate")
 
     twist_distribution = np.array([0])
     error = 0
 
+    #integrate the twist distribution 
     for i in range(len(torque.x_values) - 1):
         integrated_part, e = sp.integrate.quad(dtheta, torque.x_values[i], torque.x_values[i+1])
         twist_distribution = np.append(twist_distribution, [integrated_part + twist_distribution[-1]])
