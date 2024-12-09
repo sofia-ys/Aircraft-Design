@@ -43,13 +43,13 @@ def tors_const2(y): #multi-cell torsional constant calculation
     d1, d2, d3, d4 = Wing_design(y)
     t1 = t_1(y)
     t2 = t_2(y)
-
+   
     alpha = np.arctan((d3-d1) / d2)
     #Set lengths of stringers 1-3 going from front to back and top to bottom
     vert1 = d1
     vert2 = vert1 - np.sin(alpha) * d4
     vert3 = d3
-
+    
     hoz1 = d2
     diag = d2 / np.cos(alpha)
     
@@ -59,13 +59,13 @@ def tors_const2(y): #multi-cell torsional constant calculation
     
     #find matrix rows of unkowns q1, q2, and twist: [q1, q2, twist]
     lin1 = [
-            1/(2*A1) * 1/G * (vert1/t1 + hoz1/t2 * d4/d3 + diag/t2 * d4/d3),
-            -1* vert2/(2*A1*G * t1),
+            1/(2*A1) * 1 * (vert1/t1 + hoz1/t2 * d4/d2 + diag/t2 * d4/d2),
+            -1* vert2/(2*A1 * t1),
             -1 
         ]
     lin2 = [
-            -1 * vert2 / (2 * A2 * G * t1), 
-            1 / (2 * A1) * 1/G * (vert3/t1 + hoz1 / t2 * (1 - d4/d3) + diag/t2 * (1 - d4/d3)), 
+            -1 * vert2 / (2 * A2 * t1), 
+            1 / (2 * A2) * (vert3/t1 + hoz1 / t2 * (1 - d4/d2) + diag/t2 * (1 - d4/d2)), 
             -1
         ]
     lin3 = [
@@ -73,10 +73,10 @@ def tors_const2(y): #multi-cell torsional constant calculation
             2 * A2, 
             0
         ]
-    
+    print(d4/d3)
     #right side of the matrix to be solve
     righthandside = [0, 0, 1]
-
+    
     #set up matrix to be solved
     matrix = np.array([lin1, 
                        lin2, 
@@ -84,15 +84,17 @@ def tors_const2(y): #multi-cell torsional constant calculation
 
     #solve for q1, q2, and the twist
     solution = np.linalg.solve(matrix, righthandside)
+    print(lin1)
+    print(solution)
     twist = solution[2]
-    print(twist)
     #find the torsional constant (J) from the previously found twist ({dtheta/dy} = T/{GJ})
-    J = twist * G
+    J = twist * 1
 
     return J
 
 J = tors_const2
 print(J(0))
+print(tors_const)
 def dtheta (y):
         x = torques(y) * 1000 / (J(y) * G)
         return x
