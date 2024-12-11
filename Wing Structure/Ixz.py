@@ -7,19 +7,49 @@ import constants as con
 from Ixx import CentroidZcontribution
 from Ixx import Wingbox_lengths
 
-def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4):
-    u = d4 * math.tan(alpha)
-    I1 = 1 / 12 * d1 ** 3 * t1 + d1 * t1 * (d1 / 2 - h) ** 2
-    I2 = 1 / 12 * L ** 3 * t1 + L * t1 * (d2 * math.sin(alpha) + d3 / 2 - h) ** 2
-    I3 = (1 / 12 * L ** 3 * t2 * (math.sin(alpha)) ** 2)+L*t2*(h-d1/2*math.sin(alpha))**2
-    I4 = t2 * d2 * (d1 - h) ** 2
-    I5 = As * n1 * (d1 - h) ** 2
+
+
+def Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st):
+    I1 = (t1*d1*x*(h-d1/2)) #front spar
+    I2 = -(t1*d3(x-d2)*(L*math.sin(alpha)+(d3/2)-h)) #rear spar
+    I3 = (d2*t2*(h-d1)*(x-d2)) #top skin
+    I4 = (((L**3)*t2*math.sin(alpha)*math.cos(alpha)/12) + (L*t2*(x-d2)(h-(L*math.sin(alpha)/2)))) #bottom skin
+    I5 = 0
+
+    for i in range(0, int(n1)):
+        Ii = As * (h - i * st)(h-d1)
+        I5 += Ii
+
     I6 = 0
-    I7 = 1 / 12 * (d1 - u) ** 3 * t1 + t1 * (d1 - u) * (d1 / 2 - h + u / 2) ** 2
+
     for i in range(0, int(n2)):
-        Ii = As * (h - i * math.sin(alpha) * sb) ** 2
+        Ii = As * (h - i * math.cos(alpha) * sb) * (h - i*math.sin(alpha))
         I6 += Ii
+    I = I1 + I2 + I3 + I4 + I5 + I6
+
+    return I
+
+def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x):
+    I1 = (t1 * d1 * x * (h - d1 / 2))  # front spar
+    I2 = -(t1 * d3(x - d2) * (L * math.sin(alpha) + (d3 / 2) - h))  # rear spar
+    I3 = (d2 * t2 * (h - d1) * (x - d2))  # top skin
+    I4 = (((L ** 3) * t2 * math.sin(alpha) * math.cos(alpha) / 12) + (
+                L * t2 * (x - d2)(h - (L * math.sin(alpha) / 2))))  # bottom skin
+    I5 = 0
+
+    for i in range(0, int(n1)):
+        Ii = As * (h - i * st)(h - d1)
+        I5 += Ii
+
+    I6 = 0
+
+    for i in range(0, int(n2)):
+        Ii = As * (h - i * math.cos(alpha) * sb) * (h - i * math.sin(alpha))
+        I6 += Ii
+    I = I1 + I2 + I3 + I4 + I5 + I6
     I = I1 + I2 + I3 + I4 + I5 + I6 + I7
+
+    I7 =
 
     return I
 
@@ -86,10 +116,10 @@ def Ixzfinal(design_choice, y):
     h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
 
     if y < q:
-        Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4)
+        Ixz = Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4)
     else:
-        Ixx = Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
-    return Ixx
+        Ixz = Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+    return Ixz
 
 
 y_tab = []
@@ -116,8 +146,12 @@ plt.show()
 
 
 
-(t1*d1*x*(h-d1/2))
--(t1*d3(x-d2)*(L*sin(alpha)+(d3/2)-h))
-+(d2*t2*(h-d1)*(x-d2))
-+(((L**3)*t2*sin(alpha)*cos(alpha)/12)+(Lt2*(x-d2)(h-(L*sin(alpha)/2))))
--((d1-u)t1*(x-d4)*(u-h+((d1-u)/2)))
+(t1*d1*x*(h-d1/2)) first spar
+
+-(t1*d3(x-d2)*(L*sin(alpha)+(d3/2)-h)) last spar
+
++(d2*t2*(h-d1)*(x-d2)) top skin
+
++(((L**3)*t2*sin(alpha)*cos(alpha)/12) + (Lt2*(x-d2)(h-(L*sin(alpha)/2)))) bottom skin
+
+-((d1-u)t1*(x-d4)*(u-h+((d1-u)/2))) extra spar
