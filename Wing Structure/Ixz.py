@@ -24,7 +24,7 @@ def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4):
     return I
 
 
-def Ixyfinal(design_choice, y):
+def Ixzfinal(design_choice, y):
     d1_root = con.d_1
     d2_root = con.d_2
     d3_root = con.d_3
@@ -93,7 +93,7 @@ def Ixyfinal(design_choice, y):
 
 
 y_tab = []
-Ixx_tab=[]
+Ixz_tab=[]
 i = 0
 step = 0.05
 count = 0
@@ -105,11 +105,11 @@ while i <= b / 2:
     count = count + 1
 
 for y in y_tab:
-     Ixy = Ixyfinal(1, y)
-     Ixy_tab.append(Ixx)
+     Ixz = Ixzfinal(1, y)
+     Ixz_tab.append(Ixz)
 
-plt.plot(y_tab, Ixx_tab)
+plt.plot(y_tab, Ixz_tab)
 plt.xlabel('Position along half-span (m)')
-plt.ylabel('Ixx (m^4)')
+plt.ylabel('Ixz (m^4)')
 plt.title('Moment of inertia at each position along the half-span ')
 plt.show()
