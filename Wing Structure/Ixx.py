@@ -154,8 +154,8 @@ for y in y_tab:
      Ixx = Ixxfinal(1, y)
      Ixx_tab.append(Ixx)
 
-plt.plot(y_tab, Ixx_tab)
-plt.xlabel('Position along half-span')
-plt.ylabel('Ixx')
-plt.title('Moment of inertia at each position along the half-span ')
-plt.show()
+# plt.plot(y_tab, Ixx_tab)
+# plt.xlabel('Position along half-span')
+# plt.ylabel('Ixx')
+# plt.title('Moment of inertia at each position along the half-span ')
+# plt.show()
