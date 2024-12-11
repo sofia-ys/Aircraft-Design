@@ -10,3 +10,4 @@ spar_t1 = 0  # spar web thickness [m]
 k_s1 = 0  # buckling coefficient for rectangular plate under shear
 spar_hf1 = 0  # height of front spar [m]
 spar_hr1 = 0  # height of rear spar [m]
+
