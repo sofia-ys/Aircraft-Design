@@ -17,8 +17,9 @@ def getCritShear(k_s, E, poisson, t, b):
     return tau_cr
 
 #insert a shear force value V (needs to be integrated from the distribution at a particular span y
-def avgShear(V, y, h, t):
+def avgShear(y, h, t):
     #compute the shear force at a particular span y by integrating
+    
     denominator = 0
     for i in range(0, len(h)):
         denominator += h[i] * t
