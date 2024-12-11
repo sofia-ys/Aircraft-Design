@@ -12,8 +12,6 @@ def getSparHeight(spar_id, y):
     else:
         return d[spar_id - 1]
 
-print(getSparHeight(1, 0))
-
 def criticalShear(k_s, E, poisson, t, b):
     tau_cr = np.pi**2 * k_s * E / (12 * (1 - poisson**2)) * (t/b)**2 
     return tau_cr
@@ -21,7 +19,10 @@ def criticalShear(k_s, E, poisson, t, b):
 #insert a shear force value V (needs to be integrated from the distribution at a particular span y
 def avgShear(V, y, h, t):
     #compute the shear force at a particular span y by integrating
-    avg_shear = V/(h_1 * t_1 + h_2 * t_2 + h_3 * t_3)
+    denominator = 0
+    for i in range(0, len(h)):
+        denominator += h[i] * t
+    avg_shear = V / denominator
     return avg_shear
 
 #tau_cr = criticalShear(wb.k_s1, wb.E, wb.poisson, wb.spar_t1, wb.spar_b1)
