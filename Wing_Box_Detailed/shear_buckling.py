@@ -12,6 +12,10 @@ def getSparHeight(spar_id, y):
     else:
         return d[spar_id - 1]
 
+def getSparThickness(case, spar, y):
+    # at a certain spanwise location y, get the thickness of the spars
+    return spar_thickness
+
 def getCritShear(k_s, E, poisson, t, b):
     tau_cr = np.pi**2 * k_s * E / (12 * (1 - poisson**2)) * (t/b)**2 
     return tau_cr
