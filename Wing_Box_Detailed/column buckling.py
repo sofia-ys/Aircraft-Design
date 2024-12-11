@@ -17,11 +17,13 @@ def moments_of_inetria_L_stringer(height, width, thickness): # The reference x c
             (height / 2 - y) ** 2 * height * thickness + (thickness / 2 - y) ** 2 * (width - thickness) * thickness)
     return I_xx
 
-
+def A (height, width, thickness):
+    return width * thickness + (height - thickness) * thickness
 
 def calc_crit_sigma(K,E,I,A,L):
     I = I*10**(-12)
-    A = A*10^(-6)
+    A = A*10**(-6)
     return (K * m.pi**(2) * E * I)/(A * L**2)
 
-print("Tall = ", calc_crit_sigma(1, 72.4 * 10**9, moments_of_inetria_L_stringer(83,53.3,3), 300, 10))
+print("Design 2 =", round(calc_crit_sigma(1, 72.4 * 10**9, moments_of_inetria_L_stringer(83,53.3,3), A(83,53.3,3), 10)/1000000,2), "MPa") # 10m is the shortest stinger
+print("Design 1,3 =", round(calc_crit_sigma(1, 72.4 * 10**9, moments_of_inetria_L_stringer(63,40.3,3), A(63,40.3,3), 7)/1000000,2), "MPa") # 7m is the shortest stringer
