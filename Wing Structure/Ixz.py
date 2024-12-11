@@ -113,3 +113,11 @@ plt.xlabel('Position along half-span (m)')
 plt.ylabel('Ixz (m^4)')
 plt.title('Moment of inertia at each position along the half-span ')
 plt.show()
+
+
+
+(t1*d1*x*(h-d1/2))
+-(t1*d3(x-d2)*(L*sin(alpha)+(d3/2)-h))
++(d2*t2*(h-d1)*(x-d2))
++(((L**3)*t2*sin(alpha)*cos(alpha)/12)+(Lt2*(x-d2)(h-(L*sin(alpha)/2))))
+-((d1-u)t1*(x-d4)*(u-h+((d1-u)/2)))
