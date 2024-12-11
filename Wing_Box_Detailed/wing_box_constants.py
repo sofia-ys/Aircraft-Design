@@ -20,9 +20,9 @@ t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
 #Design 1
 k_s1 = [15, 13.6, 12.8, 12.3, 11.9, 11.6, 11.35, 11, 10.8, 10.55, 10.35, 10.2, 10.1, 10, 9.9, 9.85, 9.8, 9.78,  9.76, 9.74, 9.73, 9.7, 9.68, 9.64, 9.62, 9.6, 9.58, 9.56, 9.54, 9.54, 9.54, 9.52, 9.52, 9.52, 9.52, 9.52, 9.52, 9.53, 9.53, 9.53, 9.53, ]  # buckling coefficient for rectangular plate under shear, starting at a/b = 1 and 0.1 increments
 span_t1_1 = [0, 7.5, 12.5]
-t1_1 = [0.019, 0.015, 0.01]
+t1_1 = [0.019, 0.015, 0.01]  # t1 is the thickness of the spar, which is the same for all spars in the design
 span_t2_1 = [0, 7.5, 12.5]
-t2_1 = [0.016, 0.014, 0.012]
+t2_1 = [0.016, 0.014, 0.012]  # t2 is the thickness of the skin
 
 #Design 2
 k_s2 = [15, 13.6, 12.8, 12.3, 11.9, 11.6, 11.35, 11, 10.8, 10.55, 10.35, 10.2, 10.1, 10, 9.9, 9.85, 9.8, 9.78,  9.76, 9.74, 9.73, 9.7, 9.68, 9.64, 9.62, 9.6, 9.58, 9.56, 9.54, 9.54, 9.54, 9.52, 9.52, 9.52, 9.52, 9.52, 9.52, 9.53, 9.53, 9.53, 9.53, ] # buckling coefficient for rectangular plate under shear, starting at a/b = 1 and 0.1 increments
