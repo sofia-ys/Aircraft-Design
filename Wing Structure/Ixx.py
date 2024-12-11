@@ -131,7 +131,7 @@ def Ixxfinal(design_choice, y):
     st = d2 / (n1 - 1)
     h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
 
-    if y <= q:
+    if y < q:
         Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4)
     else:
         Ixx = Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
@@ -155,7 +155,7 @@ for y in y_tab:
      Ixx_tab.append(Ixx)
 
 plt.plot(y_tab, Ixx_tab)
-plt.xlabel('Position along half-span')
-plt.ylabel('Ixx')
+plt.xlabel('Position along half-span (m)')
+plt.ylabel('Ixx (m^4)')
 plt.title('Moment of inertia at each position along the half-span ')
 plt.show()

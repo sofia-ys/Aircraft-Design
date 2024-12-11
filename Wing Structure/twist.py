@@ -81,7 +81,7 @@ def tors_const2(y): #multi-cell torsional constant calculation
 
 
 def J(y): #Function that switches between multi-cell and single-cell wingbox
-    if y <= con.q1:
+    if y < con.q1:
          J = tors_const2(y)
     else:
          J = tors_const(y)
@@ -101,7 +101,7 @@ for i in x_values:
 plt.plot(x_values, torsional_stiffness)
 
 plt.xlabel('Spanwise Position [m]')
-plt.ylabel('Torsional Stiffness')
+plt.ylabel('Torsional Stiffness [Nm/rad]')
 plt.title('Torsional Stiffness along the Wing Span')
 plt.grid(True)
 plt.show()
@@ -133,3 +133,4 @@ plt.title('Twist Distribution along the Wing Span for different Angles of Attack
 plt.legend()
 plt.grid(True)
 plt.show()
+print(twist_distribution)
