@@ -1,6 +1,13 @@
 import numpy as np
 import wing_box_constants as wb
-from Wing Structure import Ixx
+
+def Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y):
+    taper = wb.taper
+    d1_a = d1_root + (d1_root * taper - d1_root) / (b / 2) * y
+    d2_a = d2_root + (d2_root * taper - d2_root) / (b / 2) * y
+    d3_a = d3_root + (d3_root * taper - d3_root) / (b / 2) * y
+    d4_a = d4_root + (d4_root * taper - d4_root) / (b / 2) * y
+    return d1_a, d2_a, d3_a, d4_a
 
 def getSparHeight(spar_id, y):
     d1, d2, d3, d4 = Wingbox_lengths(wb.d_1, wb.d_2, wb.d_3, wb.d_4, wb.b, y)

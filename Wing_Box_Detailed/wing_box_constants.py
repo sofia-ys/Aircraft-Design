@@ -5,6 +5,7 @@ poisson = 0  # poisson's ratio
 
 k_s1 = [15, 13.6, 12.8, 12.3, 11.9, 11.6, 11.35, 11, 10.8, 10.55, 10.35]  # buckling coefficient for rectangular plate under shear, starting at a/b = 1 and 0.1 increments
 b = 35.48
+taper = 0.246  # taper ratio [-]
 # wing box characteristics ALL VALUES FOR ROOT POSITION ONLY
 d_1 = 0.609118 #Place Holder value Length of front spar
 d_2 = 2.582268 #Place holder value for Distance between front and back spar
