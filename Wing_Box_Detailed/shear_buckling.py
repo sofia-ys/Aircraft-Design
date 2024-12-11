@@ -1,6 +1,8 @@
 import numpy as np
 import wing_box_constants as wb
-from Wing Structure import Ixx
+import sys
+sys.path.append("Wing Structure")
+import Ixx
 
 def getSparHeight(spar_id, y):
     d1, d2, d3, d4 = Wingbox_lengths(wb.d_1, wb.d_2, wb.d_3, wb.d_4, wb.b, y)
