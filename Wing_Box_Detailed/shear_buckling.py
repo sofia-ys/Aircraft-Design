@@ -46,4 +46,3 @@ def get_ks(aspect_ratio):
     interpolated_value = lower_value + fraction * (upper_value - lower_value)
     return interpolated_value
 
-get_ks(2.3)
