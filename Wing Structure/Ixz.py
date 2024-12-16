@@ -29,7 +29,8 @@ def Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st):
 
     return I
 
-def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x):
+def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x, st):
+    u = d4 * math.tan(alpha)
     I1 = (t1 * d1 * x * (h - d1 / 2))  # front spar
     I2 = -(t1 * d3(x - d2) * (L * math.sin(alpha) + (d3 / 2) - h))  # rear spar
     I3 = (d2 * t2 * (h - d1) * (x - d2))  # top skin
@@ -41,6 +42,7 @@ def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x):
         Ii = As * (h - i * st)(h - d1)
         I5 += Ii
 
+    I7 = -((d1-u)*t1*(x-d4)*(u-h+((d1-u)/2))) #Mid spar
     I6 = 0
 
     for i in range(0, int(n2)):
@@ -49,7 +51,7 @@ def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x):
     I = I1 + I2 + I3 + I4 + I5 + I6
     I = I1 + I2 + I3 + I4 + I5 + I6 + I7
 
-    I7 = -((d1-u)t1*(x-d4)*(u-h+((d1-u)/2))) #Mid spar
+
 
     return I
 
@@ -145,13 +147,3 @@ plt.title('Moment of inertia at each position along the half-span ')
 plt.show()
 
 
-
-(t1*d1*x*(h-d1/2)) first spar
-
--(t1*d3(x-d2)*(L*sin(alpha)+(d3/2)-h)) last spar
-
-+(d2*t2*(h-d1)*(x-d2)) top skin
-
-+(((L**3)*t2*sin(alpha)*cos(alpha)/12) + (Lt2*(x-d2)(h-(L*sin(alpha)/2)))) bottom skin
-
--((d1-u)t1*(x-d4)*(u-h+((d1-u)/2))) extra spar
