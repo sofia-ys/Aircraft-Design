@@ -71,7 +71,5 @@ def get_ks(aspect_ratio):
 def get_bay_width(y,list):
     for i in range(len(list) - 1):
         if y in range(list[i], list[i + 1]):
-            return list[i + 1] - list[i]
+            return list[i + 1] - list[i] #if y equals a rib it takes the bay to the right
         
-b = get_bay_width(8, wb.ribs)
-print(b)
