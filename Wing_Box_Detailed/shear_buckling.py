@@ -94,9 +94,8 @@ q_values = [wb.q1, wb.q2, wb.q3]
 def plotCritShear(E, poisson, y_values):
     for design_id in range(0,2):
         for y in y_values:
-            print(getSparHeight(1, y))
-            print(get_bay_width(y, wb.ribs))
-            print(get_ks(0.6, 2))
+            if(get_bay_width(y, wb.ribs)/getSparHeight(1, y) < 1):
+                continue
             crit_shear_spar1.append(getCritShear(get_ks(getSparHeight(1, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(1, y)))
             crit_shear_spar2.append(getCritShear(get_ks(getSparHeight(2, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(2, y)))
             print(crit_shear_spar2)
