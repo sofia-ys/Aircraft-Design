@@ -31,8 +31,8 @@ t1_inter = scipy.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="
 t2_inter = scipy.interpolate.interp1d(span_t2, t2, kind="previous", fill_value="extrapolate")
 As_inter = scipy.interpolate.interp1d(span_As, As, kind="previous", fill_value="extrapolate")
 
-x_compressive = 0.33 # change this when the function calculates the maximum distance is imported
-z_compressive = 0.5 # change this when the function calculates the maximum distance is imported
+x_compressive = -0.33 # change this when the function calculates the maximum distance is imported
+z_compressive = -0.5 # change this when the function calculates the maximum distance is imported
 x_tensile = 0.33 # change this when the function calculates the maximum distance is imported
 z_tensile = 0.5 # change this when the function calculates the maximum distance is imported
 y = 0
@@ -65,9 +65,10 @@ while y<=b/2 :
     compressive_stress_tab.append(compressive_stress)
     y_tab.append(y)
     y += step
-plt.plot(y_tab, tensile_stress_tab)
-plt.plot(y_tab, compressive_stress_tab)
+plt.plot(y_tab, tensile_stress_tab, label="Tensile")
+plt.plot(y_tab, compressive_stress_tab, label="Compressive")
 plt.xlabel('Position along half-span')
-plt.ylabel('Izz [m^4]')
-plt.title('Moment of inertia at each position along the half-span')
+plt.ylabel('Stress [Pa]')
+plt.title('Tensile Stress vs. Compressive Stress')
+plt.legend()
 plt.show()
