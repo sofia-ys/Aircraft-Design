@@ -73,5 +73,5 @@ def get_bay_width(y,list):
         if y in range(list[i], list[i + 1]):
             return list[i + 1] - list[i]
         
-b = get_bay_width(3, wb.ribs)
+b = get_bay_width(8, wb.ribs)
 print(b)
