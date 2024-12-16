@@ -20,7 +20,7 @@ span_As = con.span_As_1
 n1 = con.n1_1
 n2 = con.n2_1
 
-def Izz(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y):
+def Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y):
     s1 = d2 / (n1 - 1)
     s2 = L / (n2 - 1)
     h, x = CentroidZcontribution(As, s2, s1, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
@@ -58,13 +58,14 @@ while y <= b / 2:
     t2 = t2_inter(y)
     As = As_inter(y)
 
+
     d1, d2, d3, d4 = Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y)
     alpha = atan((d1 - d3) / d2)
     L = (d1 - d3) / cos(alpha)
     s1 = d2 / (n1 - 1)
     s2 = L / (n2 - 1)
-
-    I_zz = Izz(d1, d2, d3, d4, alpha, t1, t2, 0, As, n1, n2, L, y)
+    h, x = CentroidZcontribution(As, s2, s1, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
+    I_zz = Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y)
     I_zz_tab.append(I_zz)
     y_tab.append(y)
     y += step
