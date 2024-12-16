@@ -4,7 +4,10 @@ import sys
 sys.path.append('Wing Structure')
 import Ixx
 import matplotlib.pyplot as plt
-def getSparHeight(spar_id, y): #get b
+#half-span divided into 100 sections
+y_values = array = np.linspace(0, wb.b / 2, 100)
+
+def getSparHeight(spar_id, y):
     d = []
     d = Ixx.Wingbox_lengths(wb.d_1, wb.d_2, wb.d_3, wb.d_4, wb.b, y)
     if(spar_id > 3 or spar_id < 0):
@@ -24,6 +27,29 @@ def getSparThickness(span_t1, t1, y):
 def getCritShear(k_s, E, poisson, t, b):
     tau_cr = np.pi**2 * k_s * E / (12 * (1 - poisson**2)) * (t/b)**2 
     return tau_cr
+
+crit_shear_spar1 = []
+crit_shear_spar2 = []
+crit_shear_spar3 = []
+
+t1_vals = [wb.t1_1, wb.t1_2, wb.t1_3]
+t1_spans = [wb.span_t1_1, wb.span_t1_2, wb.span_t1_3]
+t2_vals = [wb.t2_1, wb.t2_2, wb.t2_3]
+t2_spans = [wb.span_t2_1, wb.span_t2_2, wb.span_t2_3]
+
+
+def plotCritShear(k_s, E, poisson, y_values):
+    for design_id in range(0,2):
+        for i in y_values:
+            crit_shear_spar1.append(getCritShear(k_s, E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y_values[i]), getSparHeight(y_values[i])))
+            crit_shear_spar2.append(getCritShear(k_s, E, poisson, getSparThickness(wb.span_t1_1, wb.t1_1, y_values[i]), getSparHeight(y_values[i])))
+            crit_shear_spar3.append(getCritShear(k_s, E, poisson, getSparThickness(wb.span_t1_1, wb.t1_1, y_values[i]), getSparHeight(y_values[i])))
+    plt.figure()
+    plt.plot(y_values, crit_shear_spar1, label='Critical shear for spar 1')
+    plt.xlabel('Spanwise Position (m)')
+    plt.ylabel('Critical shear stress (Pa)')
+    plt.title('Critical shear stress along the wing span')
+    plt.legend()
 
 #insert a shear force value V (needs to be integrated from the distribution at a particular span y
 def avgShear(y, h, t):
