@@ -68,3 +68,10 @@ def get_ks(aspect_ratio):
     interpolated_value = lower_value + fraction * (upper_value - lower_value)
     return interpolated_value
 
+def get_bay_width(y,list):
+    for i in range(len(list) - 1):
+        if y in range(list[i], list[i + 1]):
+            return list[i + 1] - list[i]
+        
+b = get_bay_width(8, wb.ribs)
+print(b)
