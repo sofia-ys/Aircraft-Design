@@ -72,3 +72,7 @@ def get_bay_width(y,list): #get a
     for i in range(len(list) - 1):
         if y in range(list[i], list[i + 1]):
             return list[i + 1] - list[i] #if y equals a rib it takes the bay to the right
+        
+def getCritSkinBuckling(k_c, E, poisson, t, b):
+    omega_cr = np.pi**2 * k_c * E / (12 * (1 - poisson**2)) * (t/b)**2 
+    return omega_cr
