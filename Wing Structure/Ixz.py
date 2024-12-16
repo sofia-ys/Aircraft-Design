@@ -11,13 +11,13 @@ from Ixx import Wingbox_lengths
 
 def Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st):
     I1 = (t1*d1*x*(h-d1/2)) #front spar
-    I2 = -(t1*d3(x-d2)*(L*math.sin(alpha)+(d3/2)-h)) #rear spar
+    I2 = -(t1*d3*(x-d2)*(L*math.sin(alpha)+(d3/2)-h)) #rear spar
     I3 = (d2*t2*(h-d1)*(x-d2)) #top skin
-    I4 = (((L**3)*t2*math.sin(alpha)*math.cos(alpha)/12) + (L*t2*(x-d2)(h-(L*math.sin(alpha)/2)))) #bottom skin
+    I4 = (((L**3)*t2*math.sin(alpha)*math.cos(alpha)/12) + (L*t2*(x-d2)*(h-(L*math.sin(alpha)/2)))) #bottom skin
     I5 = 0
 
     for i in range(0, int(n1)):
-        Ii = As * (h - i * st)(h-d1)
+        Ii = As * (h - i * st)*(h-d1)
         I5 += Ii
 
     I6 = 0
@@ -32,14 +32,13 @@ def Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st):
 def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x, st):
     u = d4 * math.tan(alpha)
     I1 = (t1 * d1 * x * (h - d1 / 2))  # front spar
-    I2 = -(t1 * d3(x - d2) * (L * math.sin(alpha) + (d3 / 2) - h))  # rear spar
+    I2 = -(t1 * d3*(x - d2) * (L * math.sin(alpha) + (d3 / 2) - h))  # rear spar
     I3 = (d2 * t2 * (h - d1) * (x - d2))  # top skin
-    I4 = (((L ** 3) * t2 * math.sin(alpha) * math.cos(alpha) / 12) + (
-                L * t2 * (x - d2)(h - (L * math.sin(alpha) / 2))))  # bottom skin
+    I4 = (((L ** 3) * t2 * math.sin(alpha) * math.cos(alpha) / 12) + (L * t2 * (x - d2)*(h - (L * math.sin(alpha) / 2))))  # bottom skin
     I5 = 0
 
     for i in range(0, int(n1)):
-        Ii = As * (h - i * st)(h - d1)
+        Ii = As * (h - i * st)*(h - d1)
         I5 += Ii
 
     I7 = -((d1-u)*t1*(x-d4)*(u-h+((d1-u)/2))) #Mid spar
@@ -118,9 +117,9 @@ def Ixzfinal(design_choice, y):
     h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
 
     if y < q:
-        Ixz = Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4)
+        Ixz = Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x, st)
     else:
-        Ixz = Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
+        Ixz = Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st)
     return Ixz
 
 
