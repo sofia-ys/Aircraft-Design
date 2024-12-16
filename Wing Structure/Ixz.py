@@ -49,7 +49,7 @@ def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x):
     I = I1 + I2 + I3 + I4 + I5 + I6
     I = I1 + I2 + I3 + I4 + I5 + I6 + I7
 
-    I7 =
+    I7 = -((d1-u)t1*(x-d4)*(u-h+((d1-u)/2))) #Mid spar
 
     return I
 
