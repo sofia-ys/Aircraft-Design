@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 #half-span divided into 100 sections
 y_values = array = np.linspace(0, wb.b / 2, 100)
 
-def getSparHeight(spar_id, y): # get b
+def getSparHeight(design_id, spar_id, y): # get b
     d = []
     d = Ixx.Wingbox_lengths(wb.d_1, wb.d_2, wb.d_3, wb.d_4, wb.b, y)
     if(spar_id > 3 or spar_id < 0):

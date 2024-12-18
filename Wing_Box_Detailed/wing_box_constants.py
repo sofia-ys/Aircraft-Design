@@ -18,7 +18,7 @@ t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
 ribs = [0, 2, 4, 6, 9, 10, 12, 14, 16, 17.74]
 k_c = 7
 
-dimensions = [[0.609, 2.582, 0.487, 1.2],[0.573, 3.254, 0.369, 1.2],[0.61,2.541,0.493, 0]] #use as dimensions[design id (0 to 2 for designs 1 to 3)][0 to 3 for d1 to d4]
+all_spar_d = [[0.609, 2.582, 0.487, 1.2],[0.573, 3.254, 0.369, 1.2],[0.61,2.541,0.493, 0]] #use as dimensions[design id (0 to 2 for designs 1 to 3)][0 to 3 for d1 to d4]
 
 #Design 1
 k_s1 = [15, 13.6, 12.8, 12.3, 11.9, 11.6, 11.35, 11, 10.8, 10.55, 10.35, 10.2, 10.1, 10, 9.9, 9.85, 9.8, 9.78,  9.76, 9.74, 9.73, 9.7, 9.68, 9.64, 9.62, 9.6, 9.58, 9.56, 9.54, 9.54, 9.54, 9.52, 9.52, 9.52, 9.52, 9.52, 9.52, 9.53, 9.53, 9.53, 9.53, ]  # buckling coefficient for rectangular plate under shear, starting at a/b = 1 and 0.1 increments
