@@ -9,7 +9,7 @@ y_values = array = np.linspace(0, wb.b / 2, 100)
 
 def getSparHeight(design_id, spar_id, y): # get b
     d = []
-    d = Ixx.Wingbox_lengths(wb.d_1, wb.d_2, wb.d_3, wb.d_4, wb.b, y)
+    d = Ixx.Wingbox_lengths(wb.all_spar_d[design_id][0], wb.all_spar_d[design_id][1], wb.all_spar_d[design_id][2], wb.all_spar_d[design_id][3], wb.b, y)
     if(spar_id > 3 or spar_id < 0):
         print('spar id out of range')
     else:
@@ -85,9 +85,9 @@ def getCritSkinBuckling(k_c, E, poisson, t, b):
     omega_cr = np.pi**2 * k_c * E / (12 * (1 - poisson**2)) * (t/b)**2 
     return omega_cr
 
-crit_shear_spar1 = []
-crit_shear_spar2 = []
-crit_shear_spar3 = []
+crit_shear_spar1 = [[], [], []]
+crit_shear_spar2 = [[], [], []]
+crit_shear_spar3 = [[], [], []]
 
 t1_vals = [wb.t1_1, wb.t1_2, wb.t1_3]
 t1_spans = [wb.span_t1_1, wb.span_t1_2, wb.span_t1_3]
@@ -96,18 +96,19 @@ t2_spans = [wb.span_t2_1, wb.span_t2_2, wb.span_t2_3]
 q_values = [wb.q1, wb.q2, wb.q3]
 
 def plotCritShear(E, poisson, y_values):
-    for design_id in range(0,1):
+    for design_id in range(0,3):
         for y in y_values:
-            crit_shear_spar1.append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(1, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(1, y)))
-            #crit_shear_spar2.append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(2, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(2, y)))
-            #if(y < q_values[design_id]):
-                #crit_shear_spar3.append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(3, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(3, y)))
+            crit_shear_spar1[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 1, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 1, y)))
+            crit_shear_spar2[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 2, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 2, y)))
+            print(crit_shear_spar2)
+            if(y < q_values[design_id]):
+                crit_shear_spar3[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 3, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 3, y)))
     critShearSpar1 = np.array(crit_shear_spar1)
     print("Critical shear spar 1: " + str(critShearSpar1))
     print("y values: " + str(y_values))
     #print("Critical shear spar 2: " + str(crit_shear_spar2))
     plt.figure()
-    plt.plot(y_values, critShearSpar1, label='Critical shear for spar 1')
+    plt.plot(y_values, critShearSpar1[0], crit_shear_spar2[0], crit_shear_spar3[0], label='Critical shear for spar 1')
     plt.xlabel('Spanwise Position (m)')
     plt.ylabel('Critical shear stress (Pa)')
     plt.title('Critical shear stress along the wing span')
