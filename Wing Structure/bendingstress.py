@@ -25,15 +25,16 @@ def findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, desi
     B3 = P3 + A
     B4 = P4 - A
     g1 = f1 * math.sin(B1)  # distance from neutral axis for corner 1
-    g2 = f2 * math.sin(B2)
-    g3 = f3 * math.sin(B3)
-    g4 = f3 * math.sin(B4)
+    g2 = f2 * math.sin(B2)  # distance from neutral axis for corner 2
+    g3 = f3 * math.sin(B3)  # distance from neutral axis for corner 3
+    g4 = f3 * math.sin(B4)  # distance from neutral axis for corner 4
 
     values = [g1, g2, g3, g4]
 
     max_value = max(values)
     max_index = values.index(max_value)
 
+    # associating coordinates to corners
     if max_index == 1:
         c1 = x
         c2 = - d1 + h
