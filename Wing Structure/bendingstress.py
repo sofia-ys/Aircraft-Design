@@ -1,8 +1,9 @@
 import math as math
 from Ixx import Ixx2calculator
+from Ixz
 
 
-def findlongestdistance(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, q):
+def findlongestdistance(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, q, x):
     f1 = math.sqrt(x**2 + h**2)
     f2 = math.sqrt(x**2 + (d1-h)**2)
     f3 = math.sqrt((d2-x)**2 + (d1-h)**2)
@@ -16,6 +17,10 @@ def findlongestdistance(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, q):
     P3 = math.acos(e3/f3)
     P4 = math.acos(e4/f4)
     Ixx = Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb)
-    Izz =
+    Ixz = Ixzfin
+
     A =
-    B1 = P1 -
+    B1 = P1 +
+    B2 = P2
+    B3 = P3
+    B4 = P4
