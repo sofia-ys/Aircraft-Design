@@ -58,6 +58,7 @@ def get_ks(a, b):
 
     # Ensure the index is within bounds
     if index < 0 or index >= len(values) - 1:
+        print(str(index) + ' :')
         raise ValueError("Input number is out of interpolation range.")
 
     # Find the lower and upper bounds for interpolation
@@ -72,10 +73,11 @@ def get_ks(a, b):
     interpolated_value = lower_value + fraction * (upper_value - lower_value)
     return interpolated_value
 
-def get_bay_width(y,list): #get a
-    for i in range(len(list) - 1):
-        if y in range(list[i], list[i + 1]):
-            return list[i + 1] - list[i] #if y equals a rib it takes the bay to the right
+def get_bay_width(y, lst):
+    for i in range(len(lst) - 1):
+        if lst[i] <= y < lst[i + 1]:  # Check if y lies between two consecutive elements
+            return lst[i + 1] - lst[i]  # Return the width of the bay
+    return None  # Return None if y is not within any range
         
 def getCritSkinBuckling(k_c, E, poisson, t, b):
     omega_cr = np.pi**2 * k_c * E / (12 * (1 - poisson**2)) * (t/b)**2 
@@ -96,9 +98,12 @@ def plotCritShear(E, poisson, y_values):
         for y in y_values:
             if(get_bay_width(y, wb.ribs)/getSparHeight(1, y) < 1):
                 continue
+            for i in y_values: #for debug
+                print(get_bay_width(i, wb.ribs))
             crit_shear_spar1.append(getCritShear(get_ks(getSparHeight(1, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(1, y)))
+            print("Critical shear spar 1: " + str(crit_shear_spar1))
             crit_shear_spar2.append(getCritShear(get_ks(getSparHeight(2, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(2, y)))
-            print(crit_shear_spar2)
+            print("Critical shear spar 2: " + str(crit_shear_spar2))
             if(y < q_values[design_id]):
                 crit_shear_spar3.append(getCritShear(get_ks(getSparHeight(3, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(3, y)))
     plt.figure()
