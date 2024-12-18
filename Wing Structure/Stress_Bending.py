@@ -31,10 +31,10 @@ t1_inter = scipy.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="
 t2_inter = scipy.interpolate.interp1d(span_t2, t2, kind="previous", fill_value="extrapolate")
 As_inter = scipy.interpolate.interp1d(span_As, As, kind="previous", fill_value="extrapolate")
 
-x_compressive = -0.33 # change this when the function calculates the maximum distance is imported
-z_compressive = -0.5 # change this when the function calculates the maximum distance is imported
-x_tensile = 0.33 # change this when the function calculates the maximum distance is imported
-z_tensile = 0.5 # change this when the function calculates the maximum distance is imported
+x_compressive = 1.3 # change this when the function calculates the maximum distance is imported
+z_compressive =0.33 # change this when the function calculates the maximum distance is imported
+x_tensile = 1.3 # change this when the function calculates the maximum distance is imported
+z_tensile = 0.33 # change this when the function calculates the maximum distance is imported
 y = 0
 step = 0.1
 tensile_stress_tab = []
@@ -58,17 +58,28 @@ while y<=b/2 :
     sb = s2
     st = s1
     h, x = CentroidZcontribution(As, s2, s1, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
-
+    print(Ixxfinal(1,y))
     tensile_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) * z_tensile) - (bending_moment(y) * Ixzfinal(1,y) * x_tensile)) / (Ixxfinal(1,y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) - Ixzfinal(1,y)**2)
     compressive_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) * z_compressive) - (bending_moment(y) * Ixzfinal(1, y) * x_compressive)) / (Ixxfinal(1, y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) - Ixzfinal(1, y) ** 2)
     tensile_stress_tab.append(tensile_stress)
     compressive_stress_tab.append(compressive_stress)
     y_tab.append(y)
     y += step
-plt.plot(y_tab, tensile_stress_tab, label="Tensile")
-plt.plot(y_tab, compressive_stress_tab, label="Compressive")
+plt.figure(figsize=(10, 5))
+
+plt.subplot(1, 2, 1)
+plt.plot(y_tab, tensile_stress_tab, label="Tensile", color='blue')
 plt.xlabel('Position along half-span')
 plt.ylabel('Stress [Pa]')
-plt.title('Tensile Stress vs. Compressive Stress')
+plt.title('Tensile Stress')
 plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(y_tab, compressive_stress_tab, label="Compressive", color='red')
+plt.xlabel('Position along half-span')
+plt.ylabel('Stress [Pa]')
+plt.title('Compressive Stress')
+plt.legend()
+
+plt.tight_layout()
 plt.show()
