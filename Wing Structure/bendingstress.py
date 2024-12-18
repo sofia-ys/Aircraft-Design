@@ -44,8 +44,9 @@ def findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, desi
     elif max_index == 3:
         c1 = -d2 + x
         c2 = -d1 + h
-    elif max_index == 4:
+    else:
         c1 = -d2 + x
         c2 = h
 
     return c1, c2
+
