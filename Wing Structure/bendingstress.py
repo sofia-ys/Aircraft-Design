@@ -27,7 +27,7 @@ def findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, desi
     g1 = f1 * math.sin(B1) #distance from neutral axis for corner 1
     g2 = f2 * math.sin(B2)
     g3 = f3 * math.sin(B3)
-    g4 = f3 * math.sin(B3)
+    g4 = f3 * math.sin(B4)
 
     values = [g1, g2, g3, g4]
     labels = [1, 2, 3, 4]
