@@ -18,10 +18,13 @@ def getSparHeight(spar_id, y): # get b
 def getSparThickness(span_t1, t1, y):
     spar_thickness = 0
     for i in range(len(span_t1) - 1):  # adjustable to the number of discontinuities for the design types
-        if span_t1[i] < y <= span_t1[i+1]:  # between the first point in the list and the next point
+        if span_t1[i] < y and y <= span_t1[i+1]:  # between the first point in the list and the next point
             spar_thickness = t1[i]  # spar thickness is that point
-        elif y > span_t1[i+1]:  # just in case out of range
-            print("Spar position out of range")
+        elif wb.b/2 > y and y > span_t1[i+1]:
+            spar_thickness = t1[i+1]
+        else:
+            break
+            print('Spar position out of range')
     return spar_thickness
 
 
@@ -58,7 +61,6 @@ def get_ks(a, b):
 
     # Ensure the index is within bounds
     if index < 0 or index >= len(values) - 1:
-        print(str(index) + ' :')
         raise ValueError("Input number is out of interpolation range.")
 
     # Find the lower and upper bounds for interpolation
@@ -77,7 +79,7 @@ def get_bay_width(y, lst):
     for i in range(len(lst) - 1):
         if lst[i] <= y < lst[i + 1]:  # Check if y lies between two consecutive elements
             return lst[i + 1] - lst[i]  # Return the width of the bay
-    return None  # Return None if y is not within any range
+    return 2  # Return None if y is not within any range
         
 def getCritSkinBuckling(k_c, E, poisson, t, b):
     omega_cr = np.pi**2 * k_c * E / (12 * (1 - poisson**2)) * (t/b)**2 
@@ -94,24 +96,23 @@ t2_spans = [wb.span_t2_1, wb.span_t2_2, wb.span_t2_3]
 q_values = [wb.q1, wb.q2, wb.q3]
 
 def plotCritShear(E, poisson, y_values):
-    for design_id in range(0,2):
+    for design_id in range(0,1):
         for y in y_values:
-            if(get_bay_width(y, wb.ribs)/getSparHeight(1, y) < 1):
-                continue
-            for i in y_values: #for debug
-                print(get_bay_width(i, wb.ribs))
-            crit_shear_spar1.append(getCritShear(get_ks(getSparHeight(1, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(1, y)))
-            print("Critical shear spar 1: " + str(crit_shear_spar1))
-            crit_shear_spar2.append(getCritShear(get_ks(getSparHeight(2, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(2, y)))
-            print("Critical shear spar 2: " + str(crit_shear_spar2))
-            if(y < q_values[design_id]):
-                crit_shear_spar3.append(getCritShear(get_ks(getSparHeight(3, y), get_bay_width(y, wb.ribs)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(3, y)))
+            crit_shear_spar1.append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(1, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(1, y)))
+            #crit_shear_spar2.append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(2, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(2, y)))
+            #if(y < q_values[design_id]):
+                #crit_shear_spar3.append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(3, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(3, y)))
+    critShearSpar1 = np.array(crit_shear_spar1)
+    print("Critical shear spar 1: " + str(critShearSpar1))
+    print("y values: " + str(y_values))
+    #print("Critical shear spar 2: " + str(crit_shear_spar2))
     plt.figure()
-    plt.plot(y_values, crit_shear_spar1, label='Critical shear for spar 1')
+    plt.plot(y_values, critShearSpar1, label='Critical shear for spar 1')
     plt.xlabel('Spanwise Position (m)')
     plt.ylabel('Critical shear stress (Pa)')
     plt.title('Critical shear stress along the wing span')
     plt.legend()
+    plt.show()
 
 plotCritShear(wb.E, wb.poisson, y_values)
         
