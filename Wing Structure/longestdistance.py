@@ -29,23 +29,19 @@ def findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, desi
     g3 = f3 * math.sin(B3)  # distance from neutral axis for corner 3
     g4 = f3 * math.sin(B4)  # distance from neutral axis for corner 4
 
-    values = [g1, g2, g3, g4]
-
-    max_value = max(values)
-    max_index = values.index(max_value)
-
-    # associating coordinates to corners
-    if max_index == 1:
-        c1 = x
-        c2 = - d1 + h
-    elif max_index == 2:
-        c1 = x
-        c2 = h
-    elif max_index == 3:
-        c1 = -d2 + x
-        c2 = -d1 + h
+    if g1 >= g3:
+        x_compressive = x
+        z_compressive = -d1 + h
     else:
-        c1 = -d2 + x
-        c2 = h
+        x_compressive = -d2 + x
+        z_compressive = -d1 + h
 
-    return c1, c2
+    if g2 >= g4:
+        x_tensile = x
+        z_tensile = h
+
+    else:
+        x_tensile = -d2 + x
+        z_tensile = h
+
+    return x_tensile, z_tensile, x_compressive, z_compressive
