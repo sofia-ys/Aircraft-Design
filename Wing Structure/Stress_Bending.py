@@ -8,6 +8,7 @@ import scipy
 from math import atan,cos
 import matplotlib.pyplot as plt
 import constants as con
+from longestdistance import findlongestdistance
 
 d1_root = con.d_1
 d2_root = con.d_2
@@ -59,6 +60,7 @@ while y<=b/2 :
     st = s1
     h, x = CentroidZcontribution(As, s2, s1, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
     print(Ixxfinal(1,y))
+    x_tensile, z_tensile, x_compressive, z_compressive = findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, 1, y)
     tensile_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) * z_tensile) - (bending_moment(y) * Ixzfinal(1,y) * x_tensile)) / (Ixxfinal(1,y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) - Ixzfinal(1,y)**2)
     compressive_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) * z_compressive) - (bending_moment(y) * Ixzfinal(1, y) * x_compressive)) / (Ixxfinal(1, y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) - Ixzfinal(1, y) ** 2)
     tensile_stress_tab.append(tensile_stress)
