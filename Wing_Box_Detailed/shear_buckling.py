@@ -22,7 +22,7 @@ def getSparHeight(design_id, spar_id, y): # get b
 def getSparThickness(span_t1, t1, y):
     spar_thickness = 0
     for i in range(len(span_t1) - 1):  # adjustable to the number of discontinuities for the design types
-        if span_t1[i] < y and y <= span_t1[i+1]:  # between the first point in the list and the next point
+        if span_t1[i] <= y and y <= span_t1[i+1]:  # between the first point in the list and the next point
             spar_thickness = t1[i]  # spar thickness is that point
         elif wb.b/2 > y and y > span_t1[i+1]:
             spar_thickness = t1[i+1]
