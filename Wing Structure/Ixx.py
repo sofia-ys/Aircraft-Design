@@ -40,7 +40,7 @@ def CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2):
 
 def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
     I1 = 1 / 12 * d1 ** 3 * t1 + d1 * t1 * (d1 / 2 - h) ** 2
-    I2 = 1 / 12 * L ** 3 * t1 + L * t1 * (L * math.sin(alpha) + d3 / 2 - h) ** 2
+    I2 = 1 / 12 * d3 ** 3 * t1 + d3 * t1 * (L * math.sin(alpha) + d3 / 2 - h) ** 2
     I3 = (1 / 12 * L ** 3 * t2 * (math.sin(alpha)) ** 2)+L*t2*(h-d1/2*math.sin(alpha))**2
     I4 = t2 * d2 * (d1 - h) ** 2
     I5 = As * n1 * (d1 - h) ** 2
@@ -57,7 +57,7 @@ def Ixxcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb):
 def Ixx2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4):
     u = d4 * math.tan(alpha)
     I1 = 1 / 12 * d1 ** 3 * t1 + d1 * t1 * (d1 / 2 - h) ** 2
-    I2 = 1 / 12 * L ** 3 * t1 + L * t1 * (L * math.sin(alpha) + d3 / 2 - h) ** 2
+    I2 = 1 / 12 * d3 ** 3 * t1 + d3 * t1 * (L * math.sin(alpha) + d3 / 2 - h) ** 2
     I3 = (1 / 12 * L ** 3 * t2 * (math.sin(alpha)) ** 2)+L*t2*(h-d1/2*math.sin(alpha))**2
     I4 = t2 * d2 * (d1 - h) ** 2
     I5 = As * n1 * (d1 - h) ** 2
