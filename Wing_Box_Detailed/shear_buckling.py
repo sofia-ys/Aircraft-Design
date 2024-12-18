@@ -10,10 +10,14 @@ y_values = array = np.linspace(0, wb.b / 2, 100)
 def getSparHeight(design_id, spar_id, y): # get b
     d = []
     d = Ixx.Wingbox_lengths(wb.all_spar_d[design_id][0], wb.all_spar_d[design_id][1], wb.all_spar_d[design_id][2], wb.all_spar_d[design_id][3], wb.b, y)
-    if(spar_id > 3 or spar_id < 0):
-        print('spar id out of range')
+    if(spar_id == 1):
+        return d[0]
+    elif(spar_id == 2):
+        return d[2]
+    elif(spar_id == 3):
+        return d[3]
     else:
-        return d[spar_id - 1]
+        print("error")
 
 def getSparThickness(span_t1, t1, y):
     spar_thickness = 0
@@ -99,16 +103,20 @@ def plotCritShear(E, poisson, y_values):
     for design_id in range(0,3):
         for y in y_values:
             crit_shear_spar1[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 1, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 1, y)))
-            crit_shear_spar2[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 2, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 2, y)))
-            print(crit_shear_spar2)
+            crit_shear_spar2[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 2, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 2, y)))      
             if(y < q_values[design_id]):
                 crit_shear_spar3[design_id].append(getCritShear(get_ks(get_bay_width(y, wb.ribs), getSparHeight(design_id, 3, y)), E, poisson, getSparThickness(t1_spans[design_id], t1_vals[design_id], y), getSparHeight(design_id, 3, y)))
+            else:
+                crit_shear_spar3[design_id].append(0)
     critShearSpar1 = np.array(crit_shear_spar1)
-    print("Critical shear spar 1: " + str(critShearSpar1))
-    print("y values: " + str(y_values))
-    #print("Critical shear spar 2: " + str(crit_shear_spar2))
+    critShearSpar2 = np.array(crit_shear_spar2)
+    critShearSpar3 = np.array(crit_shear_spar3)
+
     plt.figure()
-    plt.plot(y_values, critShearSpar1[0], crit_shear_spar2[0], crit_shear_spar3[0], label='Critical shear for spar 1')
+    for designCase in range(0,3):
+        plt.plot(y_values, critShearSpar1[designCase], label='Critical shear for spar 1, DC ' + str(designCase + 1))
+        plt.plot(y_values, critShearSpar2[designCase], label='Critical shear for spar 2, DC ' + str(designCase + 1))
+        plt.plot(y_values, critShearSpar3[designCase], label='Critical shear for spar 3, DC ' + str(designCase + 1))
     plt.xlabel('Spanwise Position (m)')
     plt.ylabel('Critical shear stress (Pa)')
     plt.title('Critical shear stress along the wing span')
