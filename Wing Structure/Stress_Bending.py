@@ -85,3 +85,22 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
+
+
+safety_margin_compressive_tab = [4.5e8 / stress for stress in compressive_stress_tab]
+safety_margin_tensile_tab = [4.5e8 / stress for stress in tensile_stress_tab]
+
+plt.plot(y_tab, safety_margin_tensile_tab, label="Tensile", color='blue')
+plt.xlabel('Position along half-span')
+plt.ylabel('Margin of safety')
+plt.title('Margin of safety for tensile strength failure')
+plt.legend()
+plt.show()
+
+
+plt.plot(y_tab, safety_margin_compressive_tab, label="compressive", color='blue')
+plt.xlabel('Position along half-span')
+plt.ylabel('Margin of safety')
+plt.title('Margin of safety for compressive strength failure')
+plt.legend()
+plt.show()
