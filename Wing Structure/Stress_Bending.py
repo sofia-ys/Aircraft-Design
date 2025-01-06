@@ -14,16 +14,16 @@ d1_root = con.d_1
 d2_root = con.d_2
 d3_root = con.d_3
 d4_root = con.d_4
-As = con.As_1
-t1 = con.t1_1
-t2 = con.t2_1
+As = con.As_2
+t1 = con.t1_2
+t2 = con.t2_2
 b = con.b
-span_n1 = con.span_n1_1
-span_n2 = con.span_n2_1
-span_t1 = con.span_t1_1
-span_t2 = con.span_t2_1
-span_As = con.span_As_1
-n1 = con.n1_1
+span_n1 = con.span_n1_2
+span_n2 = con.span_n2_2
+span_t1 = con.span_t1_2
+span_t2 = con.span_t2_2
+span_As = con.span_As_2
+n1 = con.n1_2
 n2 = con.n2_1
 
 n1_inter = scipy.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
