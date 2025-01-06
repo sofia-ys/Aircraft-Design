@@ -174,3 +174,4 @@ if __name__ == "__main__":
 
     # Print the result
     print(f"Required angle of attack: {alpha:.2f} degrees")
+
