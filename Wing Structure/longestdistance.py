@@ -45,3 +45,5 @@ def findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, desi
         z_tensile = h
 
     return x_tensile, z_tensile, x_compressive, z_compressive
+
+
