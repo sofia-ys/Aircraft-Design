@@ -32,6 +32,17 @@ def getSparThickness(span_t1, t1, y):
             print('Spar position out of range')
     return spar_thickness
 
+def getSkinThickness(span_t2, t2, y):
+    skin_thickness = 0
+    for i in range(len(span_t2) - 1):  # adjustable to the number of discontinuities for the design types
+        if span_t2[i] <= y and y <= span_t2[i+1]:  # between the first point in the list and the next point
+            skin_thickness = t2[i]  # spar thickness is that point
+        elif y >= span_t2[i+1]:
+            skin_thickness = t2[i+1]
+        else:
+            break
+            print('Spar position out of range')
+    return skin_thickness
 
 def getCritShear(k_s, E, poisson, t, b):
     tau_cr = np.pi**2 * k_s * E / (12 * (1 - poisson**2)) * (t/b)**2 
@@ -129,8 +140,23 @@ def plotCritShear(E, poisson, y_values):
     plt.legend()
     plt.show()
 
-plotCritShear(wb.E, wb.poisson, y_values)
+def plotCritSkin(E, poisson, y_values):
+    crit_skin = [[], [], []]
+    for design_id in range(0,3): #design_id is from 0 to 2, represents design cases 1 to 3!
+        for y in y_values:
+            crit_skin[design_id].append(getCritSkinBuckling(wb.k_c, E, poisson, getSkinThickness(t2_spans[design_id], t2_vals[design_id], y), get_bay_width(y, wb.ribs)))
+    crit_skin = np.array(crit_skin)
+
+    plt.figure()
+    for designCase in range(0,3):
+        plt.plot(y_values, crit_skin[designCase], label='Critical shear for skin, DC ' + str(designCase + 1))
+        print("Minimum critical shear [Pa] for skin, design case " + str(designCase + 1) + ": " + str(np.min(crit_skin[designCase])))
         
-def getCritSkinBuckling(spar_id, span_t2, t2, y):
-    omega_cr = np.pi**2 * 7 * E / (12 * (1 - wb.poisson**2)) * (getSparThickness(span_t2, t2, y)/getSparHeight(spar_id, y))**2 
-    return omega_cr
+    plt.xlabel('Spanwise Position (m)')
+    plt.ylabel('Critical shear stress (Pa)')
+    plt.title('Critical shear stress along the wing span')
+    plt.legend()
+    plt.show()
+
+plotCritShear(wb.E, wb.poisson, y_values)
+plotCritSkin(wb.E, wb.poisson, y_values)
