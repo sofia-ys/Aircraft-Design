@@ -102,40 +102,53 @@ t_2 = 0.005 # Place Holder value for thickness of wing box skin (top and bottom)
 
 
 #Design 1
-span_n1_1 = [0, 7, 8, 10.5, 15.5]
-n1_1 = [10, 9, 8, 7, 6]  # n1 is the number of stringers on the top skin
-span_n2_1 = [0, 7, 8, 10.5, 15.5]
-n2_1 = [11, 10, 9, 8, 7]  # n2 is the number of stringers on the bottom skin
-span_t1_1 = [0, 3.5, 7]
-t1_1 = [0.007, 0.006, 0.005]
-span_t2_1 = [0, 3.5, 7]
-t2_1 = [0.007, 0.006, 0.005]
+span_n1_1 = [0, 7, 14, 15, 16]
+n1_1 = [15, 14, 13, 12, 10]  # n1 is the number of stringers on the top skin
+span_n2_1 = [0, 7, 14, 15, 16]
+n2_1 = [15, 14, 13, 12, 10]  # n2 is the number of stringers on the bottom skin
+span_t1_1 = [0, 7.5, 12.5]
+t1_1 = [0.019, 0.015, 0.01]
+span_t2_1 = [0, 7.5, 12.5]
+t2_1 = [0.016, 0.014, 0.012]
 span_As_1 = [0, 7.5, 15.5]
-As_1 = [0.0002, 0.0002, 0.0002]  # cross sectional area of a stringer
-q1 = 10 #value along the span at which 3rd spar stops being there
+As_1 = [0.0004, 0.0004, 0.0004]  # cross sectional area of a stringer
+q1 = 5 #value along the span at which 3rd spar stops being there
 
 #Design 2
-span_n1_2 = [0, 7, 25, 30, 36]
-n1_2 = [18, 6, 25, 30, 36]  # n1 is the number of stringers on the top skin
-span_n2_2 = [0, 21, 25, 30, 36]
-n2_2 = [27, 33, 38, 45, 55]  # n2 is the number of stringers on the bottom skin
-span_t1_2 = [0, 21, 25, 30, 36]
+span_n1_2 = [0, 10, 12, 13, 15.5]
+n1_2 = [15, 14, 13, 12, 11]  # n1 is the number of stringers on the top skin
+span_n2_2 = [0, 10, 12, 13, 15.5]
+n2_2 = [16, 15, 14, 13, 12]  # n2 is the number of stringers on the bottom skin
+span_t1_2 = [0, 7, 8, 10.15, 15.5]
 t1_2 = [0.005, 0.005, 0.005, 0.005, 0.005]
-span_t2_2 = [0, 21, 25, 30, 36]
-t2_2 = [18, 21, 25, 30, 36]
-span_As_2 = [0, 21, 25]
-As_2 = [1, 1, 1]  # cross sectional area of a stringer
-q2 = 5
+span_t2_2 = [0, 10, 12, 13, 15.5]
+t2_2 = [0.006, 0.006, 0.006, 0.006, 0.006]
+span_As_2 = [0, 7.5, 15.5]
+As_2 = [0.0003, 0.0003, 0.0003]  # cross sectional area of a stringer
+q2 = 10
 
 #Design 3
-span_n1_3 = [0, 21, 25, 30, 36]
-n1_3 = [18, 21, 25, 30, 36]  # n1 is the number of stringers on the top skin
-span_n2_3 = [0, 21, 25, 30, 36]
-n2_3 = [27, 33, 38, 45, 55]  # n2 is the number of stringers on the bottom skin
-span_t1_3 = [0, 21, 25, 30, 36]
-t1_3 = [0.005, 0.005, 0.005, 0.005, 0.005]
-span_t2_3 = [0, 21, 25, 30, 36]
-t2_3 = [18, 21, 25, 30, 36]
-span_As_3 = [0, 21, 25]
-As_3 = [1, 1, 1]  # cross sectional area of a stringer
-q3 = 5
+span_n1_3 = [0, 7, 8, 10.5, 15.5]
+n1_3 = [15, 14, 13, 12, 11]  # n1 is the number of stringers on the top skin
+span_n2_3 = [0, 7, 8, 10.5, 15.5]
+n2_3 = [16, 15, 14, 13, 12]  # n2 is the number of stringers on the bottom skin
+span_t1_3 = [0, 7, 10]
+t1_3 = [0.016, 0.015, 0.014]
+span_t2_3 = [0, 7, 10]
+t2_3 = [0.016, 0.015, 0.014]
+span_As_3 = [0, 7.5, 15.5]
+As_3 = [0.0004, 0.0004, 0.0004]  # cross sectional area of a stringer
+q3 = 0
+
+#design 4 (redesign of 2)
+span_n1_4 = [0, 10, 12, 13, 15.5]
+n1_4 = [15, 14, 13, 12, 11]  # n1 is the number of stringers on the top skin
+span_n2_4 = [0, 10, 12, 13, 15.5]
+n2_4 = [16, 15, 14, 13, 12]  # n2 is the number of stringers on the bottom skin
+span_t1_4 = [0, 7, 8, 10.15, 15.5]
+t1_4 = [0.012, 0.012, 0.012, 0.012, 0.012]
+span_t2_4 = [0, 10, 12, 13, 15.5]
+t2_4 = [0.013, 0.013, 0.013, 0.013, 0.013]
+span_As_4 = [0, 7.5, 15.5]
+As_4 = [0.0003, 0.0003, 0.0003]  # cross sectional area of a stringer
+q2 = 10
