@@ -16,7 +16,15 @@ def getSparHeight(design_id, spar_id, y): # get b
     elif(spar_id == 2):
         return d[2] #dimension d3 for the second spar height
     elif(spar_id == 3):
-        return (d[0] - d[3]/d[1] * (d[0] - d[2])) #d4 for middle spar, if applicable: this calculates the height of the middle spar
+        if design_id == 0:
+            if y > 5: return 0
+            else : return (d[0] - d[3]/d[1] * (d[0] - d[2]))
+        elif design_id == 1:
+            if y > 10: return 0
+            else : return (d[0] - d[3]/d[1] * (d[0] - d[2]))
+        elif design_id == 2:
+            return 0
+           
     else:
         print("error")
 
