@@ -56,21 +56,6 @@ def getCritShear(k_s, E, poisson, t, b):
     tau_cr = np.pi**2 * k_s * E / (12 * (1 - poisson**2)) * (t/b)**2 
     return tau_cr
 
-#insert a shear force value V (needs to be integrated from the distribution at a particular span y
-def avgShear(y, h, t):
-    #compute the shear force at a particular span y by integrating
-    
-    denominator = 0
-    for i in range(0, len(h)):
-        denominator += h[i] * t
-    avg_shear = V / denominator
-    return avg_shear
-
-def maxShear(avg_shear, k_v = wb.k_v):
-    return avg_shear * k_v
-
-#tau_cr = criticalShear(wb.k_s1, wb.E, wb.poisson, wb.spar_t1, wb.spar_b1)
-
 def get_ks(a, b):
     if b == 0 :
         return 9.53
