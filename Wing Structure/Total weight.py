@@ -1,61 +1,13 @@
-import scipy as sp
-import math
-
-from matplotlib import pyplot as plt
-
-import constants as con
 from Ixx import CentroidZcontribution
+import numpy as np
+import constants as con
+from numpy import trapezoid
+import math
+import scipy as sp
 from Ixx import Wingbox_lengths
-
-
-
-def Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st):
-    I1 = (t1*d1*x*(h-d1/2)) #front spar
-    I2 = -(t1*d3*(x-d2)*(L*math.sin(alpha)+(d3/2)-h)) #rear spar
-    I3 = (d2*t2*(h-d1)*(x-d2)) #top skin
-    I4 = (((L**3)*t2*math.sin(alpha)*math.cos(alpha)/12) + (L*t2*(x-d2)*(h-(L*math.sin(alpha)/2)))) #bottom skin
-    I5 = 0
-
-    for i in range(0, int(n1)):
-        Ii = As * (h - i * st)*(h-d1)
-        I5 += Ii
-
-    I6 = 0
-
-    for i in range(0, int(n2)):
-        Ii = As * (h - i * math.cos(alpha) * sb) * (h - i*math.sin(alpha))
-        I6 += Ii
-    I = I1 + I2 + I3 + I4 + I5 + I6
-
-    return I
-
-def Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x, st):
-    u = d4 * math.tan(alpha)
-    I1 = (t1 * d1 * x * (h - d1 / 2))  # front spar
-    I2 = -(t1 * d3*(x - d2) * (L * math.sin(alpha) + (d3 / 2) - h))  # rear spar
-    I3 = (d2 * t2 * (h - d1) * (x - d2))  # top skin
-    I4 = (((L ** 3) * t2 * math.sin(alpha) * math.cos(alpha) / 12) + (L * t2 * (x - d2)*(h - (L * math.sin(alpha) / 2))))  # bottom skin
-    I5 = 0
-
-    for i in range(0, int(n1)):
-        Ii = As * (h - i * st)*(h - d1)
-        I5 += Ii
-
-    I7 = -((d1-u)*t1*(x-d4)*(u-h+((d1-u)/2))) #Mid spar
-    I6 = 0
-
-    for i in range(0, int(n2)):
-        Ii = As * (h - i * math.cos(alpha) * sb) * (h - i * math.sin(alpha))
-        I6 += Ii
-    I = I1 + I2 + I3 + I4 + I5 + I6
-    I = I1 + I2 + I3 + I4 + I5 + I6 + I7
-
-
-
-    return I
-
-
-def Ixzfinal(design_choice, y):
+b = con.b
+def area(design_choice, y):
+    b = con.b
     d1_root = con.d_1
     d2_root = con.d_2
     d3_root = con.d_3
@@ -110,7 +62,6 @@ def Ixzfinal(design_choice, y):
         As = con.As_4  # cross sectional area of a stringer
         q = con.q4
 
-
     n1_inter = sp.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
     n2_inter = sp.interpolate.interp1d(span_n2, n2, kind="previous", fill_value="extrapolate")
     t1_inter = sp.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="extrapolate")
@@ -125,38 +76,37 @@ def Ixzfinal(design_choice, y):
 
     d1, d2, d3, d4, = Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y)
     alpha = math.atan((d1 - d3) / d2)
-    L = (d1 - d3) / math.cos(alpha)
+    L = (d1 - d3) / math.sin(alpha)
     sb = L / (n2 - 1)
     st = d2 / (n1 - 1)
-    h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
 
-    if y < q:
-        Ixz = Ixz2calculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, d4, x, st)
+    CB_z = sum(As * i * sb * math.sin(alpha) for i in range(0, int(n2)))  # for bottom
+
+    CB_x = sum(As * i * sb * math.cos(alpha) for i in range(0, int(n2)))  # top
+
+    CT_x = sum(As * i * st for i in range(0, int(n1)))  # top
+    u = d4 * math.tan(alpha)
+    if d4 > 0:
+        total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2))
+
     else:
-        Ixz = Ixzcalculator(d1, d2, L, d3, t1, t2, h, alpha, n1, n2, As, sb, x, st)
-    return Ixz
+        total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2)) + (
+                        t1 * (d1 - u))
+
+    return total_area
 
 
-y_tab = []
-Ixz_tab=[]
-i = 0
-step = 0.05
-count = 0
-b = con.b
-
-while i <= b / 2:
-    i = i + step
-    y_tab.append(i)
-    count = count + 1
-
-for y in y_tab:
-     Ixz = Ixzfinal(1, y)
-     Ixz_tab.append(Ixz)
-
-plt.plot(y_tab, Ixz_tab)
-plt.xlabel('Position along half-span (m)')
-plt.ylabel('Ixz (m^4)')
-plt.title('Moment of inertia at each position along the half-span ')
-plt.show()
+step = 0.01
+y_vals = np.arange(0, b / 2 + step, step)
 
 
+def computearea(y_vals):
+    return np.array([area(4, y) for y in y_vals])
+def totalvolume(y_vals):
+    deriv = computearea(y_vals)
+    total = trapezoid(deriv, y_vals)
+    return total
+
+totalv = totalvolume(y_vals)
+
+print(totalv)

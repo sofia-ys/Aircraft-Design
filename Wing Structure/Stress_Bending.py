@@ -14,17 +14,17 @@ d1_root = con.d_1
 d2_root = con.d_2
 d3_root = con.d_3
 d4_root = con.d_4
-As = con.As_2
-t1 = con.t1_2
-t2 = con.t2_2
+As = con.As_4
+t1 = con.t1_4
+t2 = con.t2_4
 b = con.b
-span_n1 = con.span_n1_2
-span_n2 = con.span_n2_2
-span_t1 = con.span_t1_2
-span_t2 = con.span_t2_2
-span_As = con.span_As_2
-n1 = con.n1_2
-n2 = con.n2_2
+span_n1 = con.span_n1_4
+span_n2 = con.span_n2_4
+span_t1 = con.span_t1_4
+span_t2 = con.span_t2_4
+span_As = con.span_As_4
+n1 = con.n1_4
+n2 = con.n2_4
 
 n1_inter = scipy.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
 n2_inter = scipy.interpolate.interp1d(span_n2, n2, kind="previous", fill_value="extrapolate")
@@ -59,10 +59,10 @@ while y<=b/2 :
     sb = s2
     st = s1
     h, x = CentroidZcontribution(As, s2, s1, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
-    print(Ixxfinal(2,y))
-    x_tensile, z_tensile, x_compressive, z_compressive = findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, 2, y)
-    tensile_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) * z_tensile) - (bending_moment(y) * Ixzfinal(2,y) * x_tensile)) / (Ixxfinal(2,y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) - Ixzfinal(2,y)**2)
-    compressive_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) * z_compressive) - (bending_moment(y) * Ixzfinal(2, y) * x_compressive)) / (Ixxfinal(2, y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) - Ixzfinal(2, y) ** 2)
+    print(Ixxfinal(4,y))
+    x_tensile, z_tensile, x_compressive, z_compressive = findlongestdistance(d1, d2, L, d3, d4, t1, t2, h, alpha, n1, n2, As, x, 4, y)
+    tensile_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) * z_tensile) - (bending_moment(y) * Ixzfinal(4,y) * x_tensile)) / (Ixxfinal(4,y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L, y) - Ixzfinal(4,y)**2)
+    compressive_stress = ((bending_moment(y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) * z_compressive) - (bending_moment(y) * Ixzfinal(4, y) * x_compressive)) / (Ixxfinal(4, y) * Izzcalculator(d1, d2, d3, d4, alpha, t1, t2, x, As, n1, n2, L,y) - Ixzfinal(4, y) ** 2)
     tensile_stress_tab.append(tensile_stress)
     compressive_stress_tab.append(compressive_stress)
     y_tab.append(y)
