@@ -85,7 +85,7 @@ def Ixzfinal(design_choice, y):
         span_As = con.span_As_2
         As = con.As_1  # cross sectional area of a stringer
         q = con.q2
-    else:
+    elif design_choice == 3:
         span_n1 = con.span_n1_3
         n1 = con.n1_3  # n1 is the number of stringers on the top skin
         span_n2 = con.span_n2_3
@@ -97,6 +97,20 @@ def Ixzfinal(design_choice, y):
         span_As = con.span_As_3
         As = con.As_3  # cross sectional area of a stringer
         q = con.q3
+    else:
+        span_n1 = con.span_n1_4
+        n1 = con.n1_4  # n1 is the number of stringers on the top skin
+        span_n2 = con.span_n2_4
+        n2 = con.n2_4  # n2 is the number of stringers on the bottom skin
+        span_t1 = con.span_t1_4
+        t1 = con.t1_4
+        span_t2 = con.span_t2_4
+        t2 = con.t2_4
+        span_As = con.span_As_4
+        As = con.As_4  # cross sectional area of a stringer
+        q = con.q4
+
+
     n1_inter = sp.interpolate.interp1d(span_n1, n1, kind="previous", fill_value="extrapolate")
     n2_inter = sp.interpolate.interp1d(span_n2, n2, kind="previous", fill_value="extrapolate")
     t1_inter = sp.interpolate.interp1d(span_t1, t1, kind="previous", fill_value="extrapolate")
