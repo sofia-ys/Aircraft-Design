@@ -92,8 +92,9 @@ def plot_shear_force_distribution(x_vals, shear_force_vals, load_factor = 1):
 
 # Calculate shear force distribution
 shear_force_vals = shear_force_distribution(x_vals, lift_vals, engine_position, engine_weight, n)
+
 # Plot the shear force distribution
-plot_shear_force_distribution(x_vals, shear_force_vals, n)
+#plot_shear_force_distribution(x_vals, shear_force_vals, n)
 
 def bending_moment_distribution(x_vals, shear_force_vals):
     # Initialize bending moment array
