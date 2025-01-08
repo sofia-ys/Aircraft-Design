@@ -76,17 +76,9 @@ def area(design_choice, y):
 
     d1, d2, d3, d4, = Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y)
     alpha = math.atan((d1 - d3) / d2)
-    L = (d1 - d3) / math.sin(alpha)
-    sb = L / (n2 - 1)
-    st = d2 / (n1 - 1)
 
-    CB_z = sum(As * i * sb * math.sin(alpha) for i in range(0, int(n2)))  # for bottom
-
-    CB_x = sum(As * i * sb * math.cos(alpha) for i in range(0, int(n2)))  # top
-
-    CT_x = sum(As * i * st for i in range(0, int(n1)))  # top
     u = d4 * math.tan(alpha)
-    if d4 > 0:
+    if y > q:
         total_area = ((t1 * d1 + d2 * t2 + t1 * d3) + (d2 * t2 / math.cos(alpha))) + (As * (n1 + n2))
 
     else:
@@ -101,7 +93,7 @@ y_vals = np.arange(0, b / 2 + step, step)
 
 
 def computearea(y_vals):
-    return np.array([area(4, y) for y in y_vals])
+    return np.array([area(1, y) for y in y_vals])
 def totalvolume(y_vals):
     deriv = computearea(y_vals)
     total = trapezoid(deriv, y_vals)

@@ -141,6 +141,8 @@ def Ixxfinal(design_choice, y):
     As = As_inter(y)
 
     d1, d2, d3, d4, = Wingbox_lengths(d1_root, d2_root, d3_root, d4_root, b, y)
+    if y > q:
+        d4 = 0
     alpha = math.atan((d1 - d3) / d2)
     L = (d1 - d3) / math.sin(alpha)
     sb = L / (n2 - 1)

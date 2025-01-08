@@ -128,6 +128,8 @@ def Ixzfinal(design_choice, y):
     L = (d1 - d3) / math.cos(alpha)
     sb = L / (n2 - 1)
     st = d2 / (n1 - 1)
+    if y > q:
+        d4 = 0
     h, x = CentroidZcontribution(As, sb, st, alpha, n2, n1, d1, d2, d3, d4, t1, t2)
 
     if y < q:
