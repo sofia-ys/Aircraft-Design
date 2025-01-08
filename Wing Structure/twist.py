@@ -11,8 +11,8 @@ def Wing_design (y):
 
 G = 25e9
 
-t_1 = sp.interpolate.interp1d(con.span_t1_1, con.t1_1, kind="previous",fill_value="extrapolate")
-t_2 = sp.interpolate.interp1d(con.span_t2_1, con.t2_1, kind="previous",fill_value="extrapolate")
+t_1 = sp.interpolate.interp1d(con.span_t1_4, con.t1_4, kind="previous",fill_value="extrapolate")
+t_2 = sp.interpolate.interp1d(con.span_t2_4, con.t2_4, kind="previous",fill_value="extrapolate")
 
 def area_trap (d1, d3, d2): #area of the wingbox
 
