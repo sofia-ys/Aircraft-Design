@@ -12,7 +12,7 @@ def bending_moment(y_vals):
     return np.array([getBendingMomentFlight(y, -1) for y in y_vals])
 
 def Ixx(y_vals):
-    return np.array([Ixxfinal(1, y) for y in y_vals])
+    return np.array([Ixxfinal(4, y) for y in y_vals])
 
 def second_derivative_deflection(y_vals):
     return -bending_moment(y_vals) / (E * Ixx(y_vals))

@@ -93,7 +93,7 @@ y_vals = np.arange(0, b / 2 + step, step)
 
 
 def computearea(y_vals):
-    return np.array([area(1, y) for y in y_vals])
+    return np.array([area(4, y) for y in y_vals])
 def totalvolume(y_vals):
     deriv = computearea(y_vals)
     total = trapezoid(deriv, y_vals)
