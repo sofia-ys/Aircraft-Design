@@ -1,13 +1,5 @@
 import math as m
 
-
-
-K = 0 #𝐾 = 1 if both endsare pinned, 𝐾 = 4 if both ends are clamped; 𝐾 = 1/4 if one end is fixed and one end is free; 1/√𝐾 = 0.7 if one end is pinned and one end is free.
-L = 0
-E = 72.4 * 10**9
-A = 0
-
-
 def moments_of_inetria_L_stringer(height, width, thickness): # The reference x coordinate is the left side of the L and the reference y coordinate is the bottom of the L
     y = ((((height - thickness)/2 + thickness)*(height - thickness)*thickness + thickness / 2 * width * thickness)
          / ((height - thickness)*thickness + width * thickness))
@@ -25,5 +17,5 @@ def calc_crit_sigma(K,E,I,A,L):
     A = A*10**(-6)
     return (K * m.pi**(2) * E * I)/(A * L**2)
 
-print("Design 2 =", round(calc_crit_sigma(1, 72.4 * 10**9, moments_of_inetria_L_stringer(83,53.3,3), A(83,53.3,3), 10)/1000000,2), "MPa") # 10m is the shortest stinger
-print("Design 1,3 =", round(calc_crit_sigma(1, 72.4 * 10**9, moments_of_inetria_L_stringer(63,40.3,3), A(63,40.3,3), 7)/1000000,2), "MPa") # 7m is the shortest stringer
+print("Design 2 =", round(calc_crit_sigma(4, 72.4 * 10**9, moments_of_inetria_L_stringer(83,53.3,3), A(83,53.3,3), 2)/1000000,2), "MPa") # 2m is the shortest stinger
+print("Design 1,3 =", round(calc_crit_sigma(4, 72.4 * 10**9, moments_of_inetria_L_stringer(63,40.3,3), A(63,40.3,3), 2)/1000000,2), "MPa") # 2m is the shortest stringer
